@@ -4,7 +4,7 @@
 
 import Foundation
 
-public struct User: Codable, Hashable, Sendable {
+public struct User: Codable, Hashable, Sendable, Identifiable {
   public let id: Int
   public let userID: String
   public let userName: String?
