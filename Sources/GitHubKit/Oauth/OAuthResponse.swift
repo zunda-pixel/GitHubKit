@@ -5,9 +5,9 @@
 import Foundation
 
 public struct OAuthResponse: Decodable {
-  let accessToken: String
-  let scopes: [Scope]
-  let tokenType: TokenType
+  public let accessToken: String
+  public let scopes: [Scope]
+  public let tokenType: TokenType
   
   private enum CodingKeys: String, CodingKey {
     case accessToken = "access_token"
