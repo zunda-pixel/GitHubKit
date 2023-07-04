@@ -5,7 +5,10 @@ import PackageDescription
 
 let package = Package(
   name: "GitHubKit",
-  platforms: [.macOS(.v13)],
+  platforms: [
+    .macOS(.v14),
+    .iOS(.v17)
+  ],
   products: [
     .library(
       name: "GitHubKit",
