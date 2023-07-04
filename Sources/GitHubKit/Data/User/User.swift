@@ -4,7 +4,7 @@
 
 import Foundation
 
-public struct User: Codable {
+public struct User: Codable, Hashable, Sendable {
   public let id: Int
   public let userID: String?
   public let userName: String
@@ -138,7 +138,7 @@ public struct User: Codable {
   }
 }
 
-public enum UserType: String, Codable {
+public enum UserType: String, Codable, Sendable {
   case user = "User"
   case organization = "Organization"
   
