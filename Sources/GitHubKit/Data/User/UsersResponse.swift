@@ -5,9 +5,9 @@
 import Foundation
 
 public struct UsersResponse: Codable {
-  let totalCount: Int
-  let incompleteResults: Bool
-  var users: [User]
+  public let totalCount: Int
+  public let incompleteResults: Bool
+  public let users: [User]
   
   private enum CodingKeys: String, CodingKey {
     case totalCount = "total_count"
