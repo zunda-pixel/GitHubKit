@@ -6,8 +6,8 @@ import Foundation
 
 public struct User: Codable, Hashable, Sendable {
   public let id: Int
-  public let userID: String?
-  public let userName: String
+  public let userID: String
+  public let userName: String?
   public let nodeID: String
   public let avatarURL: URL
   public let gravatarID: String
@@ -39,8 +39,8 @@ public struct User: Codable, Hashable, Sendable {
   
   public init(
     id: Int,
-    userID: String?,
-    userName: String,
+    userID: String,
+    userName: String?,
     nodeID: String,
     avatarURL: URL,
     gravatarID: String,
