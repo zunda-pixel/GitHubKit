@@ -33,8 +33,9 @@ public struct User: Codable {
   public let location: String?
   public let hireable: Bool?
   public let type: UserType
-  public let score: Int
+  public let score: Int?
   public let siteAdmin: Bool
+  public let twitterUserName: String?
   
   public init(
     id: Int,
@@ -65,8 +66,9 @@ public struct User: Codable {
     location: String?,
     hireable: Bool?,
     type: UserType,
-    score: Int,
-    siteAdmin: Bool
+    score: Int?,
+    siteAdmin: Bool,
+    twitterUserName: String?
   ) {
     self.id = id
     self.userID = userID
@@ -98,6 +100,7 @@ public struct User: Codable {
     self.type = type
     self.score = score
     self.siteAdmin = siteAdmin
+    self.twitterUserName = twitterUserName
   }
   
   private enum CodingKeys: String, CodingKey {
@@ -131,6 +134,7 @@ public struct User: Codable {
     case email
     case location
     case hireable
+    case twitterUserName = "twitter_username"
   }
 }
 
