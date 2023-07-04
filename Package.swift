@@ -12,9 +12,15 @@ let package = Package(
       targets: ["GitHubKit"]
     ),
   ],
+  dependencies: [
+    .package(url: "https://github.com/thii/HTTPMethod", .upToNextMajor(from: "0.1.0")),
+  ],
   targets: [
     .target(
-      name: "GitHubKit"
+      name: "GitHubKit",
+      dependencies: [
+        .product(name: "HTTPMethod", package: "HTTPMethod")
+      ]
     ),
     .testTarget(
       name: "GitHubKitTests",
