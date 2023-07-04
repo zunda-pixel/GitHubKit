@@ -105,8 +105,8 @@ public struct User: Codable, Hashable, Sendable {
   
   private enum CodingKeys: String, CodingKey {
     case id
-    case userID = "name"
-    case userName = "login"
+    case userID = "login"
+    case userName = "name"
     case nodeID = "node_id"
     case avatarURL = "avatar_url"
     case gravatarID = "gravatar_id"
