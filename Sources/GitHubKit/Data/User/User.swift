@@ -23,7 +23,10 @@ public struct User: Codable, Hashable, Sendable {
   public let gistsURL: URL
   public let starredURL: URL
   public let publicRepoCount: Int?
+  public let totalPrivateRepoCount: Int?
+  public let ownedPrivateRepoCount: Int?
   public let publicGistsCount: Int?
+  public let privateGistsCount: Int?
   public let followerCount: Int?
   public let followingCount: Int?
   public let createdAt: Date?
@@ -36,6 +39,11 @@ public struct User: Codable, Hashable, Sendable {
   public let score: Int?
   public let siteAdmin: Bool
   public let twitterUserName: String?
+  public let company: String?
+  public let diskUsage: Int?
+  public let collaboratorCount: Int?
+  public let twoFactorAuthentication: Bool?
+  public let plan: Plan?
   
   public init(
     id: Int,
@@ -56,7 +64,10 @@ public struct User: Codable, Hashable, Sendable {
     gistsURL: URL,
     starredURL: URL,
     publicRepoCount: Int?,
+    totalPrivateRepoCount: Int?,
+    ownedPrivateRepoCount: Int?,
     publicGistsCount: Int?,
+    privateGistsCount: Int?,
     followerCount: Int?,
     followingCount: Int?,
     createdAt: Date?,
@@ -68,7 +79,12 @@ public struct User: Codable, Hashable, Sendable {
     type: UserType,
     score: Int?,
     siteAdmin: Bool,
-    twitterUserName: String?
+    twitterUserName: String?,
+    company: String?,
+    diskUsage: Int?,
+    collaboratorCount: Int?,
+    twoFactorAuthentication: Bool?,
+    plan: Plan?
   ) {
     self.id = id
     self.userID = userID
@@ -88,7 +104,10 @@ public struct User: Codable, Hashable, Sendable {
     self.gistsURL = gistsURL
     self.starredURL = starredURL
     self.publicRepoCount = publicRepoCount
+    self.totalPrivateRepoCount = totalPrivateRepoCount
+    self.ownedPrivateRepoCount = ownedPrivateRepoCount
     self.publicGistsCount = publicGistsCount
+    self.privateGistsCount = privateGistsCount
     self.followerCount = followerCount
     self.followingCount = followingCount
     self.createdAt = createdAt
@@ -101,6 +120,11 @@ public struct User: Codable, Hashable, Sendable {
     self.score = score
     self.siteAdmin = siteAdmin
     self.twitterUserName = twitterUserName
+    self.company = company
+    self.diskUsage = diskUsage
+    self.collaboratorCount = collaboratorCount
+    self.twoFactorAuthentication = twoFactorAuthentication
+    self.plan = plan
   }
   
   private enum CodingKeys: String, CodingKey {
@@ -125,7 +149,10 @@ public struct User: Codable, Hashable, Sendable {
     case siteAdmin = "site_admin"
     case score
     case publicRepoCount = "public_repos"
+    case totalPrivateRepoCount = "total_private_repos"
+    case ownedPrivateRepoCount = "owned_private_repos"
     case publicGistsCount = "public_gists"
+    case privateGistsCount = "private_gists"
     case followerCount = "followers"
     case followingCount = "following"
     case createdAt = "created_at"
@@ -135,21 +162,10 @@ public struct User: Codable, Hashable, Sendable {
     case location
     case hireable
     case twitterUserName = "twitter_username"
-  }
-}
-
-public enum UserType: String, Codable, Sendable {
-  case user = "User"
-  case organization = "Organization"
-  
-  public init(from decoder: Decoder) throws {
-    let container = try decoder.singleValueContainer()
-    let rawValue = try container.decode(String.self)
-    self.init(rawValue: rawValue)!
-  }
-  
-  public func encode(to encoder: Encoder) throws {
-    var container = encoder.singleValueContainer()
-    try container.encode(rawValue)
+    case company
+    case diskUsage = "disk_usage"
+    case collaboratorCount = "collaborators"
+    case twoFactorAuthentication = "two_factor_authentication"
+    case plan
   }
 }
