@@ -14,6 +14,7 @@ let package = Package(
   ],
   dependencies: [
     .package(url: "https://github.com/thii/HTTPMethod", .upToNextMajor(from: "0.1.0")),
+    .package(url: "https://github.com/kishikawakatsumi/swift-power-assert", .upToNextMajor(from: "0.10.0")),
   ],
   targets: [
     .target(
@@ -24,7 +25,10 @@ let package = Package(
     ),
     .testTarget(
       name: "GitHubKitTests",
-      dependencies: ["GitHubKit"]
+      dependencies: [
+        "GitHubKit",
+        .product(name: "PowerAssert", package: "swift-power-assert"),
+      ]
     ),
   ]
 )
