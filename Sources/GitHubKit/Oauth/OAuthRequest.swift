@@ -32,7 +32,7 @@ public struct OAuthRequest {
     self.allowSignUp = allowSignUp
   }
   
-  func authorizingURL() -> URL {
+  public func authorizingURL() -> URL {
     let endpoint = baseURL.appending(path: path)
     var queries: [String: String] = [
       "client_id": clientID,

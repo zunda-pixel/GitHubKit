@@ -1,9 +1,6 @@
 //
 //  SearchTests.swift
 //
-//
-//  Created by zunda on 2023/07/04.
-//
 
 import Foundation
 
