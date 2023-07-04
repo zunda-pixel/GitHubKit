@@ -39,7 +39,7 @@ extension GitHubKit {
     
     let (data, _) = try await session.data(for: request)
     
-    let decoder = JSONDecoder()
+    let decoder = JSONDecoder.github
     let response = try decoder.decode(UsersResponse.self, from: data)
     
     return response

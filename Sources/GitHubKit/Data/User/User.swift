@@ -4,10 +4,10 @@
 
 import Foundation
 
-public struct User: Codable {
+public struct User: Codable, Hashable, Sendable {
   public let id: Int
-  public let userID: String?
-  public let userName: String
+  public let userID: String
+  public let userName: String?
   public let nodeID: String
   public let avatarURL: URL
   public let gravatarID: String
@@ -33,13 +33,14 @@ public struct User: Codable {
   public let location: String?
   public let hireable: Bool?
   public let type: UserType
-  public let score: Int
+  public let score: Int?
   public let siteAdmin: Bool
+  public let twitterUserName: String?
   
   public init(
     id: Int,
-    userID: String?,
-    userName: String,
+    userID: String,
+    userName: String?,
     nodeID: String,
     avatarURL: URL,
     gravatarID: String,
@@ -65,8 +66,9 @@ public struct User: Codable {
     location: String?,
     hireable: Bool?,
     type: UserType,
-    score: Int,
-    siteAdmin: Bool
+    score: Int?,
+    siteAdmin: Bool,
+    twitterUserName: String?
   ) {
     self.id = id
     self.userID = userID
@@ -98,12 +100,13 @@ public struct User: Codable {
     self.type = type
     self.score = score
     self.siteAdmin = siteAdmin
+    self.twitterUserName = twitterUserName
   }
   
   private enum CodingKeys: String, CodingKey {
     case id
-    case userID = "name"
-    case userName = "login"
+    case userID = "login"
+    case userName = "name"
     case nodeID = "node_id"
     case avatarURL = "avatar_url"
     case gravatarID = "gravatar_id"
@@ -131,10 +134,11 @@ public struct User: Codable {
     case email
     case location
     case hireable
+    case twitterUserName = "twitter_username"
   }
 }
 
-public enum UserType: String, Codable {
+public enum UserType: String, Codable, Sendable {
   case user = "User"
   case organization = "Organization"
   
