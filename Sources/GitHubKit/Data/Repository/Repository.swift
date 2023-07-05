@@ -4,7 +4,7 @@
 
 import Foundation
 
-public struct Repository: Codable {
+public struct Repository: Codable, Sendable, Hashable, Identifiable {
   public let id: Int
   public let nodeID: String
   public let name: String
