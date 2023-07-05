@@ -16,7 +16,7 @@ extension GitHubKit {
   /// - Returns: UsersResponse
   public func searchUsers(
     query: String,
-    sort: SortType? = nil,
+    sort: UserSortType? = nil,
     order: OrderType = .desc,
     perPage: Int = 30,
     page: Int = 1

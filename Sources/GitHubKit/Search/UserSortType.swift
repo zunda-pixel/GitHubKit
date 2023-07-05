@@ -1,10 +1,10 @@
 //
-//  SortType.swift
+//  UserSortType.swift
 //
 
 import Foundation
 
-public enum SortType: String {
+public enum UserSortType: String {
   case followers
   case repositories
   case joined
