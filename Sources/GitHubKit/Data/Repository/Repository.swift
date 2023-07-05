@@ -12,7 +12,7 @@ public struct Repository: Codable {
   public let isPrivate: Bool
   public let owner: User
   public let htmlURL: URL
-  public let description: String
+  public let description: String?
   public let isFork: Bool
   public let url: URL
   public let forksURL: URL
@@ -92,7 +92,7 @@ public struct Repository: Codable {
     isPrivate: Bool,
     owner: User,
     htmlURL: URL,
-    description: String,
+    description: String?,
     isFork: Bool,
     url: URL,
     forksURL: URL,
@@ -161,7 +161,7 @@ public struct Repository: Codable {
     topics: [String],
     visibility: Visibility,
     defaultBranch: String,
-    permissions: Permission,
+    permissions: Permission?,
     score: Int
   ) {
     self.id = id
