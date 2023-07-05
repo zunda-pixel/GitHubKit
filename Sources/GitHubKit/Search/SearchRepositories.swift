@@ -18,7 +18,7 @@ extension GitHubKit {
     let endpoint = baseURL.appending(path: path)
     
     var queries: [String: String] = [
-      "q": query.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed)!,
+      "q": query,
       "order": order.rawValue,
       "per_page": String(perPage),
       "page": String(page)
