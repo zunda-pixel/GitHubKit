@@ -81,7 +81,7 @@ public struct Repository: Codable {
   public let topics: [String]
   public let visibility: Visibility
   public let defaultBranch: String
-  public let permissions: Permission
+  public let permissions: Permission?
   public let score: Int
   
   public init(
