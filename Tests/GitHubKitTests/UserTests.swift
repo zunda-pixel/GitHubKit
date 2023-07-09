@@ -8,10 +8,8 @@ import XCTest
 @testable import GitHubKit
 
 final class UserTests: XCTestCase {
-  let accessToken = "flsdjfsdjfoisjdiofjsdklfjsdlk"
-  
   func testMe() async throws {
-    let user = try await GitHubKit(accessToken: accessToken).me()
+    let user = try await GitHubKit(type: authorizationType).me()
     print(user)
   }
 }
