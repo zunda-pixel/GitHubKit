@@ -1,10 +1,10 @@
 //
-//  RepositorySortType.swift
+//  RepositorySearchSortType.swift
 //
 
 import Foundation
 
-public enum RepositorySortType: String {
+public enum RepositorySearchSortType: String {
   case stars
   case forks
   case helpWantedIssues = "help-wanted-issues"

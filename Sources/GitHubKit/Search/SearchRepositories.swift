@@ -8,7 +8,7 @@ import HTTPMethod
 extension GitHubKit {
   public func searchRepositories(
     query: String,
-    sort: RepositorySortType? = nil,
+    sort: RepositorySearchSortType? = nil,
     order: OrderType = .desc,
     perPage: Int = 30,
     page: Int = 1
