@@ -82,7 +82,7 @@ public struct Repository: Codable, Sendable, Hashable, Identifiable {
   public let visibility: Visibility
   public let defaultBranch: String
   public let permissions: Permission?
-  public let score: Int
+  public let score: Int?
   
   public init(
     id: Int,
@@ -162,7 +162,7 @@ public struct Repository: Codable, Sendable, Hashable, Identifiable {
     visibility: Visibility,
     defaultBranch: String,
     permissions: Permission?,
-    score: Int
+    score: Int?
   ) {
     self.id = id
     self.nodeID = nodeID
