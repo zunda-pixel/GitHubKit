@@ -3,7 +3,6 @@
 //
 
 import XCTest
-import PowerAssert
 @testable import GitHubKit
 
 final class DataCodableTests: XCTestCase {
@@ -53,6 +52,6 @@ final class DataCodableTests: XCTestCase {
     let encodedData = try encoder.encode(user1)
     
     let user2 = try decoder.decode(User.self, from: encodedData)
-    #assert(user1 == user2)
+    XCTAssertEqual(user1, user2)
   }
 }
