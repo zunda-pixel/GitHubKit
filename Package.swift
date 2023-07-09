@@ -5,20 +5,31 @@ import PackageDescription
 
 let package = Package(
   name: "GitHubKit",
-  platforms: [.macOS(.v13)],
+  platforms: [
+    .macOS(.v14),
+    .iOS(.v17)
+  ],
   products: [
     .library(
       name: "GitHubKit",
       targets: ["GitHubKit"]
     ),
   ],
+  dependencies: [
+    .package(url: "https://github.com/thii/HTTPMethod", .upToNextMajor(from: "0.1.0")),
+  ],
   targets: [
     .target(
-      name: "GitHubKit"
+      name: "GitHubKit",
+      dependencies: [
+        .product(name: "HTTPMethod", package: "HTTPMethod")
+      ]
     ),
     .testTarget(
       name: "GitHubKitTests",
-      dependencies: ["GitHubKit"]
+      dependencies: [
+        "GitHubKit",
+      ]
     ),
   ]
 )
