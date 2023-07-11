@@ -3,7 +3,7 @@
 //
 
 import Foundation
-import HTTPMethod
+import HTTPTypes
 
 extension GitHubKit {
   /// Find users via various criteria. This method returns up to 100 results
@@ -22,7 +22,7 @@ extension GitHubKit {
     page: Int = 1
   ) async throws -> UsersResponse {
     let path = "/search/users"
-    let method: HTTPMethod = .get
+    let method: HTTPRequest.Method = .get
 
     let endpoint = baseURL.appending(path: path)
     
@@ -35,7 +35,13 @@ extension GitHubKit {
     
     sort.map { queries["sort"] = $0.rawValue }
     
-    let request = URLRequest(url: endpoint, method: method, queries: queries, headers: headers())
+    let request = HTTPRequest(
+      method: method,
+      url: endpoint,
+      queries: queries,
+      headers: headers(
+      )
+    )
     
     let (data, _) = try await session.data(for: request)
     

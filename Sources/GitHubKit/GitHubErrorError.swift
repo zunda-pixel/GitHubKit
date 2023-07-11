@@ -3,8 +3,9 @@
 //
 
 import Foundation
+import HTTPTypes
 
 public enum GitHubError: Error {
-  case request(request: URLRequest)
-  case decode(data: Data, response: URLResponse)
+  case request(request: HTTPRequest)
+  case decode(data: Data, response: HTTPResponse)
 }

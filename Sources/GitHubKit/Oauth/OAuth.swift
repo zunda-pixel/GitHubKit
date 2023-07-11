@@ -3,6 +3,7 @@
 //
 
 import Foundation
+import HTTPTypes
 
 /// OAuth
 /// https://docs.github.com/en/apps/oauth-apps/building-oauth-apps/authorizing-oauth-apps#2-users-are-redirected-back-to-your-site-by-github
@@ -34,7 +35,7 @@ public struct OAuth {
     self.redirectURL = redirectURL
   }
   
-  public func request(responseType: ResponseType = .default) -> URLRequest {
+  public func request(responseType: ResponseType = .default) -> HTTPRequest {
     let endpoint = baseURL.appending(path: path)
     
     var queries: [String: String] = [
@@ -48,21 +49,23 @@ public struct OAuth {
     var urlComponents = URLComponents(url: endpoint, resolvingAgainstBaseURL: true)!
     urlComponents.queryItems = queries.map { .init(name: $0.key, value: $0.value) }
     
-    var request = URLRequest(url: urlComponents.url!)
-    request.httpMethod = "POST"
+    var headers: [String: String] = [:]
     if responseType != .default {
-      request.allHTTPHeaderFields = [
-        "Accept": responseType.rawValue
-      ]
+      headers["Accept"] = responseType.rawValue
     }
     
-    return request
+    return HTTPRequest(
+      method: .post,
+      url: endpoint,
+      queries: queries,
+      headers: headers
+    )
   }
   
   public func authorize(session: URLSession = .shared) async throws -> OAuthResponse {
     let request = request(responseType: .json)
     let data: Data
-    let response: URLResponse
+    let response: HTTPResponse
     
     do {
       (data, response) = try await session.data(for: request)

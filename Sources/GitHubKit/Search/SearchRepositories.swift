@@ -3,7 +3,7 @@
 //
 
 import Foundation
-import HTTPMethod
+import HTTPTypes
 
 extension GitHubKit {
   public func searchRepositories(
@@ -14,7 +14,7 @@ extension GitHubKit {
     page: Int = 1
   ) async throws -> RepositoriesResponse {
     let path = "/search/repositories"
-    let method: HTTPMethod = .get
+    let method: HTTPRequest.Method = .get
     let endpoint = baseURL.appending(path: path)
     
     var queries: [String: String] = [
@@ -26,9 +26,9 @@ extension GitHubKit {
     
     sort.map { queries["sort"] = $0.rawValue }
     
-    let request = URLRequest(
-      url: endpoint,
+    let request = HTTPRequest(
       method: method,
+      url: endpoint,
       queries: queries,
       headers: headers()
     )

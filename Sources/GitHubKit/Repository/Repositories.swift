@@ -3,7 +3,7 @@
 //
 
 import Foundation
-import HTTPMethod
+import HTTPTypes
 
 extension GitHubKit {
   /// List repositories for a user
@@ -26,7 +26,7 @@ extension GitHubKit {
     page: Int = 1
   ) async throws -> [Repository] {
     let path = "/users/\(userID)/repos"
-    let method: HTTPMethod = .get
+    let method: HTTPRequest.Method = .get
     let endpoint = baseURL.appending(path: path)
     
     let queries: [String: String] = [
@@ -37,7 +37,13 @@ extension GitHubKit {
       "page": String(page),
     ]
     
-    let request = URLRequest(url: endpoint, method: method, queries: queries, headers: headers())
+    let request = HTTPRequest(
+      method: method,
+      url: endpoint,
+      queries: queries,
+      headers: headers()
+    )
+    
     let (data, _) = try await session.data(for: request)
     
     let decoder = JSONDecoder.github
