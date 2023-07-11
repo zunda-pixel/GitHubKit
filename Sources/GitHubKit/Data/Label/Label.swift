@@ -13,6 +13,24 @@ public struct Label: Codable, Hashable, Sendable, Identifiable {
   public let isDefault: Bool
   public let description: String?
   
+  public init(
+    id: Int,
+    nodeID: String,
+    url: URL,
+    name: String,
+    color: String,
+    isDefault: Bool,
+    description: String?
+  ) {
+    self.id = id
+    self.nodeID = nodeID
+    self.url = url
+    self.name = name
+    self.color = color
+    self.isDefault = isDefault
+    self.description = description
+  }
+  
   private enum CodingKeys: String, CodingKey {
     case id
     case nodeID = "node_id"

@@ -11,6 +11,20 @@ public struct PullRequest: Codable, Hashable, Sendable {
   public let patchURL: URL
   public let mergedAt: Date?
   
+  public init(
+    url: URL,
+    htmlURL: URL,
+    diffURL: URL,
+    patchURL: URL,
+    mergedAt: Date?
+  ) {
+    self.url = url
+    self.htmlURL = htmlURL
+    self.diffURL = diffURL
+    self.patchURL = patchURL
+    self.mergedAt = mergedAt
+  }
+  
   private enum CodingKeys: String, CodingKey {
     case url
     case htmlURL = "html_url"

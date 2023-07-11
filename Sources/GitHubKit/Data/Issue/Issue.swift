@@ -40,6 +40,78 @@ public struct Issue: Codable, Sendable, Identifiable, Hashable {
   public let closedBy: User?
   public let repository: Repository?
   
+  public init(
+    id: Int,
+    number: Int,
+    title: String,
+    body: String?,
+    bodyHTML: String?,
+    bodyText: String?,
+    user: User,
+    nodeID: String,
+    url: URL,
+    repositoryURL: URL,
+    labelsURL: URL,
+    commentsURL: URL,
+    eventsURL: URL,
+    htmlURL: URL,
+    labels: [Label],
+    state: IssueState,
+    locked: Bool,
+    assignee: User?,
+    assignees: [User],
+    milestone: Milestone?,
+    commentsCount: Int,
+    createdAt: Date,
+    updatedAt: Date,
+    closedAt: Date?,
+    authorAssociation: IssueAuthorAssociation,
+    activeLockReason: ActiveLockReason?,
+    draft: Bool?,
+    pullRequest: PullRequest?,
+    reactions: Reaction?,
+    timelineURL: URL?,
+    performedViaGitHubApp: PerformGitHubApp?,
+    stateReason: IssueStateReason?,
+    closedBy: User?,
+    repository: Repository?
+  ) {
+    self.id = id
+    self.number = number
+    self.title = title
+    self.body = body
+    self.bodyHTML = bodyHTML
+    self.bodyText = bodyText
+    self.user = user
+    self.nodeID = nodeID
+    self.url = url
+    self.repositoryURL = repositoryURL
+    self.labelsURL = labelsURL
+    self.commentsURL = commentsURL
+    self.eventsURL = eventsURL
+    self.htmlURL = htmlURL
+    self.labels = labels
+    self.state = state
+    self.locked = locked
+    self.assignee = assignee
+    self.assignees = assignees
+    self.milestone = milestone
+    self.commentsCount = commentsCount
+    self.createdAt = createdAt
+    self.updatedAt = updatedAt
+    self.closedAt = closedAt
+    self.authorAssociation = authorAssociation
+    self.activeLockReason = activeLockReason
+    self.draft = draft
+    self.pullRequest = pullRequest
+    self.reactions = reactions
+    self.timelineURL = timelineURL
+    self.performedViaGitHubApp = performedViaGitHubApp
+    self.stateReason = stateReason
+    self.closedBy = closedBy
+    self.repository = repository
+  }
+  
   private enum CodingKeys: String, CodingKey {
     case id
     case number

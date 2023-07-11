@@ -22,6 +22,42 @@ public struct PerformGitHubApp: Codable, Sendable, Hashable, Identifiable {
   public let webhookSecret: String?
   public let pem: String?
   
+  public init(
+    id: Int,
+    slug: String?,
+    nodeID: String,
+    owner: User,
+    name: String,
+    description: String,
+    externalURL: URL,
+    htmlURL: URL,
+    createdAt: Date,
+    updatedAt: Date,
+    permissions: Permission,
+    installationsCount: Int?,
+    clientID: String?,
+    clientSecret: String?,
+    webhookSecret: String?,
+    pem: String?
+  ) {
+    self.id = id
+    self.slug = slug
+    self.nodeID = nodeID
+    self.owner = owner
+    self.name = name
+    self.description = description
+    self.externalURL = externalURL
+    self.htmlURL = htmlURL
+    self.createdAt = createdAt
+    self.updatedAt = updatedAt
+    self.permissions = permissions
+    self.installationsCount = installationsCount
+    self.clientID = clientID
+    self.clientSecret = clientSecret
+    self.webhookSecret = webhookSecret
+    self.pem = pem
+  }
+  
   private enum CodingKeys: String, CodingKey {
     case id
     case slug
