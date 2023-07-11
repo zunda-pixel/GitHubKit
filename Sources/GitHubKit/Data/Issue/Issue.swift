@@ -20,7 +20,7 @@ public struct Issue: Codable, Sendable, Identifiable, Hashable {
   public let eventsURL: URL
   public let htmlURL: URL
   public let labels: [Label]
-  public let state: IssueState
+  public let state: State
   public let locked: Bool
   public let assignee: User?
   public let assignees: [User]
@@ -29,14 +29,14 @@ public struct Issue: Codable, Sendable, Identifiable, Hashable {
   public let createdAt: Date
   public let updatedAt: Date
   public let closedAt: Date?
-  public let authorAssociation: IssueAuthorAssociation
+  public let authorAssociation: AuthorAssociation
   public let activeLockReason: ActiveLockReason?
   public let draft: Bool?
   public let pullRequest: PullRequest?
   public let reactions: Reaction?
   public let timelineURL: URL?
   public let performedViaGitHubApp: PerformGitHubApp?
-  public let stateReason: IssueStateReason?
+  public let stateReason: StateReason?
   public let closedBy: User?
   public let repository: Repository?
   
@@ -56,7 +56,7 @@ public struct Issue: Codable, Sendable, Identifiable, Hashable {
     eventsURL: URL,
     htmlURL: URL,
     labels: [Label],
-    state: IssueState,
+    state: State,
     locked: Bool,
     assignee: User?,
     assignees: [User],
@@ -65,14 +65,14 @@ public struct Issue: Codable, Sendable, Identifiable, Hashable {
     createdAt: Date,
     updatedAt: Date,
     closedAt: Date?,
-    authorAssociation: IssueAuthorAssociation,
+    authorAssociation: AuthorAssociation,
     activeLockReason: ActiveLockReason?,
     draft: Bool?,
     pullRequest: PullRequest?,
     reactions: Reaction?,
     timelineURL: URL?,
     performedViaGitHubApp: PerformGitHubApp?,
-    stateReason: IssueStateReason?,
+    stateReason: StateReason?,
     closedBy: User?,
     repository: Repository?
   ) {
