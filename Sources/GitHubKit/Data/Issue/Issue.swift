@@ -140,7 +140,7 @@ public struct Issue: Codable, Sendable, Identifiable, Hashable {
     case authorAssociation = "author_association"
     case activeLockReason = "active_lock_reason"
     case draft
-    case pullRequest = "pull_requests"
+    case pullRequest = "pull_request"
     case reactions
     case timelineURL = "timeline_url"
     case performedViaGitHubApp = "performed_via_github_app"
