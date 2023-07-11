@@ -1,13 +1,12 @@
 //
-//  UserType.swift
+//  MilestoneState.swift
 //
 
 import Foundation
 
-public enum UserType: String, Codable, Sendable {
-  case user = "User"
-  case organization = "Organization"
-  case mannequin = "Mannequin"
+public enum MilestoneState: String, Codable, Sendable {
+  case open
+  case closed
   
   public init(from decoder: Decoder) throws {
     let container = try decoder.singleValueContainer()
@@ -20,3 +19,4 @@ public enum UserType: String, Codable, Sendable {
     try container.encode(rawValue)
   }
 }
+

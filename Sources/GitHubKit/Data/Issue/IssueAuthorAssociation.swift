@@ -1,13 +1,19 @@
 //
-//  UserType.swift
+//  IssueAuthorAssociation.swift
 //
 
 import Foundation
 
-public enum UserType: String, Codable, Sendable {
-  case user = "User"
-  case organization = "Organization"
-  case mannequin = "Mannequin"
+
+public enum IssueAuthorAssociation: String, Codable, Sendable {
+  case collaborator = "COLLABORATOR"
+  case contributor = "CONTRIBUTOR"
+  case firstTimer = "FIRST_TIMER"
+  case firstTimeContributor = "FIRST_TIME_CONTRIBUTOR"
+  case mannequin = "MANNEQUIN"
+  case member = "MEMBER"
+  case none = "NONE"
+  case owner = "OWNER"
   
   public init(from decoder: Decoder) throws {
     let container = try decoder.singleValueContainer()

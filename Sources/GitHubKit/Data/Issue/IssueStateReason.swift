@@ -1,13 +1,13 @@
 //
-//  UserType.swift
+//  IssueStateReason.swift
 //
 
 import Foundation
 
-public enum UserType: String, Codable, Sendable {
-  case user = "User"
-  case organization = "Organization"
-  case mannequin = "Mannequin"
+public enum IssueStateReason: String, Codable, Sendable {
+  case completed
+  case reopened
+  case notPlanned = "not_planned"
   
   public init(from decoder: Decoder) throws {
     let container = try decoder.singleValueContainer()

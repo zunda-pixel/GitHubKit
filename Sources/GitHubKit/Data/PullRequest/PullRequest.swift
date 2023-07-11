@@ -1,0 +1,21 @@
+//
+//  PullRequest.swift
+//
+
+import Foundation
+
+public struct PullRequest: Codable, Hashable, Sendable {
+  public let url: URL
+  public let htmlURL: URL
+  public let diffURL: URL
+  public let patchURL: URL
+  public let mergedAt: Date?
+  
+  private enum CodingKeys: String, CodingKey {
+    case url
+    case htmlURL = "html_url"
+    case diffURL = "diff_url"
+    case patchURL = "patch_url"
+    case mergedAt = "merged_at"
+  }
+}

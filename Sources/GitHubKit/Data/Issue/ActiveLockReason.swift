@@ -1,13 +1,11 @@
 //
-//  UserType.swift
+//  ActiveLockReason.swift
 //
 
 import Foundation
 
-public enum UserType: String, Codable, Sendable {
-  case user = "User"
-  case organization = "Organization"
-  case mannequin = "Mannequin"
+public enum ActiveLockReason: String, Codable, Sendable {
+  case tooHeated = "too heated"
   
   public init(from decoder: Decoder) throws {
     let container = try decoder.singleValueContainer()
