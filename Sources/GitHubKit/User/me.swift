@@ -3,16 +3,17 @@
 //
 
 import Foundation
-import HTTPMethod
+import HTTPTypes
 
 extension GitHubKit {
   public func me() async throws -> User {
     let path = "/user"
-    let method: HTTPMethod = .get
+    let method: HTTPRequest.Method = .get
     let endpoint = baseURL.appending(path: path)
-    let request = URLRequest(
-      url: endpoint,
+    
+    let request = HTTPRequest(
       method: method,
+      url: endpoint,
       queries: [:],
       headers: headers()
     )

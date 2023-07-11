@@ -3,7 +3,7 @@
 //
 
 import Foundation
-import HTTPMethod
+import HTTPTypes
 
 public enum IssueSearchState: String {
   case open
@@ -50,7 +50,7 @@ extension GitHubKit {
     page: Int = 1
   ) async throws -> [Issue] {
     let path = "/repos/\(ownerID)/\(repositoryName)/issues"
-    let method: HTTPMethod = .get
+    let method: HTTPRequest.Method = .get
     let endpoint = baseURL.appending(path: path)
     
     var queries: [String: String] = [
@@ -68,7 +68,12 @@ extension GitHubKit {
     if !labels.isEmpty { queries["labels"] = labels.joined(separator: ",") }
     since.map { queries["since"] = "\($0)" }
     
-    let request = URLRequest(url: endpoint, method: method, queries: queries, headers: headers())
+    let request = HTTPRequest(
+      method: method,
+      url: endpoint,
+      queries: queries,
+      headers: headers()
+    )
     
     let (data, _) = try await session.data(for: request)
     
