@@ -54,7 +54,10 @@ extension GitHubKit {
     creator.map { queries["creator"] = String($0) }
     mentioned.map { queries["mentioned"] = String($0) }
     if !labels.isEmpty { queries["labels"] = labels.joined(separator: ",") }
-    since.map { queries["since"] = "\($0)" }
+    since.map {
+      let formatter = ISO8601DateFormatter()
+      queries["since"] = formatter.string(from: $0)
+    }
     
     let request = HTTPRequest(
       method: method,
