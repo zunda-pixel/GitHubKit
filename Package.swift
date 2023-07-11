@@ -16,7 +16,6 @@ let package = Package(
     ),
   ],
   dependencies: [
-    .package(url: "https://github.com/thii/HTTPMethod", .upToNextMajor(from: "0.1.0")),
     .package(url: "https://github.com/apple/swift-http-types", .upToNextMajor(from: "0.1.1")),
   ],
   targets: [
