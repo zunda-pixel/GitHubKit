@@ -5,18 +5,6 @@
 import Foundation
 import HTTPTypes
 
-public enum IssueSearchState: String {
-  case open
-  case closed
-  case all
-}
-
-public enum IssueSearchSortType: String {
-  case created
-  case updated
-  case comments
-}
-
 extension GitHubKit {
   /// List issues in a repository. Only open issues will be listed.
   /// - Parameters:
