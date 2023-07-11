@@ -5,7 +5,7 @@ final class OAuthTests: XCTestCase {
   let clientID = "g7j5DeETKUfN1e1swdOU"
   let clientSecret = "QORWumaSE24K1C4ijJnUjxwYxqEr7nB2rxcHKeUo"
   
-  func testAuthorizingURL() throws {
+  func testAuthorizingURL() {
     let oauth = OAuthRequest(
       clientID: clientID,
       scopes: Scope.allCases
