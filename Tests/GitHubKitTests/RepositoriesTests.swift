@@ -9,8 +9,8 @@ import XCTest
 
 final class RepositoriesTests: XCTestCase {  
   func testRepositories() async throws {
-    let githubKit = GitHubKit(type: authorizationType)
-    let repositories = try await githubKit.repositories(
+    let api = GitHubAPI(type: authorizationType)
+    let repositories = try await api.repositories(
       userID: "zunda-pixel",
       type: .all,
       sort: .updated,

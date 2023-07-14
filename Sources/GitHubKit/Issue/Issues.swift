@@ -5,7 +5,7 @@
 import Foundation
 import HTTPTypes
 
-extension GitHubKit {
+extension GitHubAPI {
   /// List issues in a repository. Only open issues will be listed.
   /// - Parameters:
   ///   - ownerID: The account owner of the repository. The name is not case sensitive.

@@ -9,8 +9,8 @@ import XCTest
 
 final class IssuesTests: XCTestCase {
   func testIssues() async throws {
-    let githubKit = GitHubKit(type: authorizationType)
-    let response = try await githubKit.issues(
+    let api = GitHubAPI(type: authorizationType)
+    let response = try await api.issues(
       ownerID: "apple",
       repositoryName: "swift",
       milestone: nil,

@@ -1,10 +1,10 @@
 //
-//  GitHubKit.swift
+//  GitHubAPI.swift
 //
 
 import Foundation
 
-public struct GitHubKit {
+public struct GitHubAPI {
   public var baseURL = URL(string: "https://api.github.com")!
   public var authorizationType: AuthorizationType
   public var session: URLSession

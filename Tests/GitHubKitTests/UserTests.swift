@@ -9,7 +9,7 @@ import XCTest
 
 final class UserTests: XCTestCase {
   func testMe() async throws {
-    let user = try await GitHubKit(type: authorizationType).me()
+    let user = try await GitHubAPI(type: authorizationType).me()
     print(user)
   }
 }

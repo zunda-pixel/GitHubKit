@@ -5,7 +5,7 @@
 import Foundation
 import HTTPTypes
 
-extension GitHubKit {
+extension GitHubAPI {
   public func searchRepositories(
     query: String,
     sort: RepositorySearchSortType? = nil,
