@@ -32,7 +32,7 @@ public struct Issue: Codable, Sendable, Identifiable, Hashable {
   public let authorAssociation: AuthorAssociation
   public let activeLockReason: ActiveLockReason?
   public let draft: Bool?
-  public let pullRequest: PullRequest?
+  public let pullRequest: SimplePull?
   public let reactions: Reaction?
   public let timelineURL: URL?
   public let performedViaGitHubApp: PerformGitHubApp?
@@ -68,7 +68,7 @@ public struct Issue: Codable, Sendable, Identifiable, Hashable {
     authorAssociation: AuthorAssociation,
     activeLockReason: ActiveLockReason?,
     draft: Bool?,
-    pullRequest: PullRequest?,
+    pullRequest: SimplePull?,
     reactions: Reaction?,
     timelineURL: URL?,
     performedViaGitHubApp: PerformGitHubApp?,

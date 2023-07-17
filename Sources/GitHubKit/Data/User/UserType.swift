@@ -9,15 +9,4 @@ public enum UserType: String, Codable, Sendable {
   case organization = "Organization"
   case mannequin = "Mannequin"
   case bot = "Bot"
-  
-  public init(from decoder: Decoder) throws {
-    let container = try decoder.singleValueContainer()
-    let rawValue = try container.decode(String.self)
-    self.init(rawValue: rawValue)!
-  }
-  
-  public func encode(to encoder: Encoder) throws {
-    var container = encoder.singleValueContainer()
-    try container.encode(rawValue)
-  }
 }

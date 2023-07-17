@@ -10,7 +10,7 @@ public struct Milestone: Codable, Sendable, Hashable, Identifiable {
   public let state: MilestoneState
   public let number: Int
   public let title: String
-  public let description: String
+  public let description: String?
   public let url: URL
   public let htmlURL: URL
   public let labelsURL: URL
@@ -20,7 +20,7 @@ public struct Milestone: Codable, Sendable, Hashable, Identifiable {
   public let createdAt: Date
   public let updatedAt: Date
   public let closedAt: Date
-  public let dueOn: Date
+  public let dueOn: Date?
   
   public init(
     id: Int,
@@ -28,7 +28,7 @@ public struct Milestone: Codable, Sendable, Hashable, Identifiable {
     state: MilestoneState,
     number: Int,
     title: String,
-    description: String,
+    description: String?,
     url: URL,
     htmlURL: URL,
     labelsURL: URL,
@@ -38,7 +38,7 @@ public struct Milestone: Codable, Sendable, Hashable, Identifiable {
     createdAt: Date,
     updatedAt: Date,
     closedAt: Date,
-    dueOn: Date
+    dueOn: Date?
   ) {
     self.id = id
     self.nodeID = nodeID
