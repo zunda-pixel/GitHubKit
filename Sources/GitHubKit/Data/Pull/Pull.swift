@@ -15,7 +15,7 @@ public struct Pull: Hashable, Sendable, Identifiable, Codable {
   public let body: String?
   public let createdAt: Date
   public let updateAt: Date
-  public let closedAt: Date
+  public let closedAt: Date?
   public let url: URL
   public let htmlURL: URL
   public let diffURL: URL
