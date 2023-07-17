@@ -19,7 +19,19 @@ public enum PullSearchType: String {
 }
 
 extension GitHubAPI {
-  func pulls(
+  /// List pull requests
+  /// - Parameters:
+  ///   - ownerID: The account owner of the repository. The name is not case sensitive.
+  ///   - repositoryName: The name of the repository without the .git extension. The name is not case sensitive.
+  ///   - state: Either open, closed, or all to filter by state.
+  ///   - head: Filter pulls by head user or head organization and branch name in the format of user:ref-name or organization:ref-name. For example: github:new-script-format or octocat:test-branch.
+  ///   - branchName: Filter pulls by base branch name. Example: gh-pages.
+  ///   - sort: What to sort results by. popularity will sort by the number of comments. long-running will sort by date created and will limit the results to pull requests that have been open for more than a month and have had activity within the past month.
+  ///   - direction: The direction of the sort. Default: desc when sort is created or sort is not specified, otherwise asc.
+  ///   - perPage: The number of results per page (max 100).
+  ///   - page: Page number of the results to fetch.
+  /// - Returns: [Pull]
+  public func pulls(
     ownerID: String,
     repositoryName: String,
     state: PullSearchType = .open,
