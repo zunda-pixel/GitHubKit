@@ -26,7 +26,7 @@ public struct Pull: Hashable, Sendable, Identifiable, Codable {
   public let assignee: User?
   public let assignees: [User]
   public let requestedReviewers: [User]
-  public let requestedTeams: [User]
+  public let requestedTeams: [Team]
   public let labels: [Label]
   public let milestone: Milestone?
   public let isDraft: Bool
@@ -63,7 +63,7 @@ public struct Pull: Hashable, Sendable, Identifiable, Codable {
     assignee: User?,
     assignees: [User],
     requestedReviewers: [User],
-    requestedTeams: [User],
+    requestedTeams: [Team],
     labels: [Label],
     milestone: Milestone?,
     isDraft: Bool,
@@ -114,7 +114,6 @@ public struct Pull: Hashable, Sendable, Identifiable, Codable {
     self.autoMerge = autoMerge
     self.activeLockReason = activeLockReason
   }
-  
   
   private enum CodingKeys: String, CodingKey {
     case id
