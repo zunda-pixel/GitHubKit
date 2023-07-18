@@ -7,13 +7,13 @@ import Foundation
 public struct Merge: Codable, Hashable, Sendable {
   public let enabledBy: User
   public let method: Method
-  public let commitTitle: String
+  public let commitTitle: String?
   public let commitMessage: String
   
   public init(
     enabledBy: User,
     method: Method,
-    commitTitle: String,
+    commitTitle: String?,
     commitMessage: String
   ) {
     self.enabledBy = enabledBy
@@ -24,7 +24,7 @@ public struct Merge: Codable, Hashable, Sendable {
   
   private enum CodingKeys: String, CodingKey {
     case enabledBy = "enabled_by"
-    case method
+    case method = "merge_method"
     case commitTitle = "commit_title"
     case commitMessage = "commit_message"
   }
