@@ -27,4 +27,17 @@ final class IssuesTests: XCTestCase {
     )
     print(response)
   }
+  
+  func testIssueComments() async throws {
+    let api = GitHubAPI(type: authorizationType)
+    let comments = try await api.comments(
+      ownerID: "apple",
+      repositoryName: "swift",
+      issueNumber: 67351,
+      perPage: 100,
+      page: 1
+    )
+    
+    print(comments)
+  }
 }
