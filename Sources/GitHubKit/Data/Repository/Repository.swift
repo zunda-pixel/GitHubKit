@@ -10,7 +10,7 @@ public struct Repository: Codable, Sendable, Hashable, Identifiable {
   public let name: String
   public let fullName: String
   public let isPrivate: Bool
-  public let owner: User
+  public let owner: User?
   public let htmlURL: URL
   public let description: String?
   public let isFork: Bool
@@ -90,7 +90,7 @@ public struct Repository: Codable, Sendable, Hashable, Identifiable {
     name: String,
     fullName: String,
     isPrivate: Bool,
-    owner: User,
+    owner: User?,
     htmlURL: URL,
     description: String?,
     isFork: Bool,
