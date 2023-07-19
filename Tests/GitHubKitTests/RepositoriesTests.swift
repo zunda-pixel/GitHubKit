@@ -11,10 +11,12 @@ final class RepositoriesTests: XCTestCase {
   func testRepositories() async throws {
     let api = GitHubAPI(type: authorizationType)
     let repositories = try await api.repositories(
-      ownerID: "zunda-pixel",
+      ownerID: "apple",
       type: .all,
       sort: .updated,
-      direction: .desc
+      direction: .desc,
+      perPage: 100,
+      page: 1
     )
     print(repositories)
   }
@@ -66,5 +68,23 @@ final class RepositoriesTests: XCTestCase {
     )
     
     print(repositories.count)
+  }
+  
+  func testSecurityAnalyticsCodable() throws {
+    let securityAnalytics = SecurityAnalytics(
+      advancedSecurity: true,
+      dependabotSecurityUpdates: true,
+      secretScanning: true,
+      secretScanningPushProtection: true
+    )
+    let encoder = JSONEncoder.github
+    
+    let data = try encoder.encode(securityAnalytics)
+        
+    let decoder = JSONDecoder.github
+    
+    let decodedSecurityAnalytics = try decoder.decode(SecurityAnalytics.self, from: data)
+    
+    XCTAssertEqual(securityAnalytics, decodedSecurityAnalytics)
   }
 }
