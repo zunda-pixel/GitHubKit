@@ -53,4 +53,18 @@ final class RepositoriesTests: XCTestCase {
     
     print(users.count)
   }
+  
+  func testForks() async throws {
+    let api = GitHubAPI(type: authorizationType)
+    
+    let repositories = try await api.forks(
+      ownerID: "apple",
+      repositoryName: "swift-http-types",
+      sort: .newest,
+      perPage: 100,
+      page: 1
+    )
+    
+    print(repositories.count)
+  }
 }
