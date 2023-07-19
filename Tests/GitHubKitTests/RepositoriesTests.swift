@@ -18,4 +18,16 @@ final class RepositoriesTests: XCTestCase {
     )
     print(repositories)
   }
+  
+  func testContributors() async throws {
+    let api = GitHubAPI(type: authorizationType)
+    let contributors = try await api.contributors(
+      ownerID: "apple",
+      repositoryName: "swift-format",
+      anon: true,
+      perPage: 100,
+      page: 1
+    )
+    print(contributors.count)
+  }
 }

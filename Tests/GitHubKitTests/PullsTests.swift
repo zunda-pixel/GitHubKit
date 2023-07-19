@@ -12,8 +12,8 @@ final class PullsTests: XCTestCase {
     let api = GitHubAPI(type: authorizationType)
     
     let pulls = try await api.pulls(
-      ownerID: "apple",
-      repositoryName: "swift",
+      ownerID: "github",
+      repositoryName: "explore",
       state: .all,
       sort: .created,
       direction: .asc,
