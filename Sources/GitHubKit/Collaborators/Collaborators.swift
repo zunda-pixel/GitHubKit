@@ -29,7 +29,7 @@ extension GitHubAPI {
     permission: PermissionType? = nil,
     perPage: Int = 30,
     page: Int = 1
-  ) async throws -> [Contributor] {
+  ) async throws -> [Collaborator] {
     let path = "/repos/\(ownerID)/\(repositoryName)/collaborators"
     let endpoint = baseURL.appending(path: path)
     let method: HTTPRequest.Method = .get
@@ -49,7 +49,7 @@ extension GitHubAPI {
     let (data, _) = try await session.data(for: request)
     
     let decoder = JSONDecoder.github
-    let contributors = try decoder.decode([Contributor].self, from: data)
+    let contributors = try decoder.decode([Collaborator].self, from: data)
     
     return contributors
   }
