@@ -9,6 +9,16 @@ import Foundation
 import HTTPTypes
 
 extension GitHubAPI {
+  /// List issue comments
+  /// https://docs.github.com/en/rest/issues/comments?apiVersion=2022-11-28#list-issue-comments
+  /// - Parameters:
+  ///   - ownerID: The account owner of the repository. The name is not case sensitive.
+  ///   - repositoryName: The name of the repository without the .git extension. The name is not case sensitive.
+  ///   - issueNumber: The number that identifies the issue.
+  ///   - since: Only show results that were last updated after the given time.
+  ///   - perPage: The number of results per page (max 100).
+  ///   - page: Page number of the results to fetch.
+  /// - Returns: [Comment]
   public func comments(
     ownerID: String,
     repositoryName: String,
@@ -41,6 +51,16 @@ extension GitHubAPI {
     return comments
   }
   
+  /// List issue comments
+  /// https://docs.github.com/en/rest/issues/comments?apiVersion=2022-11-28#list-issue-comments
+  /// - Parameters:
+  ///   - ownerID: The account owner of the repository. The name is not case sensitive.
+  ///   - repositoryName: The name of the repository without the .git extension. The name is not case sensitive.
+  ///   - pullNumber: The number that identifies the pull.
+  ///   - since: Only show results that were last updated after the given time.
+  ///   - perPage: The number of results per page (max 100).
+  ///   - page: Page number of the results to fetch.
+  /// - Returns: [Comment]
   public func comments(
     ownerID: String,
     repositoryName: String,

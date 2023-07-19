@@ -20,6 +20,7 @@ public enum PullSearchType: String {
 
 extension GitHubAPI {
   /// List pull requests
+  /// https://docs.github.com/en/rest/pulls/pulls?apiVersion=2022-11-28#list-pull-requests
   /// - Parameters:
   ///   - ownerID: The account owner of the repository. The name is not case sensitive.
   ///   - repositoryName: The name of the repository without the .git extension. The name is not case sensitive.
