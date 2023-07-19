@@ -15,7 +15,7 @@ extension GitHubAPI {
   ///   - perPage: The number of results per page (max 100).
   ///   - page: Page number of the results to fetch.
   /// - Returns: [User]
-  func contributors(
+  public func contributors(
     ownerID: String,
     repositoryName: String,
     anon: Bool,
