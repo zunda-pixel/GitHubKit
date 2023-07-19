@@ -4,7 +4,7 @@
 
 import Foundation
 
-public struct License: Codable, Hashable, Sendable {
+public struct SimpleLicense: Codable, Hashable, Sendable {
   public let key: String
   public let name: String
   public let spdxID: String
