@@ -51,36 +51,36 @@ public struct Repository: Codable, Sendable, Hashable, Identifiable {
   public let labelsURL: URL
   public let releasesURL: URL
   public let deploymentsURL: URL
-  public let createdAt: Date
-  public let updatedAt: Date
-  public let pushedAt: Date
-  public let gitURL: URL
-  public let sshURL: URL
-  public let cloneURL: URL
-  public let svnURL: URL
+  public let createdAt: Date?
+  public let updatedAt: Date?
+  public let pushedAt: Date?
+  public let gitURL: URL?
+  public let sshURL: URL?
+  public let cloneURL: URL?
+  public let svnURL: URL?
   public let homepage: String?
-  public let size: Int
-  public let stargazersCount: Int
-  public let watchersCount: Int
+  public let size: Int?
+  public let stargazersCount: Int?
+  public let watchersCount: Int?
   public let language: String?
-  public let hasIssues: Bool
-  public let hasProjects: Bool
-  public let hasDownloads: Bool
-  public let hasWiki: Bool
-  public let hasPages: Bool
-  public let hasDiscussions: Bool
-  public let forksCount: Int
+  public let hasIssues: Bool?
+  public let hasProjects: Bool?
+  public let hasDownloads: Bool?
+  public let hasWiki: Bool?
+  public let hasPages: Bool?
+  public let hasDiscussions: Bool?
+  public let forksCount: Int?
   public let mirrorURL: URL?
-  public let isArchived: Bool
-  public let disabled: Bool
-  public let openIssuesCount: Int
+  public let isArchived: Bool?
+  public let disabled: Bool?
+  public let openIssuesCount: Int?
   public let license: SimpleLicense?
-  public let allowForking: Bool
-  public let isTemplate: Bool
-  public let webCommitSignOffRequired: Bool
-  public let topics: [String]
-  public let visibility: Visibility
-  public let defaultBranch: String
+  public let allowForking: Bool?
+  public let isTemplate: Bool?
+  public let webCommitSignOffRequired: Bool?
+  public let topics: [String]?
+  public let visibility: Visibility?
+  public let defaultBranch: String?
   public let permissions: Permission?
   public let roleName: Role?
   public let tempCloneToken: String?
@@ -137,36 +137,36 @@ public struct Repository: Codable, Sendable, Hashable, Identifiable {
     labelsURL: URL,
     releasesURL: URL,
     deploymentsURL: URL,
-    createdAt: Date,
-    updatedAt: Date,
-    pushedAt: Date,
-    gitURL: URL,
-    sshURL: URL,
-    cloneURL: URL,
-    svnURL: URL,
+    createdAt: Date?,
+    updatedAt: Date?,
+    pushedAt: Date?,
+    gitURL: URL?,
+    sshURL: URL?,
+    cloneURL: URL?,
+    svnURL: URL?,
     homepage: String?,
-    size: Int,
-    stargazersCount: Int,
-    watchersCount: Int,
+    size: Int?,
+    stargazersCount: Int?,
+    watchersCount: Int?,
     language: String?,
-    hasIssues: Bool,
-    hasProjects: Bool,
-    hasDownloads: Bool,
-    hasWiki: Bool,
-    hasPages: Bool,
-    hasDiscussions: Bool,
-    forksCount: Int,
+    hasIssues: Bool?,
+    hasProjects: Bool?,
+    hasDownloads: Bool?,
+    hasWiki: Bool?,
+    hasPages: Bool?,
+    hasDiscussions: Bool?,
+    forksCount: Int?,
     mirrorURL: URL?,
-    isArchived: Bool,
-    disabled: Bool,
-    openIssuesCount: Int,
+    isArchived: Bool?,
+    disabled: Bool?,
+    openIssuesCount: Int?,
     license: SimpleLicense?,
-    allowForking: Bool,
-    isTemplate: Bool,
-    webCommitSignOffRequired: Bool,
-    topics: [String],
-    visibility: Visibility,
-    defaultBranch: String,
+    allowForking: Bool?,
+    isTemplate: Bool?,
+    webCommitSignOffRequired: Bool?,
+    topics: [String]?,
+    visibility: Visibility?,
+    defaultBranch: String?,
     permissions: Permission?,
     roleName: Role?,
     tempCloneToken: String?,
