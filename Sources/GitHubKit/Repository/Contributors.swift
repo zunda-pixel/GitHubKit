@@ -11,14 +11,12 @@ extension GitHubAPI {
   /// - Parameters:
   ///   - ownerID: The account owner of the repository. The name is not case sensitive.
   ///   - repositoryName: The name of the repository without the .git extension. The name is not case sensitive.
-  ///   - anon: Set to true to include anonymous contributors in results.
   ///   - perPage: The number of results per page (max 100).
   ///   - page: Page number of the results to fetch.
   /// - Returns: [User]
   public func contributors(
     ownerID: String,
     repositoryName: String,
-    anon: Bool,
     perPage: Int = 30,
     page: Int = 1
   ) async throws -> [Contributor] {
@@ -27,7 +25,7 @@ extension GitHubAPI {
     let method: HTTPRequest.Method = .get
     
     let queries: [String: String] = [
-      "anon": anon ? "true" : "false",
+      "anon": "false", // Set False to not get anonymous contributors. anonymous contributors has invalid data model
       "per_page": String(perPage),
       "page": String(page),
     ]
