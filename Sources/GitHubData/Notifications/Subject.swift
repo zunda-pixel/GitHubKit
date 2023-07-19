@@ -8,13 +8,13 @@ public struct Subject: Codable, Hashable, Sendable {
   public let title: String
   public let url: URL
   public let latestCommitURL: URL?
-  public let type: String
+  public let type: SubjectType
   
   public init(
     title: String,
     url: URL,
     latestCommitURL: URL?,
-    type: String
+    type: SubjectType
   ) {
     self.title = title
     self.url = url

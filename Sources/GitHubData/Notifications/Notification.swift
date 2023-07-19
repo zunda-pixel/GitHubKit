@@ -8,10 +8,10 @@ public struct Notification: Codable, Sendable, Hashable, Identifiable {
   public let id: String
   public let repository: Repository
   public let subject: Subject
-  public let reason: String
+  public let reason: Reason
   public let unread: Bool
   public let updatedAt: Date
-  public let lastReadAt: Date
+  public let lastReadAt: Date?
   public let url: URL
   public let subscriptionURL: URL
   
@@ -19,7 +19,7 @@ public struct Notification: Codable, Sendable, Hashable, Identifiable {
     id: String,
     repository: Repository,
     subject: Subject,
-    reason: String,
+    reason: Reason,
     unread: Bool,
     updatedAt: Date,
     lastReadAt: Date,
