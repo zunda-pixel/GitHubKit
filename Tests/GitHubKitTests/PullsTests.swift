@@ -5,7 +5,7 @@
 import Foundation
 
 import XCTest
-@testable import GitHubKit
+@testable import GitHubAPI
 
 final class PullsTests: XCTestCase {
   func testPulls() async throws {

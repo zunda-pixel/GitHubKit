@@ -11,8 +11,8 @@ let package = Package(
   ],
   products: [
     .library(
-      name: "GitHubKit",
-      targets: ["GitHubKit"]
+      name: "GitHubAPI",
+      targets: ["GitHubAPI"]
     ),
   ],
   dependencies: [
@@ -20,16 +20,20 @@ let package = Package(
   ],
   targets: [
     .target(
-      name: "GitHubKit",
+      name: "GitHubAPI",
       dependencies: [
+        .target(name: "GitHubData"),
         .product(name: "HTTPTypes", package: "swift-http-types"),
         .product(name: "HTTPTypesFoundation", package: "swift-http-types"),
       ]
     ),
+    .target(
+      name: "GitHubData"
+    ),
     .testTarget(
       name: "GitHubKitTests",
       dependencies: [
-        "GitHubKit",
+        .target(name: "GitHubAPI"),
       ]
     ),
   ]

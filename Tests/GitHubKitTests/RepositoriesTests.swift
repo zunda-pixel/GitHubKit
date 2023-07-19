@@ -5,7 +5,7 @@
 import Foundation
 
 import XCTest
-@testable import GitHubKit
+@testable import GitHubAPI
 
 final class RepositoriesTests: XCTestCase {  
   func testRepositories() async throws {
@@ -41,10 +41,10 @@ final class RepositoriesTests: XCTestCase {
     print(license)
   }
   
-  func testStarringUsers() async throws {
+  func testStargazers() async throws {
     let api = GitHubAPI(type: authorizationType)
     
-    let users = try await api.starringUsers(
+    let users = try await api.stargazers(
       ownerID: "apple",
       repositoryName: "swift",
       perPage: 100,

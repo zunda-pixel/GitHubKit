@@ -1,19 +1,19 @@
 //
-//  Stars.swift
+//  Stargazers.swift
 //
 
 import Foundation
 import HTTPTypes
 
 extension GitHubAPI {
-  /// List starring Users
+  /// Stargazers
   /// - Parameters:
   ///   - ownerID: The account owner of the repository. The name is not case sensitive.
   ///   - repositoryName: The name of the repository without the .git extension. The name is not case sensitive.
   ///   - perPage: The number of results per page (max 100).
   ///   - page: Page number of the results to fetch.
   /// - Returns: [User]
-  public func starringUsers(
+  public func stargazers(
     ownerID: String,
     repositoryName: String,
     perPage: Int = 30,

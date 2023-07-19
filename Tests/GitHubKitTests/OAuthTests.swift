@@ -1,5 +1,5 @@
 import XCTest
-@testable import GitHubKit
+@testable import GitHubAPI
 
 final class OAuthTests: XCTestCase {
   let clientID = "g7j5DeETKUfN1e1swdOU"

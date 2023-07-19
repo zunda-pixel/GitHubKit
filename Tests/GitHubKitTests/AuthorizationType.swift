@@ -3,6 +3,6 @@
 //
 
 import Foundation
-@testable import GitHubKit
+@testable import GitHubAPI
 
-let authorizationType: AuthorizationType = .withoutToken
+let authorizationType: AuthorizationType = .bearerToken(accessToken: "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")
