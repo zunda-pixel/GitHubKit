@@ -12,7 +12,7 @@ public struct Team: Hashable, Sendable, Identifiable, Codable {
   public let description: String?
   public let privacy: Privacy
   public let notificationSetting: NotificationSettings
-  public let permission: Team.Permission
+  public let permission: PermissionType
   public let url: URL
   public let htmlURL: URL
   public let membersURL: URL
@@ -27,7 +27,7 @@ public struct Team: Hashable, Sendable, Identifiable, Codable {
     description: String?,
     privacy: Privacy,
     notificationSetting: NotificationSettings,
-    permission: Team.Permission,
+    permission: PermissionType,
     url: URL,
     htmlURL: URL,
     membersURL: URL,
