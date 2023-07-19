@@ -5,20 +5,9 @@
 import Foundation
 import HTTPTypes
 
-public enum IssueSearchState: String {
-  case open
-  case closed
-  case all
-}
-
-public enum IssueSearchSortType: String {
-  case created
-  case updated
-  case comments
-}
-
-extension GitHubKit {
+extension GitHubAPI {
   /// List issues in a repository. Only open issues will be listed.
+  /// https://docs.github.com/en/rest/issues/issues?apiVersion=2022-11-28#list-repository-issues
   /// - Parameters:
   ///   - ownerID: The account owner of the repository. The name is not case sensitive.
   ///   - repositoryName: The name of the repository without the .git extension. The name is not case sensitive.
@@ -66,7 +55,10 @@ extension GitHubKit {
     creator.map { queries["creator"] = String($0) }
     mentioned.map { queries["mentioned"] = String($0) }
     if !labels.isEmpty { queries["labels"] = labels.joined(separator: ",") }
-    since.map { queries["since"] = "\($0)" }
+    since.map {
+      let formatter = ISO8601DateFormatter()
+      queries["since"] = formatter.string(from: $0)
+    }
     
     let request = HTTPRequest(
       method: method,

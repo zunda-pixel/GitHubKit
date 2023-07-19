@@ -16,6 +16,30 @@ public struct Reaction: Codable, Sendable, Hashable {
   public let rockerCount: Int
   public let eyesCount: Int
 
+  public init(
+    url: URL,
+    totalCount: Int,
+    plusOne: Int,
+    minusOne: Int,
+    laughCount: Int,
+    hoorayCount: Int,
+    confusedCount: Int,
+    heartCount: Int,
+    rockerCount: Int,
+    eyesCount: Int
+  ) {
+    self.url = url
+    self.totalCount = totalCount
+    self.plusOne = plusOne
+    self.minusOne = minusOne
+    self.laughCount = laughCount
+    self.hoorayCount = hoorayCount
+    self.confusedCount = confusedCount
+    self.heartCount = heartCount
+    self.rockerCount = rockerCount
+    self.eyesCount = eyesCount
+  }
+  
   private enum CodingKeys: String, CodingKey {
     case url
     case totalCount = "total_count"

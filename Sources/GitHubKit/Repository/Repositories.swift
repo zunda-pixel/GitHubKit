@@ -5,7 +5,7 @@
 import Foundation
 import HTTPTypes
 
-extension GitHubKit {
+extension GitHubAPI {
   /// List repositories for a user
   /// Lists public repositories for the specified user. Note: For GitHub AE, this endpoint will list internal repositories for the specified user.
   /// https://docs.github.com/en/rest/repos/repos?apiVersion=2022-11-28#list-repositories-for-a-user

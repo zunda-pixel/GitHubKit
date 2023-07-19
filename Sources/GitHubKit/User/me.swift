@@ -5,7 +5,9 @@
 import Foundation
 import HTTPTypes
 
-extension GitHubKit {
+extension GitHubAPI {
+  /// Get the authenticated user
+  /// - Returns: User
   public func me() async throws -> User {
     let path = "/user"
     let method: HTTPRequest.Method = .get

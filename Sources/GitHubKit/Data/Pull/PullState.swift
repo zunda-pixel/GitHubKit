@@ -1,10 +1,10 @@
 //
-//  IssueState.swift
+//  PullState.swift
 //
 
 import Foundation
 
-extension Issue {
+extension Pull {
   public enum State: String, Codable, Sendable {
     case open
     case closed

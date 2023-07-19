@@ -5,7 +5,7 @@
 import Foundation
 import HTTPTypes
 
-extension GitHubKit {
+extension GitHubAPI {
   /// Find users via various criteria. This method returns up to 100 results
   /// https://docs.github.com/en/rest/search/search?apiVersion=2022-11-28#search-users
   /// - Parameter query: The query contains one or more search keywords and qualifiers. Qualifiers allow you to limit your search to specific areas of GitHub. The REST API supports the same qualifiers as the web interface for GitHub. To learn more about the format of the query, see Constructing a search query. See "Searching users" for a detailed list of qualifiers.
