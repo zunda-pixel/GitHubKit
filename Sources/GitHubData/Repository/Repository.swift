@@ -82,7 +82,13 @@ public struct Repository: Codable, Sendable, Hashable, Identifiable {
   public let visibility: Visibility
   public let defaultBranch: String
   public let permissions: Permission?
-  public let score: Int?
+  public let roleName: Role?
+  public let tempCloneToken: String?
+  public let deleteBranchOnMerge: Bool?
+  public let subscribersCount: Int?
+  public let networkCount: Int?
+  public let codeConduct: CodeConduct?
+  public let securityAnalytics: SecurityAnalytics?
   
   public init(
     id: Int,
@@ -162,7 +168,13 @@ public struct Repository: Codable, Sendable, Hashable, Identifiable {
     visibility: Visibility,
     defaultBranch: String,
     permissions: Permission?,
-    score: Int?
+    roleName: Role?,
+    tempCloneToken: String?,
+    deleteBranchOnMerge: Bool?,
+    subscribersCount: Int?,
+    networkCount: Int?,
+    codeConduct: CodeConduct?,
+    securityAnalytics: SecurityAnalytics?
   ) {
     self.id = id
     self.nodeID = nodeID
@@ -241,10 +253,16 @@ public struct Repository: Codable, Sendable, Hashable, Identifiable {
     self.visibility = visibility
     self.defaultBranch = defaultBranch
     self.permissions = permissions
-    self.score = score
+    self.roleName = roleName
+    self.tempCloneToken = tempCloneToken
+    self.deleteBranchOnMerge = deleteBranchOnMerge
+    self.subscribersCount = subscribersCount
+    self.networkCount = networkCount
+    self.codeConduct = codeConduct
+    self.securityAnalytics = securityAnalytics
   }
   
-  enum CodingKeys: String, CodingKey {
+  private enum CodingKeys: String, CodingKey {
     case id
     case nodeID = "node_id"
     case name
@@ -322,6 +340,12 @@ public struct Repository: Codable, Sendable, Hashable, Identifiable {
     case visibility
     case defaultBranch = "default_branch"
     case permissions
-    case score
+    case roleName = "role_name"
+    case tempCloneToken = "temp_clone_token"
+    case deleteBranchOnMerge = "delete_branch_on_merge"
+    case subscribersCount = "subscribers_count"
+    case networkCount = "network_count"
+    case codeConduct = "code_of_conduct"
+    case securityAnalytics = "security_and_analysis"
   }
 }
