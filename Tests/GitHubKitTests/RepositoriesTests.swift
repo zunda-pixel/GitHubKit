@@ -11,7 +11,7 @@ final class RepositoriesTests: XCTestCase {
   func testRepositories() async throws {
     let api = GitHubAPI(type: authorizationType)
     let repositories = try await api.repositories(
-      userID: "zunda-pixel",
+      ownerID: "zunda-pixel",
       type: .all,
       sort: .updated,
       direction: .desc
@@ -24,10 +24,20 @@ final class RepositoriesTests: XCTestCase {
     let contributors = try await api.contributors(
       ownerID: "apple",
       repositoryName: "swift-format",
-      anon: true,
       perPage: 100,
       page: 1
     )
     print(contributors.count)
+  }
+  
+  func testLicense() async throws {
+    let api = GitHubAPI(type: authorizationType)
+    
+    let license = try await api.license(
+      ownerID: "apple",
+      repositoryName: "swift"
+    )
+    
+    print(license)
   }
 }
