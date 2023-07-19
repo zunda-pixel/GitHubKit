@@ -4,7 +4,8 @@
 
 import Foundation
 
-public struct Contributor: Codable, Sendable, Hashable {
+public struct Contributor: Codable, Sendable, Hashable, Identifiable {
+  public var id: Int { user.id }
   public let user: User
   public let contributionCount: Int
   

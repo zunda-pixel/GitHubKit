@@ -4,7 +4,8 @@
 
 import Foundation
 
-public struct Collaborator: Codable, Sendable, Hashable {
+public struct Collaborator: Codable, Sendable, Hashable, Identifiable {
+  public var id: Int { user.id }
   public let user: User
   public let role: Role
   
