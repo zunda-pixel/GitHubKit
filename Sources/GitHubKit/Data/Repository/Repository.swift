@@ -74,7 +74,7 @@ public struct Repository: Codable, Sendable, Hashable, Identifiable {
   public let isArchived: Bool
   public let disabled: Bool
   public let openIssuesCount: Int
-  public let license: License?
+  public let license: SimpleLicense?
   public let allowForking: Bool
   public let isTemplate: Bool
   public let webCommitSignOffRequired: Bool
@@ -154,7 +154,7 @@ public struct Repository: Codable, Sendable, Hashable, Identifiable {
     isArchived: Bool,
     disabled: Bool,
     openIssuesCount: Int,
-    license: License?,
+    license: SimpleLicense?,
     allowForking: Bool,
     isTemplate: Bool,
     webCommitSignOffRequired: Bool,
