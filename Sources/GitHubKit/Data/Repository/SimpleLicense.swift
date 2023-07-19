@@ -1,5 +1,5 @@
 //
-//  License.swift
+//  SimpleLicense.swift
 //
 
 import Foundation
