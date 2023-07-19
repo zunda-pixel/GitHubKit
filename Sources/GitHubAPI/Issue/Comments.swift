@@ -1,8 +1,5 @@
 //
-//  File.swift
-//  
-//
-//  Created by zunda on 2023/07/19.
+//  Comments.swift
 //
 
 import Foundation

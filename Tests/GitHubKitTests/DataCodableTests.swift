@@ -3,7 +3,7 @@
 //
 
 import XCTest
-@testable import GitHubKit
+@testable import GitHubAPI
 
 final class DataCodableTests: XCTestCase {
   func testUserCodable() async throws {
