@@ -14,10 +14,6 @@ let package = Package(
       name: "GitHubAPI",
       targets: ["GitHubAPI"]
     ),
-    .library(
-      name: "GitHubData",
-      targets: ["GitHubData"]
-    ),
   ],
   dependencies: [
     .package(url: "https://github.com/apple/swift-http-types", .upToNextMajor(from: "0.1.1")),
