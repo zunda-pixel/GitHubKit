@@ -28,8 +28,8 @@ extension GitHubAPI {
     let method: HTTPRequest.Method = .get
     
     var queries: [String: String] = [
-      "all": all ? "true" : "false",
-      "participating": participating ? "true" : "false",
+      "all": all.description,
+      "participating": participating.description,
       "per_page": String(perPage),
       "page": String(page),
     ]
