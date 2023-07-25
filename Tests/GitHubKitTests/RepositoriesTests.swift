@@ -70,6 +70,17 @@ final class RepositoriesTests: XCTestCase {
     print(repositories.count)
   }
   
+  func testCreateFork() async throws {
+    let api = GitHubAPI(type: authorizationType)
+    let repository = try await api.createFork(
+      ownerID: "apple",
+      repositoryName: "swift",
+      name: "swift",
+      defaultBranchOnly: true
+    )
+    print(repository)
+  }
+  
   func testSecurityAnalyticsCodable() throws {
     let securityAnalytics = SecurityAnalytics(
       advancedSecurity: true,
