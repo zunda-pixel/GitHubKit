@@ -36,7 +36,7 @@ public struct OAuthRequest {
     let endpoint = baseURL.appending(path: path)
     var queries: [String: String] = [
       "client_id": clientID,
-      "allow_signup": allowSignUp ? "true" : "false",
+      "allow_signup": allowSignUp.description,
     ]
     
     redirectURL.map { queries["redirect_uri"] = $0.absoluteString }
