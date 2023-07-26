@@ -98,4 +98,13 @@ final class RepositoriesTests: XCTestCase {
     
     XCTAssertEqual(securityAnalytics, decodedSecurityAnalytics)
   }
+  
+  func testProtectionTags() async throws {
+    let api = GitHubAPI(type: authorizationType)
+    let tags = try await api.protectionTags(
+      ownerID: "zunda-pixel",
+      repositoryName: "GitHubKit"
+    )
+    print(tags)
+  }
 }
