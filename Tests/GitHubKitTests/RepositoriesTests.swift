@@ -99,6 +99,17 @@ final class RepositoriesTests: XCTestCase {
     XCTAssertEqual(securityAnalytics, decodedSecurityAnalytics)
   }
   
+  func testTags() async throws {
+    let api = GitHubAPI(type: authorizationType)
+    let tags = try await api.tags(
+      ownerID: "apple",
+      repositoryName: "swift-format",
+      perPage: 100,
+      page: 1
+    )
+    print(tags)
+  }
+  
   func testProtectionTags() async throws {
     let api = GitHubAPI(type: authorizationType)
     let tags = try await api.protectionTags(
