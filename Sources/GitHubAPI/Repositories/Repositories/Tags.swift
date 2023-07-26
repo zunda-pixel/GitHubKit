@@ -13,7 +13,7 @@ extension GitHubAPI {
   ///   - repositoryName: The name of the repository without the .git extension. The name is not case sensitive.
   ///   - perPage: The number of results per page (max 100).
   ///   - page: Page number of the results to fetch.
-  /// - Returns: [Tag]]
+  /// - Returns: [Tag]
   public func tags(
     ownerID: String,
     repositoryName: String,
