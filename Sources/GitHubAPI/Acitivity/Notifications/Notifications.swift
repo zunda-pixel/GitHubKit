@@ -7,6 +7,7 @@ import HTTPTypes
 
 extension GitHubAPI {
   /// List notifications for the authenticated user
+  /// https://docs.github.com/en/rest/activity/notifications?apiVersion=2022-11-28#list-notifications-for-the-authenticated-user
   /// - Parameters:
   ///   - all: If true, show notifications marked as read.
   ///   - participating: If true, only shows notifications in which the user is directly participating or mentioned.

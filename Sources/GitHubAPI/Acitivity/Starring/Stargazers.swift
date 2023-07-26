@@ -7,6 +7,7 @@ import HTTPTypes
 
 extension GitHubAPI {
   /// Stargazers
+  /// https://docs.github.com/en/rest/activity/starring?apiVersion=2022-11-28#list-stargazers
   /// - Parameters:
   ///   - ownerID: The account owner of the repository. The name is not case sensitive.
   ///   - repositoryName: The name of the repository without the .git extension. The name is not case sensitive.
