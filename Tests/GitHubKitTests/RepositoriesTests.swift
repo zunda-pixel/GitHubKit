@@ -7,7 +7,17 @@ import Foundation
 import XCTest
 @testable import GitHubAPI
 
-final class RepositoriesTests: XCTestCase {  
+final class RepositoriesTests: XCTestCase {
+  func testRepository() async throws {
+    let api = GitHubAPI(type: authorizationType)
+    let repository = try await api.repository(
+      ownerID: "apple",
+      repositoryName: "swift"
+    )
+    
+    print(repository)
+  }
+  
   func testRepositories() async throws {
     let api = GitHubAPI(type: authorizationType)
     let repositories = try await api.repositories(
