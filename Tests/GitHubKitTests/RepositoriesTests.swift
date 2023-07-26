@@ -110,6 +110,19 @@ final class RepositoriesTests: XCTestCase {
     print(tags)
   }
   
+  func testOrganizationRepositories() async throws {
+    let api = GitHubAPI(type: authorizationType)
+    let repositories = try await api.repositories(
+      organization: "apple",
+      type: .all,
+      direction: .asc,
+      perPage: 100,
+      page: 1
+    )
+    
+    print(repositories.count)
+  }
+  
   func testProtectionTags() async throws {
     let api = GitHubAPI(type: authorizationType)
     let tags = try await api.protectionTags(
