@@ -8,6 +8,18 @@ import XCTest
 @testable import GitHubAPI
 
 final class RepositoriesTests: XCTestCase {
+  func testTopics() async throws {
+    let api = GitHubAPI(type: authorizationType)
+    let topics = try await api.topics(
+      ownerID: "zunda-pixel",
+      repositoryName: "GitHubKit",
+      perPage: 100,
+      page: 1
+    )
+    
+    print(topics)
+  }
+  
   func testRepositoryTeams() async throws {
     let api = GitHubAPI(type: authorizationType)
     let teams = try await api.teams(
