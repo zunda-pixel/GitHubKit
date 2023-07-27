@@ -8,6 +8,24 @@ import XCTest
 @testable import GitHubAPI
 
 final class RepositoriesTests: XCTestCase {
+  func testOwnedRepositories() async throws {
+    let api = GitHubAPI(type: authorizationType)
+    
+    let repositories = try await api.ownedRepositories(
+      visibility: nil,
+      affiliation: nil,
+      type: .all,
+      sort: .created,
+      direction: .asc,
+      since: nil,
+      before: nil,
+      perPage: 100,
+      page: 1
+    )
+    
+    print(repositories.count)
+  }
+  
   func testCreateRepositoryWithTemplate() async throws {
     let api = GitHubAPI(type: authorizationType)
     
