@@ -8,6 +8,21 @@ import XCTest
 @testable import GitHubAPI
 
 final class RepositoriesTests: XCTestCase {
+  func testCreateRepositoryWithTemplate() async throws {
+    let api = GitHubAPI(type: authorizationType)
+    
+    let repository = try await api.createRepository(
+      templateOwnerID: "zunda-pixel",
+      templateRepositoryName: "TemplateApp",
+      name: "TestRepository",
+      description: "Repository Description",
+      includeAllBranches: false,
+      isPrivate: false
+    )
+    
+    print(repository)
+  }
+  
   func testCreateRepository() async throws {
     let api = GitHubAPI(type: authorizationType)
     let newRepository = NewRepository(name: "TestRepository")
