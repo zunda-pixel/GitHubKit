@@ -8,6 +8,15 @@ import XCTest
 @testable import GitHubAPI
 
 final class RepositoriesTests: XCTestCase {
+  func testRepositoryLanguages() async throws {
+    let api = GitHubAPI(type: authorizationType)
+    let languages = try await api.languages(
+      ownerID: "apple",
+      repositoryName: "swift"
+    )
+    print(languages)
+  }
+  
   func testUpdateRepositoryEncodable() throws {
     let updateRepository = UpdateRepository(name: "Hello")
     let data = try JSONEncoder.github.encode(updateRepository)
