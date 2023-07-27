@@ -21,9 +21,8 @@ extension GitHubAPI {
     )
     
     let (data, _) = try await session.data(for: request)
-    let decoder = JSONDecoder.github
     
-    let user = try decoder.decode(User.self, from: data)
+    let user = try JSONDecoder.github.decode(User.self, from: data)
     return user
   }
 }

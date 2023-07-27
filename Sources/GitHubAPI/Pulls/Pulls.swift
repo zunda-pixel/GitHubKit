@@ -62,8 +62,7 @@ extension GitHubAPI {
     
     let (data, _) =  try await session.data(for: request)
 
-    let decoder = JSONDecoder.github
-    let pulls = try decoder.decode([Pull].self, from: data)
+    let pulls = try JSONDecoder.github.decode([Pull].self, from: data)
     
     return pulls
   }
