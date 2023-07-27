@@ -8,6 +8,13 @@ import XCTest
 @testable import GitHubAPI
 
 final class RepositoriesTests: XCTestCase {
+  func testCreateRepository() async throws {
+    let api = GitHubAPI(type: authorizationType)
+    let newRepository = NewRepository(name: "TestRepository")
+    let repository = try await api.createRepository(repository: newRepository)
+    print(repository)
+  }
+  
   func testSetTopics() async throws {
     let api = GitHubAPI(type: authorizationType)
     let topics = try await api.setTopics(
