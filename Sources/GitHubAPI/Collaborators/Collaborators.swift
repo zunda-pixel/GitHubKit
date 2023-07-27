@@ -5,7 +5,7 @@
 import Foundation
 import HTTPTypes
 
-public enum AffiliationType: String {
+public enum CollaboratorAffiliationType: String {
   case outside
   case direct
   case all
@@ -25,7 +25,7 @@ extension GitHubAPI {
   public func collaborators(
     ownerID: String,
     repositoryName: String,
-    affiliation: AffiliationType = .all,
+    affiliation: CollaboratorAffiliationType = .all,
     permission: PermissionType? = nil,
     perPage: Int = 30,
     page: Int = 1
