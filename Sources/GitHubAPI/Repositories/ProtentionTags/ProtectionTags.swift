@@ -1,22 +1,22 @@
 //
-//  License.swift
+//  Tags.swift
 //
 
 import Foundation
 import HTTPTypes
 
 extension GitHubAPI {
-  /// Get the license for a repository
-  /// https://docs.github.com/en/rest/licenses/licenses?apiVersion=2022-11-28#get-the-license-for-a-repository
+  /// List tag protection states for a repository
+  /// https://docs.github.com/en/rest/repos/tags?apiVersion=2022-11-28#list-tag-protection-states-for-a-repository
   /// - Parameters:
   ///   - ownerID: The account owner of the repository. The name is not case sensitive.
   ///   - repositoryName: The name of the repository without the .git extension. The name is not case sensitive.
-  /// - Returns: License
-  public func license(
+  /// - Returns: [Tag]
+  public func protectionTags(
     ownerID: String,
     repositoryName: String
-  ) async throws -> License {
-    let path = "/repos/\(ownerID)/\(repositoryName)/license"
+  ) async throws -> [ProtectionTag] {
+    let path = "/repos/\(ownerID)/\(repositoryName)/tags/protection"
     let endpoint = baseURL.appending(path: path)
     let method: HTTPRequest.Method = .get
     
@@ -24,8 +24,8 @@ extension GitHubAPI {
     
     let (data, _) = try await session.data(for: request)
     
-    let license = try JSONDecoder.github.decode(License.self, from: data)
+    let tags = try JSONDecoder.github.decode([ProtectionTag].self, from: data)
     
-    return license
+    return tags
   }
 }

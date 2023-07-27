@@ -7,6 +7,7 @@ import HTTPTypes
 
 extension GitHubAPI {
   /// Create a fork for the authenticated user.
+  /// https://docs.github.com/en/rest/repos/forks?apiVersion=2022-11-28#create-a-fork
   /// - Parameters:
   ///   - ownerID: The account owner of the repository. The name is not case sensitive.
   ///   - repositoryName: The name of the repository without the .git extension. The name is not case sensitive.
@@ -36,14 +37,13 @@ extension GitHubAPI {
     
     let bodyData = try JSONEncoder().encode(body)
     
-    let httpRequest = HTTPRequest(method: method, url: endpoint, queries: [:], headers: headers())
+    let httpRequest = HTTPRequest(method: method, url: endpoint, queries: [:], headers: headers)
     var urlRequest = URLRequest(httpRequest: httpRequest)!
     urlRequest.httpBody = bodyData
     
     let (data, _) = try await session.data(for: urlRequest)
     
-    let decoder = JSONDecoder.github
-    let repository = try decoder.decode(Repository.self, from: data)
+    let repository = try JSONDecoder.github.decode(Repository.self, from: data)
     
     return repository
   }

@@ -39,14 +39,12 @@ extension GitHubAPI {
       method: method,
       url: endpoint,
       queries: queries,
-      headers: headers(
-      )
+      headers: headers
     )
     
     let (data, _) = try await session.data(for: request)
     
-    let decoder = JSONDecoder.github
-    let response = try decoder.decode(UsersResponse.self, from: data)
+    let response = try JSONDecoder.github.decode(UsersResponse.self, from: data)
     
     return response
   }

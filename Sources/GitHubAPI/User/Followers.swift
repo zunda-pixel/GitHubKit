@@ -26,11 +26,11 @@ extension GitHubAPI {
       "page": String(page)
     ]
     
-    let request = HTTPRequest(method: method, url: endpoint, queries: queries, headers: headers())
+    let request = HTTPRequest(method: method, url: endpoint, queries: queries, headers: headers)
     let (data, _) = try await session.data(for: request)
     
-    let decoder = JSONDecoder.github
-    let users =  try decoder.decode([User].self, from: data)
+    let users =  try JSONDecoder.github.decode([User].self, from: data)
+    
     return users
   }
 }

@@ -38,12 +38,11 @@ extension GitHubAPI {
       queries["since"] = formatter.string(from: $0)
     }
     
-    let request = HTTPRequest(method: method, url: endpoint, queries: queries, headers: headers())
+    let request = HTTPRequest(method: method, url: endpoint, queries: queries, headers: headers)
     
     let (data, _) = try await session.data(for: request)
     
-    let decoder = JSONDecoder.github
-    let comments = try decoder.decode([Comment].self, from: data)
+    let comments = try JSONDecoder.github.decode([Comment].self, from: data)
     
     return comments
   }

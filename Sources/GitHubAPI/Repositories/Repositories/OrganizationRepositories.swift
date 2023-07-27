@@ -1,33 +1,40 @@
 //
-//  Forks.swift
+//  OrganizationRepositories.swift
+//  
+//
+//  Created by zunda on 2023/07/26.
 //
 
 import Foundation
 import HTTPTypes
 
 extension GitHubAPI {
-  /// List forks
-  /// https://docs.github.com/en/rest/repos/forks?apiVersion=2022-11-28#list-forks
+  /// List organization repositories
+  /// https://docs.github.com/en/rest/repos/repos?apiVersion=2022-11-28#list-organization-repositories
   /// - Parameters:
-  ///   - ownerID: The account owner of the repository. The name is not case sensitive.
-  ///   - repositoryName: The name of the repository without the .git extension. The name is not case sensitive.
-  ///   - sort: The sort order. stargazers will sort by star count.
+  ///   - organization: The organization name. The name is not case sensitive.
+  ///   - type: Specifies the types of repositories you want returned.
+  ///   - sort: The property to sort the results by
+  ///   - direction: The order to sort by. Default: asc when using full_name, otherwise desc.
   ///   - perPage: The number of results per page (max 100).
   ///   - page: Page number of the results to fetch.
   /// - Returns: [Repository]
-  public func forks(
-    ownerID: String,
-    repositoryName: String,
-    sort: ForksSearchSortType = .newest,
+  func repositories(
+    organization: String,
+    type: OrganizationRepositorySearchType = .all,
+    sort: RepositorySortType = .created,
+    direction: OrderType = .asc,
     perPage: Int = 30,
     page: Int = 1
   ) async throws -> [Repository] {
-    let path = "/repos/\(ownerID)/\(repositoryName)/forks"
+    let path = "/orgs/\(organization)/repos"
     let endpoint = baseURL.appending(path: path)
     let method: HTTPRequest.Method = .get
     
     let queries: [String: String] = [
+      "type": type.rawValue,
       "sort": sort.rawValue,
+      "order": direction.rawValue,
       "per_page": String(perPage),
       "page": String(page),
     ]

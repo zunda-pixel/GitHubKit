@@ -7,6 +7,7 @@ import HTTPTypes
 
 extension GitHubAPI {
   /// List notifications for the authenticated user
+  /// https://docs.github.com/en/rest/activity/notifications?apiVersion=2022-11-28#list-notifications-for-the-authenticated-user
   /// - Parameters:
   ///   - all: If true, show notifications marked as read.
   ///   - participating: If true, only shows notifications in which the user is directly participating or mentioned.
@@ -42,12 +43,11 @@ extension GitHubAPI {
       queries["before"] = formatter.string(from: $0)
     }
     
-    let request = HTTPRequest(method: method, url: endpoint, queries: queries, headers: headers())
+    let request = HTTPRequest(method: method, url: endpoint, queries: queries, headers: headers)
     
     let (data, _) = try await session.data(for: request)
     
-    let decoder = JSONDecoder.github
-    let notifications = try decoder.decode([GitHubData.Notification].self, from: data)
+    let notifications = try JSONDecoder.github.decode([GitHubData.Notification].self, from: data)
    
     return notifications
   }

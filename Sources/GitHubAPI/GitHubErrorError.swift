@@ -1,5 +1,5 @@
 //
-//  OAuthError.swift
+//  GitHubError.swift
 //
 
 import Foundation

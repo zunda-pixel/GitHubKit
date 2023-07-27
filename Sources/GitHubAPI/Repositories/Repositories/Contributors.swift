@@ -1,33 +1,31 @@
 //
-//  Forks.swift
+//  Contributors.swift
 //
 
 import Foundation
 import HTTPTypes
 
 extension GitHubAPI {
-  /// List forks
-  /// https://docs.github.com/en/rest/repos/forks?apiVersion=2022-11-28#list-forks
+  /// List repository contributors
+  /// https://docs.github.com/ja/rest/repos/repos?apiVersion=2022-11-28#list-repository-contributors
   /// - Parameters:
   ///   - ownerID: The account owner of the repository. The name is not case sensitive.
   ///   - repositoryName: The name of the repository without the .git extension. The name is not case sensitive.
-  ///   - sort: The sort order. stargazers will sort by star count.
   ///   - perPage: The number of results per page (max 100).
   ///   - page: Page number of the results to fetch.
-  /// - Returns: [Repository]
-  public func forks(
+  /// - Returns: [User]
+  public func contributors(
     ownerID: String,
     repositoryName: String,
-    sort: ForksSearchSortType = .newest,
     perPage: Int = 30,
     page: Int = 1
-  ) async throws -> [Repository] {
-    let path = "/repos/\(ownerID)/\(repositoryName)/forks"
+  ) async throws -> [Contributor] {
+    let path = "/repos/\(ownerID)/\(repositoryName)/contributors"
     let endpoint = baseURL.appending(path: path)
     let method: HTTPRequest.Method = .get
     
     let queries: [String: String] = [
-      "sort": sort.rawValue,
+      "anon": "false", // Set False to not get anonymous contributors. anonymous contributors has invalid data model
       "per_page": String(perPage),
       "page": String(page),
     ]
@@ -36,8 +34,8 @@ extension GitHubAPI {
     
     let (data, _) = try await session.data(for: request)
     
-    let repositories = try JSONDecoder.github.decode([Repository].self, from: data)
+    let contributors = try JSONDecoder.github.decode([Contributor].self, from: data)
     
-    return repositories
+    return contributors
   }
 }

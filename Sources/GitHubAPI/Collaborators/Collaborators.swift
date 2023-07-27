@@ -5,7 +5,7 @@
 import Foundation
 import HTTPTypes
 
-public enum AffiliationType: String {
+public enum CollaboratorAffiliationType: String {
   case outside
   case direct
   case all
@@ -25,7 +25,7 @@ extension GitHubAPI {
   public func collaborators(
     ownerID: String,
     repositoryName: String,
-    affiliation: AffiliationType = .all,
+    affiliation: CollaboratorAffiliationType = .all,
     permission: PermissionType? = nil,
     perPage: Int = 30,
     page: Int = 1
@@ -44,13 +44,12 @@ extension GitHubAPI {
       queries["permission"] = $0.rawValue
     }
     
-    let request = HTTPRequest(method: method, url: endpoint, queries: queries, headers: headers())
+    let request = HTTPRequest(method: method, url: endpoint, queries: queries, headers: headers)
     
     let (data, _) = try await session.data(for: request)
     
-    let decoder = JSONDecoder.github
-    let contributors = try decoder.decode([Collaborator].self, from: data)
+    let collaborators = try JSONDecoder.github.decode([Collaborator].self, from: data)
     
-    return contributors
+    return collaborators
   }
 }

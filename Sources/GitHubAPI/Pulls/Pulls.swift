@@ -58,12 +58,11 @@ extension GitHubAPI {
     head.map { queries["head"] = $0 }
     branchName.map { queries["base"] = $0 }
     
-    let request = HTTPRequest(method: method, url: endpoint, queries: queries, headers: headers())
+    let request = HTTPRequest(method: method, url: endpoint, queries: queries, headers: headers)
     
     let (data, _) =  try await session.data(for: request)
 
-    let decoder = JSONDecoder.github
-    let pulls = try decoder.decode([Pull].self, from: data)
+    let pulls = try JSONDecoder.github.decode([Pull].self, from: data)
     
     return pulls
   }

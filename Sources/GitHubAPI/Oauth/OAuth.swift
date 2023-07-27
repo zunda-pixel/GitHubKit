@@ -73,9 +73,8 @@ public struct OAuth {
       throw GitHubError.request(request: request)
     }
     
-    let decoder = JSONDecoder.github
     do {
-      let oauthResponse = try decoder.decode(OAuthResponse.self, from: data)
+      let oauthResponse = try JSONDecoder.github.decode(OAuthResponse.self, from: data)
       return oauthResponse
     } catch {
       throw GitHubError.decode(data: data, response: response)
