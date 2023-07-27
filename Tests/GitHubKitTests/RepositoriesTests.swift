@@ -8,6 +8,29 @@ import XCTest
 @testable import GitHubAPI
 
 final class RepositoriesTests: XCTestCase {
+  func testUpdateRepositoryEncodable() throws {
+    let updateRepository = UpdateRepository(name: "Hello")
+    let data = try JSONEncoder.github.encode(updateRepository)
+    print(String(data: data, encoding: .utf8)!)
+  }
+  
+  func testUpdateRepository() async throws {
+    let api = GitHubAPI(type: authorizationType)
+    let repositoryName: String = "TestRepository1111"
+    let repository = try await api.updateRepository(
+      ownerID: "zunda-pixel",
+      repositoryName: repositoryName,
+      repository: .init(
+        name: repositoryName,
+        homepage: .init(string: "https://github.com/tensai")!,
+        isPrivate: true,
+        allowForking: false
+      )
+    )
+    
+    print(repository)
+  }
+  
   func testRepository() async throws {
     let api = GitHubAPI(type: authorizationType)
     let repository = try await api.repository(
