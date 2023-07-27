@@ -31,6 +31,14 @@ final class RepositoriesTests: XCTestCase {
     print(repository)
   }
   
+  func testDeleteRepository() async throws {
+    let api = GitHubAPI(type: authorizationType)
+    try await api.deleteRepository(
+      ownerID: "zunda-pixel",
+      repositoryName: "TestRepository"
+    )
+  }
+  
   func testRepository() async throws {
     let api = GitHubAPI(type: authorizationType)
     let repository = try await api.repository(
