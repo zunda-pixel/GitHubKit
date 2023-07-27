@@ -25,7 +25,7 @@ public struct GitHubAPI {
     self.session = session
   }
   
-  func headers() -> [String: String] {
+  var headers: [String: String] {
     var headers: [String: String] = [
       "Accept": "application/vnd.github+json"
     ]

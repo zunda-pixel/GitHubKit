@@ -32,7 +32,7 @@ extension GitHubAPI {
       "page": String(page),
     ]
     
-    let request = HTTPRequest(method: method, url: endpoint, queries: queries, headers: headers())
+    let request = HTTPRequest(method: method, url: endpoint, queries: queries, headers: headers)
     
     let (data, _) = try await session.data(for: request)
     

@@ -41,7 +41,7 @@ extension GitHubAPI {
       method: method,
       url: endpoint,
       queries: queries,
-      headers: headers()
+      headers: headers
     )
     
     let (data, _) = try await session.data(for: request)
