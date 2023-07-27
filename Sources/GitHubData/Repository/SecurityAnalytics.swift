@@ -5,7 +5,7 @@
 import Foundation
 
 public struct SecurityAnalytics: Codable, Sendable, Hashable {
-  public let advancedSecurity: Bool
+  public let advancedSecurity: Bool?
   public let dependabotSecurityUpdates: Bool
   public let secretScanning: Bool
   public let secretScanningPushProtection: Bool
@@ -27,7 +27,7 @@ public struct SecurityAnalytics: Codable, Sendable, Hashable {
   }
   
   public init(
-    advancedSecurity: Bool,
+    advancedSecurity: Bool?,
     dependabotSecurityUpdates: Bool,
     secretScanning: Bool,
     secretScanningPushProtection: Bool
@@ -41,8 +41,8 @@ public struct SecurityAnalytics: Codable, Sendable, Hashable {
   public init(from decoder: Decoder) throws {
     let container = try decoder.container(keyedBy: CodingKeys.self)
     do {
-      let nestedContainer = try container.nestedContainer(keyedBy: StatusCodingKeys.self, forKey: .advancedSecurity)
-      self.advancedSecurity = try nestedContainer.decode(Status.self,forKey: .status) == .enabled
+      let nestedContainer = try? container.nestedContainer(keyedBy: StatusCodingKeys.self, forKey: .advancedSecurity)
+      self.advancedSecurity = try nestedContainer?.decode(Status.self,forKey: .status) == .enabled
     }
     do {
       let nestedContainer = try container.nestedContainer(keyedBy: StatusCodingKeys.self, forKey: .dependabotSecurityUpdates)
@@ -62,8 +62,10 @@ public struct SecurityAnalytics: Codable, Sendable, Hashable {
     var container = encoder.container(keyedBy: CodingKeys.self)
     do {
       var nestedContainer = container.nestedContainer(keyedBy: StatusCodingKeys.self, forKey: .advancedSecurity)
-      let value: Status = advancedSecurity ? .enabled : .disabled
-      try nestedContainer.encode(value.rawValue, forKey: .status)
+      if let advancedSecurity {
+        let value: Status = advancedSecurity ? .enabled : .disabled
+        try nestedContainer.encode(value.rawValue, forKey: .status)
+      }
     }
     do {
       var nestedContainer = container.nestedContainer(keyedBy: StatusCodingKeys.self, forKey: .dependabotSecurityUpdates)
