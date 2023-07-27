@@ -38,7 +38,3 @@ extension GitHubAPI {
     return response.names
   }
 }
-
-struct TopicsResponse: Decodable {
-  let names: [String]
-}
