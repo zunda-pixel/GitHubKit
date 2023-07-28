@@ -9,8 +9,6 @@ import XCTest
 
 final class RepositoriesTests: XCTestCase {
   func testOwnedRepositories() async throws {
-    let api = GitHubAPI(type: authorizationType)
-    
     let repositories = try await api.ownedRepositories(
       visibility: nil,
       affiliation: nil,
@@ -27,8 +25,6 @@ final class RepositoriesTests: XCTestCase {
   }
   
   func testCreateRepositoryWithTemplate() async throws {
-    let api = GitHubAPI(type: authorizationType)
-    
     let repository = try await api.createRepository(
       templateOwnerID: "zunda-pixel",
       templateRepositoryName: "TemplateApp",
@@ -42,7 +38,6 @@ final class RepositoriesTests: XCTestCase {
   }
   
   func testCreateRepository() async throws {
-    let api = GitHubAPI(type: authorizationType)
     let newRepository = NewRepository(
       name: "TestRepository",
       description: "Description",
@@ -73,7 +68,6 @@ final class RepositoriesTests: XCTestCase {
   }
   
   func testSetTopics() async throws {
-    let api = GitHubAPI(type: authorizationType)
     let topics = try await api.setTopics(
       ownerID: "zunda-pixel",
       repositoryName: "GitHubKit",
@@ -84,7 +78,6 @@ final class RepositoriesTests: XCTestCase {
   }
   
   func testTopics() async throws {
-    let api = GitHubAPI(type: authorizationType)
     let topics = try await api.topics(
       ownerID: "zunda-pixel",
       repositoryName: "GitHubKit",
@@ -96,7 +89,6 @@ final class RepositoriesTests: XCTestCase {
   }
   
   func testRepositoryTeams() async throws {
-    let api = GitHubAPI(type: authorizationType)
     let teams = try await api.teams(
       ownerID: "zunda-pixel",
       repositoryName: "GitHubKit",
@@ -108,7 +100,6 @@ final class RepositoriesTests: XCTestCase {
   }
   
   func testRepositoryLanguages() async throws {
-    let api = GitHubAPI(type: authorizationType)
     let languages = try await api.languages(
       ownerID: "apple",
       repositoryName: "swift"
@@ -123,7 +114,6 @@ final class RepositoriesTests: XCTestCase {
   }
   
   func testUpdateRepository() async throws {
-    let api = GitHubAPI(type: authorizationType)
     let repositoryName: String = "TestRepository1111"
     let repository = try await api.updateRepository(
       ownerID: "zunda-pixel",
@@ -140,7 +130,6 @@ final class RepositoriesTests: XCTestCase {
   }
   
   func testDeleteRepository() async throws {
-    let api = GitHubAPI(type: authorizationType)
     try await api.deleteRepository(
       ownerID: "zunda-pixel",
       repositoryName: "TestRepository"
@@ -148,7 +137,6 @@ final class RepositoriesTests: XCTestCase {
   }
   
   func testRepository() async throws {
-    let api = GitHubAPI(type: authorizationType)
     let repository = try await api.repository(
       ownerID: "apple",
       repositoryName: "swift"
@@ -158,7 +146,6 @@ final class RepositoriesTests: XCTestCase {
   }
   
   func testRepositories() async throws {
-    let api = GitHubAPI(type: authorizationType)
     let repositories = try await api.repositories(
       ownerID: "apple",
       type: .all,
@@ -171,7 +158,6 @@ final class RepositoriesTests: XCTestCase {
   }
   
   func testContributors() async throws {
-    let api = GitHubAPI(type: authorizationType)
     let contributors = try await api.contributors(
       ownerID: "apple",
       repositoryName: "swift-format",
@@ -182,8 +168,6 @@ final class RepositoriesTests: XCTestCase {
   }
   
   func testLicense() async throws {
-    let api = GitHubAPI(type: authorizationType)
-    
     let license = try await api.license(
       ownerID: "apple",
       repositoryName: "swift"
@@ -193,8 +177,6 @@ final class RepositoriesTests: XCTestCase {
   }
   
   func testStargazers() async throws {
-    let api = GitHubAPI(type: authorizationType)
-    
     let users = try await api.stargazers(
       ownerID: "apple",
       repositoryName: "swift",
@@ -206,8 +188,6 @@ final class RepositoriesTests: XCTestCase {
   }
   
   func testForks() async throws {
-    let api = GitHubAPI(type: authorizationType)
-    
     let repositories = try await api.forks(
       ownerID: "apple",
       repositoryName: "swift-http-types",
@@ -220,7 +200,6 @@ final class RepositoriesTests: XCTestCase {
   }
   
   func testCreateFork() async throws {
-    let api = GitHubAPI(type: authorizationType)
     let repository = try await api.createFork(
       ownerID: "apple",
       repositoryName: "swift",
@@ -249,7 +228,6 @@ final class RepositoriesTests: XCTestCase {
   }
   
   func testTags() async throws {
-    let api = GitHubAPI(type: authorizationType)
     let tags = try await api.tags(
       ownerID: "apple",
       repositoryName: "swift-format",
@@ -260,7 +238,6 @@ final class RepositoriesTests: XCTestCase {
   }
   
   func testOrganizationRepositories() async throws {
-    let api = GitHubAPI(type: authorizationType)
     let repositories = try await api.repositories(
       organization: "apple",
       type: .all,
@@ -273,7 +250,6 @@ final class RepositoriesTests: XCTestCase {
   }
   
   func testProtectionTags() async throws {
-    let api = GitHubAPI(type: authorizationType)
     let tags = try await api.protectionTags(
       ownerID: "zunda-pixel",
       repositoryName: "GitHubKit"

@@ -9,7 +9,6 @@ import XCTest
 
 final class IssuesTests: XCTestCase {
   func testIssues() async throws {
-    let api = GitHubAPI(type: authorizationType)
     let response = try await api.issues(
       ownerID: "apple",
       repositoryName: "swift",
@@ -29,7 +28,6 @@ final class IssuesTests: XCTestCase {
   }
   
   func testIssueComments() async throws {
-    let api = GitHubAPI(type: authorizationType)
     let comments = try await api.comments(
       ownerID: "apple",
       repositoryName: "swift",

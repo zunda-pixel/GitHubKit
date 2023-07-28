@@ -5,4 +5,5 @@
 import Foundation
 @testable import GitHubAPI
 
-let authorizationType: AuthorizationType = .bearerToken(accessToken: "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")
+let token = ""
+let api = GitHubAPI(accessToken: token)

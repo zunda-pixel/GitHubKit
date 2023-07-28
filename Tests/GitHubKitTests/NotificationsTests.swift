@@ -8,9 +8,7 @@ import XCTest
 @testable import GitHubAPI
 
 final class NotificationsTests: XCTestCase {
-  func testNotifications() async throws {
-    let api = GitHubAPI(type: authorizationType)
-    
+  func testNotifications() async throws {    
     let notifications = try await api.notifications(
       all: true,
       participating: false,

@@ -8,9 +8,7 @@ import XCTest
 @testable import GitHubAPI
 
 final class CollaboratorsTests: XCTestCase {
-  func testCollaborators() async throws {
-    let api = GitHubAPI(type: authorizationType)
-    
+  func testCollaborators() async throws {    
     let collaborators = try await api.collaborators(
       ownerID: "zunda-pixel",
       repositoryName: "GitHubKit",
