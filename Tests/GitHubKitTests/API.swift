@@ -1,5 +1,5 @@
 //
-//  AuthorizationType.swift
+//  API.swift
 //
 
 import Foundation
