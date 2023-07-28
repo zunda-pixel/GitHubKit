@@ -7,6 +7,7 @@ import HTTPTypes
 
 extension GitHubAPI {
   /// Create a repository using a template
+  /// https://docs.github.com/en/rest/repos/repos?apiVersion=2022-11-28#create-a-repository-using-a-template
   /// - Parameters:
   ///   - templateOwnerID: The account owner of the template repository. The name is not case sensitive.
   ///   - templateRepositoryName: The name of the template repository without the .git extension. The name is not case sensitive.
