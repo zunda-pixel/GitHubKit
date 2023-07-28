@@ -141,3 +141,32 @@ public struct UpdateRepository: Encodable {
     case webCommitSignoffRequired = "web_commit_signoff_required"
   }
 }
+
+extension UpdateRepository {
+  public init(repository: Repository) {
+    self.name = repository.name
+    self.homepage = repository.homepage
+    self.isPrivate = repository.isPrivate
+    self.visibility = repository.visibility
+    self.securityAnalytics = repository.securityAnalytics
+    self.hasIssues = repository.hasIssues
+    self.hasProjects = repository.hasProjects
+    self.hasWiki = repository.hasWiki
+    self.isTemplate = repository.isTemplate
+    self.defaultBranch = repository.defaultBranch
+    self.allowSquashMerge = repository.allowSquashMerge
+    self.allowMergeCommit = repository.allowMergeCommit
+    self.allowRebaseMerge = repository.allowRebaseMerge
+    self.allowAutoMerge = repository.allowAutoMerge
+    self.deleteBranchOnMerge = repository.deleteBranchOnMerge
+    self.allowUpdateBranch = repository.allowUpdateBranch
+    self.useSquashPrTitleAsDefault = repository.useSquashPrTitleAsDefault
+    self.squashMergeCommitTitle = repository.squashMergeCommitTitle
+    self.squashMergeCommitMessage = repository.squashMergeCommitMessage
+    self.mergeCommitTitle = repository.mergeCommitTitle
+    self.mergeCommitMessage = repository.mergeCommitMessage
+    self.isArchived = repository.isArchived
+    self.allowForking = repository.allowForking
+    self.webCommitSignoffRequired = repository.webCommitSignoffRequired
+  }
+}
