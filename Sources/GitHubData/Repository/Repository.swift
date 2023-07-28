@@ -64,12 +64,12 @@ public struct Repository: Codable, Sendable, Hashable, Identifiable {
   public let stargazersCount: Int?
   public let watchersCount: Int?
   public let language: String?
-  public let hasIssues: Bool?
-  public let hasProjects: Bool?
-  public let hasDownloads: Bool?
-  public let hasWiki: Bool?
-  public let hasPages: Bool?
-  public let hasDiscussions: Bool?
+  public let hasIssues: Bool
+  public let hasProjects: Bool
+  public let hasDownloads: Bool
+  public let hasWiki: Bool
+  public let hasPages: Bool
+  public let hasDiscussions: Bool
   public let forksCount: Int?
   public let mirrorURL: URL?
   public let isArchived: Bool?
@@ -164,12 +164,12 @@ public struct Repository: Codable, Sendable, Hashable, Identifiable {
     stargazersCount: Int?,
     watchersCount: Int?,
     language: String?,
-    hasIssues: Bool?,
-    hasProjects: Bool?,
-    hasDownloads: Bool?,
-    hasWiki: Bool?,
-    hasPages: Bool?,
-    hasDiscussions: Bool?,
+    hasIssues: Bool,
+    hasProjects: Bool,
+    hasDownloads: Bool,
+    hasWiki: Bool,
+    hasPages: Bool,
+    hasDiscussions: Bool,
     forksCount: Int?,
     mirrorURL: URL?,
     isArchived: Bool?,
