@@ -11,6 +11,7 @@ public struct Repository: Codable, Sendable, Hashable, Identifiable {
   public let fullName: String
   public let isPrivate: Bool
   public let owner: User?
+  public let organization: User?
   public let htmlURL: URL
   public let description: String?
   public let isFork: Bool
@@ -77,7 +78,7 @@ public struct Repository: Codable, Sendable, Hashable, Identifiable {
   public let license: SimpleLicense?
   public let allowForking: Bool?
   public let isTemplate: Bool?
-  public let webCommitSignOffRequired: Bool?
+  public let webCommitSignoffRequired: Bool?
   public let topics: [String]?
   public let visibility: Visibility?
   public let defaultBranch: String?
@@ -97,6 +98,7 @@ public struct Repository: Codable, Sendable, Hashable, Identifiable {
     fullName: String,
     isPrivate: Bool,
     owner: User?,
+    organization: User?,
     htmlURL: URL,
     description: String?,
     isFork: Bool,
@@ -163,7 +165,7 @@ public struct Repository: Codable, Sendable, Hashable, Identifiable {
     license: SimpleLicense?,
     allowForking: Bool?,
     isTemplate: Bool?,
-    webCommitSignOffRequired: Bool?,
+    webCommitSignoffRequired: Bool?,
     topics: [String]?,
     visibility: Visibility?,
     defaultBranch: String?,
@@ -182,6 +184,7 @@ public struct Repository: Codable, Sendable, Hashable, Identifiable {
     self.fullName = fullName
     self.isPrivate = isPrivate
     self.owner = owner
+    self.organization = organization
     self.htmlURL = htmlURL
     self.description = description
     self.isFork = isFork
@@ -248,7 +251,7 @@ public struct Repository: Codable, Sendable, Hashable, Identifiable {
     self.license = license
     self.allowForking = allowForking
     self.isTemplate = isTemplate
-    self.webCommitSignOffRequired = webCommitSignOffRequired
+    self.webCommitSignoffRequired = webCommitSignoffRequired
     self.topics = topics
     self.visibility = visibility
     self.defaultBranch = defaultBranch
@@ -269,6 +272,7 @@ public struct Repository: Codable, Sendable, Hashable, Identifiable {
     case fullName = "full_name"
     case isPrivate = "private"
     case owner
+    case organization
     case htmlURL = "html_url"
     case description
     case isFork = "fork"
@@ -335,7 +339,7 @@ public struct Repository: Codable, Sendable, Hashable, Identifiable {
     case license
     case allowForking = "allow_forking"
     case isTemplate = "is_template"
-    case webCommitSignOffRequired  = "web_commit_signoff_required"
+    case webCommitSignoffRequired  = "web_commit_signoff_required"
     case topics
     case visibility
     case defaultBranch = "default_branch"

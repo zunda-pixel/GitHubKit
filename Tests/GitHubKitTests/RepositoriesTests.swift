@@ -106,7 +106,7 @@ final class RepositoriesTests: XCTestCase {
       repositoryName: repositoryName,
       repository: .init(
         name: repositoryName,
-        homepage: .init(string: "https://github.com/sample")!,
+        homepage: "https://github.com/sample",
         isPrivate: true,
         allowForking: false
       )

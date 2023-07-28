@@ -38,7 +38,7 @@ extension GitHubAPI {
 
 public struct UpdateRepository: Encodable {
   public var name: String?
-  public var homepage: URL?
+  public var homepage: String?
   public var isPrivate: Bool?
   public var visibility: Visibility?
   public var securityAnalytics: SecurityAnalytics?
@@ -64,7 +64,7 @@ public struct UpdateRepository: Encodable {
   
   public init(
     name: String? = nil,
-    homepage: URL? = nil,
+    homepage: String? = nil,
     isPrivate: Bool? = nil,
     visibility: Visibility? = nil,
     securityAnalytics: SecurityAnalytics? = nil,
