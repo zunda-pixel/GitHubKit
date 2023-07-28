@@ -1,10 +1,10 @@
 //
-//  Repository.swift
+//  TemplateRepository.swift
 //
 
 import Foundation
 
-public struct Repository: Codable, Sendable, Hashable, Identifiable {
+public struct TemplateRepository: Codable, Sendable, Hashable, Identifiable {
   public let id: Int
   public let nodeID: String
   public let name: String
@@ -102,7 +102,6 @@ public struct Repository: Codable, Sendable, Hashable, Identifiable {
   public let allowUpdateBranch: Bool?
   public let allowAutoMerge: Bool?
   public let allowSquashMerge: Bool?
-  public let templateRepository: TemplateRepository?
   public let allowRebaseMerge: Bool?
   
   public init(
@@ -203,8 +202,7 @@ public struct Repository: Codable, Sendable, Hashable, Identifiable {
     allowUpdateBranch: Bool?,
     allowAutoMerge: Bool?,
     allowSquashMerge: Bool?,
-    allowRebaseMerge: Bool?,
-    templateRepository: TemplateRepository?
+    allowRebaseMerge: Bool?
   ) {
     self.id = id
     self.nodeID = nodeID
@@ -304,7 +302,6 @@ public struct Repository: Codable, Sendable, Hashable, Identifiable {
     self.allowAutoMerge = allowAutoMerge
     self.allowSquashMerge = allowSquashMerge
     self.allowRebaseMerge = allowRebaseMerge
-    self.templateRepository = templateRepository
   }
   
   private enum CodingKeys: String, CodingKey {
@@ -405,7 +402,6 @@ public struct Repository: Codable, Sendable, Hashable, Identifiable {
     case allowUpdateBranch = "allow_update_branch"
     case allowAutoMerge = "allow_auto_merge"
     case allowSquashMerge = "allow_squash_merge"
-    case templateRepository = "template_repository"
     case allowRebaseMerge = "allow_rebase_merge"
   }
 }
