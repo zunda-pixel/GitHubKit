@@ -54,10 +54,10 @@ public struct UpdateRepository: Encodable {
   public var deleteBranchOnMerge: Bool?
   public var allowUpdateBranch: Bool?
   public var useSquashPrTitleAsDefault: Bool?
-  public var squashMergeCommitTitle: String?
-  public var squashMergeCommitMessage: String?
-  public var mergeCommitTitle: String?
-  public var mergeCommitMessage: String?
+  public var squashMergeCommitTitle: SquashMergeCommitTitle?
+  public var squashMergeCommitMessage: SquashMergeCommitMessage?
+  public var mergeCommitTitle: MergeCommitTitle?
+  public var mergeCommitMessage: MergeCommitMessage?
   public var isArchived: Bool?
   public var allowForking: Bool?
   public var webCommitSignoffRequired: Bool?
@@ -80,10 +80,10 @@ public struct UpdateRepository: Encodable {
     deleteBranchOnMerge: Bool? = nil,
     allowUpdateBranch: Bool? = nil,
     useSquashPrTitleAsDefault: Bool? = nil,
-    squashMergeCommitTitle: String? = nil,
-    squashMergeCommitMessage: String? = nil,
-    mergeCommitTitle: String? = nil,
-    mergeCommitMessage: String? = nil,
+    squashMergeCommitTitle: SquashMergeCommitTitle? = nil,
+    squashMergeCommitMessage: SquashMergeCommitMessage? = nil,
+    mergeCommitTitle: MergeCommitTitle? = nil,
+    mergeCommitMessage: MergeCommitMessage? = nil,
     isArchived: Bool? = nil,
     allowForking: Bool? = nil,
     webCommitSignoffRequired: Bool? = nil

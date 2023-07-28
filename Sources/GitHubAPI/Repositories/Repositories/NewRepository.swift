@@ -7,7 +7,7 @@ import Foundation
 public struct NewRepository: Encodable {
   public var name: String
   public var description: String?
-  public var homepage: URL?
+  public var homepage: String?
   public var isPrivate: Bool
   public var hasIssues: Bool
   public var hasProjects: Bool
@@ -22,17 +22,17 @@ public struct NewRepository: Encodable {
   public var allowRebaseMerge: Bool
   public var allowAutoMerge: Bool
   public var deleteBranchOnMerge: Bool
-  public var squashMergeCommitTitle: String?
-  public var squashMergeCommitMessage: String?
-  public var mergeCommitTitle: String?
-  public var mergeCommitMessage: String?
+  public var squashMergeCommitTitle: SquashMergeCommitTitle?
+  public var squashMergeCommitMessage: SquashMergeCommitMessage?
+  public var mergeCommitTitle: MergeCommitTitle?
+  public var mergeCommitMessage: MergeCommitMessage?
   public var hasDownloads: Bool
   public var isTemplate: Bool
   
   public init(
     name: String,
     description: String? = nil,
-    homepage: URL? = nil,
+    homepage: String? = nil,
     isPrivate: Bool = false,
     hasIssues: Bool = true,
     hasProjects: Bool = true,
@@ -47,10 +47,10 @@ public struct NewRepository: Encodable {
     allowRebaseMerge: Bool = true,
     allowAutoMerge: Bool = false,
     deleteBranchOnMerge: Bool = false,
-    squashMergeCommitTitle: String? = nil,
-    squashMergeCommitMessage: String? = nil,
-    mergeCommitTitle: String? = nil,
-    mergeCommitMessage: String? = nil,
+    squashMergeCommitTitle: SquashMergeCommitTitle? = nil,
+    squashMergeCommitMessage: SquashMergeCommitMessage? = nil,
+    mergeCommitTitle: MergeCommitTitle? = nil,
+    mergeCommitMessage: MergeCommitMessage? = nil,
     hasDownloads: Bool = true,
     isTemplate: Bool = false
   ) {
