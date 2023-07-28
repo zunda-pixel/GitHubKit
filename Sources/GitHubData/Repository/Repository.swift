@@ -90,6 +90,19 @@ public struct Repository: Codable, Sendable, Hashable, Identifiable {
   public let networkCount: Int?
   public let codeConduct: CodeConduct?
   public let securityAnalytics: SecurityAnalytics?
+  public let anonymousAccessEnabled: Bool?
+  public let starredAt: Date?
+  public let masterBranch: String?
+  public let allowMergeCommit: Bool?
+  public let mergeCommitMessage: MergeCommitMessage?
+  public let mergeCommitTitle: MergeCommitTitle?
+  public let squashMergeCommitMessage: SquashMergeCommitMessage?
+  public let squashMergeCommitTitle: SquashMergeCommitTitle?
+  public let useSquashPrTitleAsDefault: Bool?
+  public let allowUpdateBranch: Bool?
+  public let allowAutoMerge: Bool?
+  public let allowSquashMerge: Bool?
+  public let allowRebaseMerge: Bool?
   
   public init(
     id: Int,
@@ -176,7 +189,20 @@ public struct Repository: Codable, Sendable, Hashable, Identifiable {
     subscribersCount: Int?,
     networkCount: Int?,
     codeConduct: CodeConduct?,
-    securityAnalytics: SecurityAnalytics?
+    securityAnalytics: SecurityAnalytics?,
+    anonymousAccessEnabled: Bool?,
+    starredAt: Date?,
+    masterBranch: String?,
+    allowMergeCommit: Bool?,
+    mergeCommitMessage: MergeCommitMessage?,
+    mergeCommitTitle: MergeCommitTitle?,
+    squashMergeCommitMessage: SquashMergeCommitMessage?,
+    squashMergeCommitTitle: SquashMergeCommitTitle?,
+    useSquashPrTitleAsDefault: Bool?,
+    allowUpdateBranch: Bool?,
+    allowAutoMerge: Bool?,
+    allowSquashMerge: Bool?,
+    allowRebaseMerge: Bool?
   ) {
     self.id = id
     self.nodeID = nodeID
@@ -263,6 +289,19 @@ public struct Repository: Codable, Sendable, Hashable, Identifiable {
     self.networkCount = networkCount
     self.codeConduct = codeConduct
     self.securityAnalytics = securityAnalytics
+    self.anonymousAccessEnabled = anonymousAccessEnabled
+    self.starredAt = starredAt
+    self.masterBranch = masterBranch
+    self.allowMergeCommit = allowMergeCommit
+    self.mergeCommitMessage = mergeCommitMessage
+    self.mergeCommitTitle = mergeCommitTitle
+    self.squashMergeCommitMessage = squashMergeCommitMessage
+    self.squashMergeCommitTitle = squashMergeCommitTitle
+    self.useSquashPrTitleAsDefault = useSquashPrTitleAsDefault
+    self.allowUpdateBranch = allowUpdateBranch
+    self.allowAutoMerge = allowAutoMerge
+    self.allowSquashMerge = allowSquashMerge
+    self.allowRebaseMerge = allowRebaseMerge
   }
   
   private enum CodingKeys: String, CodingKey {
@@ -351,5 +390,18 @@ public struct Repository: Codable, Sendable, Hashable, Identifiable {
     case networkCount = "network_count"
     case codeConduct = "code_of_conduct"
     case securityAnalytics = "security_and_analysis"
+    case anonymousAccessEnabled = "anonymous_access_enabled"
+    case starredAt = "starred_at"
+    case masterBranch = "master_branch"
+    case allowMergeCommit = "allow_merge_commit"
+    case mergeCommitMessage = "merge_commit_message"
+    case mergeCommitTitle = "merge_commit_title"
+    case squashMergeCommitMessage = "squash_merge_commit_message"
+    case squashMergeCommitTitle = "squash_merge_commit_title"
+    case useSquashPrTitleAsDefault = "use_squash_pr_title_as_default"
+    case allowUpdateBranch = "allow_update_branch"
+    case allowAutoMerge = "allow_auto_merge"
+    case allowSquashMerge = "allow_squash_merge"
+    case allowRebaseMerge = "allow_rebase_merge"
   }
 }
