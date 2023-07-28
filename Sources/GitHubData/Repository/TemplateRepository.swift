@@ -75,8 +75,6 @@ public struct TemplateRepository: Codable, Sendable, Hashable, Identifiable {
   public let isArchived: Bool?
   public let disabled: Bool?
   public let openIssuesCount: Int?
-  public let license: SimpleLicense?
-  public let allowForking: Bool?
   public let isTemplate: Bool?
   public let webCommitSignoffRequired: Bool?
   public let topics: [String]?
@@ -175,8 +173,6 @@ public struct TemplateRepository: Codable, Sendable, Hashable, Identifiable {
     isArchived: Bool?,
     disabled: Bool?,
     openIssuesCount: Int?,
-    license: SimpleLicense?,
-    allowForking: Bool?,
     isTemplate: Bool?,
     webCommitSignoffRequired: Bool?,
     topics: [String]?,
@@ -274,8 +270,6 @@ public struct TemplateRepository: Codable, Sendable, Hashable, Identifiable {
     self.isArchived = isArchived
     self.disabled = disabled
     self.openIssuesCount = openIssuesCount
-    self.license = license
-    self.allowForking = allowForking
     self.isTemplate = isTemplate
     self.webCommitSignoffRequired = webCommitSignoffRequired
     self.topics = topics
@@ -375,8 +369,6 @@ public struct TemplateRepository: Codable, Sendable, Hashable, Identifiable {
     case isArchived = "archived"
     case disabled
     case openIssuesCount = "open_issues_count"
-    case license
-    case allowForking = "allow_forking"
     case isTemplate = "is_template"
     case webCommitSignoffRequired  = "web_commit_signoff_required"
     case topics

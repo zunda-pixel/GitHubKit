@@ -43,7 +43,31 @@ final class RepositoriesTests: XCTestCase {
   
   func testCreateRepository() async throws {
     let api = GitHubAPI(type: authorizationType)
-    let newRepository = NewRepository(name: "TestRepository")
+    let newRepository = NewRepository(
+      name: "TestRepository",
+      description: "Description",
+      homepage: "homepage",
+      isPrivate: true,
+      hasIssues: true,
+      hasProjects: true,
+      hasWiki: true,
+      hasDiscussions: true,
+      teamID: nil,
+      autoInit: true,
+      gitignoreTemplate: nil,
+      licenseTemplate: nil,
+      allowSquashMerge: true,
+      allowMergeCommit: true,
+      allowRebaseMerge: true,
+      allowAutoMerge: true,
+      deleteBranchOnMerge: true,
+      squashMergeCommitTitle: .prTitle,
+      squashMergeCommitMessage: .prBody,
+      mergeCommitTitle: .prTitle,
+      mergeCommitMessage: .prBody,
+      hasDownloads: true,
+      isTemplate: true
+    )
     let repository = try await api.createRepository(repository: newRepository)
     print(repository)
   }
