@@ -18,6 +18,6 @@ final class NotificationsTests: XCTestCase {
       page: 1
     )
     
-    print(notifications.map(\.subject.title))
+    print(notifications)
   }
 }
