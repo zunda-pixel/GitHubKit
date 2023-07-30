@@ -9,5 +9,6 @@ extension Subject {
     case issue = "Issue"
     case release = "Release"
     case pullRequest = "PullRequest"
+    case discussion = "Discussion"
   }
 }
