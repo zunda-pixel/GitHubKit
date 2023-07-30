@@ -19,7 +19,7 @@ public struct Milestone: Codable, Sendable, Hashable, Identifiable {
   public let closedIssueCount: Int
   public let createdAt: Date
   public let updatedAt: Date
-  public let closedAt: Date
+  public let closedAt: Date?
   public let dueOn: Date?
   
   public init(
@@ -37,7 +37,7 @@ public struct Milestone: Codable, Sendable, Hashable, Identifiable {
     closedIssueCount: Int,
     createdAt: Date,
     updatedAt: Date,
-    closedAt: Date,
+    closedAt: Date?,
     dueOn: Date?
   ) {
     self.id = id
