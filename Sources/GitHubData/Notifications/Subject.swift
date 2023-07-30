@@ -6,13 +6,13 @@ import Foundation
 
 public struct Subject: Codable, Hashable, Sendable {
   public let title: String
-  public let url: URL
+  public let url: URL?
   public let latestCommitURL: URL?
   public let type: SubjectType
   
   public init(
     title: String,
-    url: URL,
+    url: URL?,
     latestCommitURL: URL?,
     type: SubjectType
   ) {
