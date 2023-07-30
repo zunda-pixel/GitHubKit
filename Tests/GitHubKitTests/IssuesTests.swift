@@ -8,6 +8,16 @@ import XCTest
 @testable import GitHubAPI
 
 final class IssuesTests: XCTestCase {
+  func testIssue() async throws {
+    let issue = try await api.issue(
+      ownerID: "zunda-pixel",
+      repositoryName: "GitHubKit",
+      issueNumber: 1
+    )
+    
+    print(issue)
+  }
+  
   func testIssues() async throws {
     let response = try await api.issues(
       ownerID: "apple",
