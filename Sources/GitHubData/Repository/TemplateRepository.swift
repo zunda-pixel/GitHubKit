@@ -1,10 +1,10 @@
 //
-//  Repository.swift
+//  TemplateRepository.swift
 //
 
 import Foundation
 
-public struct Repository: Codable, Sendable, Hashable, Identifiable {
+public struct TemplateRepository: Codable, Sendable, Hashable, Identifiable {
   public let id: Int
   public let nodeID: String
   public let name: String
@@ -64,19 +64,17 @@ public struct Repository: Codable, Sendable, Hashable, Identifiable {
   public let stargazersCount: Int?
   public let watchersCount: Int?
   public let language: String?
-  public let hasIssues: Bool?
-  public let hasProjects: Bool?
-  public let hasDownloads: Bool?
-  public let hasWiki: Bool?
-  public let hasPages: Bool?
-  public let hasDiscussions: Bool?
+  public let hasIssues: Bool
+  public let hasProjects: Bool
+  public let hasDownloads: Bool
+  public let hasWiki: Bool
+  public let hasPages: Bool
+  public let hasDiscussions: Bool
   public let forksCount: Int?
   public let mirrorURL: URL?
   public let isArchived: Bool?
   public let disabled: Bool?
   public let openIssuesCount: Int?
-  public let license: SimpleLicense?
-  public let allowForking: Bool?
   public let isTemplate: Bool?
   public let webCommitSignoffRequired: Bool?
   public let topics: [String]?
@@ -102,7 +100,6 @@ public struct Repository: Codable, Sendable, Hashable, Identifiable {
   public let allowUpdateBranch: Bool?
   public let allowAutoMerge: Bool?
   public let allowSquashMerge: Bool?
-  public let templateRepository: TemplateRepository?
   public let allowRebaseMerge: Bool?
   
   public init(
@@ -165,19 +162,17 @@ public struct Repository: Codable, Sendable, Hashable, Identifiable {
     stargazersCount: Int?,
     watchersCount: Int?,
     language: String?,
-    hasIssues: Bool?,
-    hasProjects: Bool?,
-    hasDownloads: Bool?,
-    hasWiki: Bool?,
-    hasPages: Bool?,
-    hasDiscussions: Bool?,
+    hasIssues: Bool,
+    hasProjects: Bool,
+    hasDownloads: Bool,
+    hasWiki: Bool,
+    hasPages: Bool,
+    hasDiscussions: Bool,
     forksCount: Int?,
     mirrorURL: URL?,
     isArchived: Bool?,
     disabled: Bool?,
     openIssuesCount: Int?,
-    license: SimpleLicense?,
-    allowForking: Bool?,
     isTemplate: Bool?,
     webCommitSignoffRequired: Bool?,
     topics: [String]?,
@@ -203,8 +198,7 @@ public struct Repository: Codable, Sendable, Hashable, Identifiable {
     allowUpdateBranch: Bool?,
     allowAutoMerge: Bool?,
     allowSquashMerge: Bool?,
-    allowRebaseMerge: Bool?,
-    templateRepository: TemplateRepository?
+    allowRebaseMerge: Bool?
   ) {
     self.id = id
     self.nodeID = nodeID
@@ -276,8 +270,6 @@ public struct Repository: Codable, Sendable, Hashable, Identifiable {
     self.isArchived = isArchived
     self.disabled = disabled
     self.openIssuesCount = openIssuesCount
-    self.license = license
-    self.allowForking = allowForking
     self.isTemplate = isTemplate
     self.webCommitSignoffRequired = webCommitSignoffRequired
     self.topics = topics
@@ -304,7 +296,6 @@ public struct Repository: Codable, Sendable, Hashable, Identifiable {
     self.allowAutoMerge = allowAutoMerge
     self.allowSquashMerge = allowSquashMerge
     self.allowRebaseMerge = allowRebaseMerge
-    self.templateRepository = templateRepository
   }
   
   private enum CodingKeys: String, CodingKey {
@@ -378,8 +369,6 @@ public struct Repository: Codable, Sendable, Hashable, Identifiable {
     case isArchived = "archived"
     case disabled
     case openIssuesCount = "open_issues_count"
-    case license
-    case allowForking = "allow_forking"
     case isTemplate = "is_template"
     case webCommitSignoffRequired  = "web_commit_signoff_required"
     case topics
@@ -405,7 +394,6 @@ public struct Repository: Codable, Sendable, Hashable, Identifiable {
     case allowUpdateBranch = "allow_update_branch"
     case allowAutoMerge = "allow_auto_merge"
     case allowSquashMerge = "allow_squash_merge"
-    case templateRepository = "template_repository"
     case allowRebaseMerge = "allow_rebase_merge"
   }
 }

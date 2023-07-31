@@ -9,16 +9,12 @@ import XCTest
 
 final class GitignoreTests: XCTestCase {
   func testAllGitignoreTemplates() async throws {
-    let api = GitHubAPI(type: authorizationType)
-    
     let gitignoreTemplateNames = try await api.allGitignoreTemplateNames()
     
     print(gitignoreTemplateNames)
   }
   
-  func testGitignoreTemplate() async throws {
-    let api = GitHubAPI(type: authorizationType)
-    
+  func testGitignoreTemplate() async throws {    
     let gitignoreTemplate = try await api.gitignoreTemplate(name: "Swift")
     
     print(gitignoreTemplate)

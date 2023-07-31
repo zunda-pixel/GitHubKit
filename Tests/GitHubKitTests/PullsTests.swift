@@ -8,9 +8,17 @@ import XCTest
 @testable import GitHubAPI
 
 final class PullsTests: XCTestCase {
-  func testPulls() async throws {
-    let api = GitHubAPI(type: authorizationType)
+  func testPull() async throws {
+    let pull = try await api.pull(
+      ownerID: "zunda-pixel",
+      repositoryName: "GitHubKit",
+      pullNumber: 1
+    )
     
+    print(pull)
+  }
+  
+  func testPulls() async throws {
     let pulls = try await api.pulls(
       ownerID: "github",
       repositoryName: "explore",

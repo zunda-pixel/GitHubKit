@@ -9,5 +9,6 @@ extension Notification {
     case subscribed
     case stateChange =  "state_change"
     case author
+    case mention
   }
 }

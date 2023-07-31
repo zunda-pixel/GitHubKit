@@ -7,7 +7,7 @@ import Foundation
 public struct Milestone: Codable, Sendable, Hashable, Identifiable {
   public let id: Int
   public let nodeID: String
-  public let state: MilestoneState
+  public let state: State
   public let number: Int
   public let title: String
   public let description: String?
@@ -19,13 +19,13 @@ public struct Milestone: Codable, Sendable, Hashable, Identifiable {
   public let closedIssueCount: Int
   public let createdAt: Date
   public let updatedAt: Date
-  public let closedAt: Date
+  public let closedAt: Date?
   public let dueOn: Date?
   
   public init(
     id: Int,
     nodeID: String,
-    state: MilestoneState,
+    state: State,
     number: Int,
     title: String,
     description: String?,
@@ -37,7 +37,7 @@ public struct Milestone: Codable, Sendable, Hashable, Identifiable {
     closedIssueCount: Int,
     createdAt: Date,
     updatedAt: Date,
-    closedAt: Date,
+    closedAt: Date?,
     dueOn: Date?
   ) {
     self.id = id

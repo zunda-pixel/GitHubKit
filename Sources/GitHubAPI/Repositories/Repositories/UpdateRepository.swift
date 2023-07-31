@@ -38,7 +38,7 @@ extension GitHubAPI {
 
 public struct UpdateRepository: Encodable {
   public var name: String?
-  public var homepage: URL?
+  public var homepage: String?
   public var isPrivate: Bool?
   public var visibility: Visibility?
   public var securityAnalytics: SecurityAnalytics?
@@ -54,17 +54,17 @@ public struct UpdateRepository: Encodable {
   public var deleteBranchOnMerge: Bool?
   public var allowUpdateBranch: Bool?
   public var useSquashPrTitleAsDefault: Bool?
-  public var squashMergeCommitTitle: String?
-  public var squashMergeCommitMessage: String?
-  public var mergeCommitTitle: String?
-  public var mergeCommitMessage: String?
+  public var squashMergeCommitTitle: SquashMergeCommitTitle?
+  public var squashMergeCommitMessage: SquashMergeCommitMessage?
+  public var mergeCommitTitle: MergeCommitTitle?
+  public var mergeCommitMessage: MergeCommitMessage?
   public var isArchived: Bool?
   public var allowForking: Bool?
   public var webCommitSignoffRequired: Bool?
   
   public init(
     name: String? = nil,
-    homepage: URL? = nil,
+    homepage: String? = nil,
     isPrivate: Bool? = nil,
     visibility: Visibility? = nil,
     securityAnalytics: SecurityAnalytics? = nil,
@@ -80,10 +80,10 @@ public struct UpdateRepository: Encodable {
     deleteBranchOnMerge: Bool? = nil,
     allowUpdateBranch: Bool? = nil,
     useSquashPrTitleAsDefault: Bool? = nil,
-    squashMergeCommitTitle: String? = nil,
-    squashMergeCommitMessage: String? = nil,
-    mergeCommitTitle: String? = nil,
-    mergeCommitMessage: String? = nil,
+    squashMergeCommitTitle: SquashMergeCommitTitle? = nil,
+    squashMergeCommitMessage: SquashMergeCommitMessage? = nil,
+    mergeCommitTitle: MergeCommitTitle? = nil,
+    mergeCommitMessage: MergeCommitMessage? = nil,
     isArchived: Bool? = nil,
     allowForking: Bool? = nil,
     webCommitSignoffRequired: Bool? = nil
@@ -139,5 +139,34 @@ public struct UpdateRepository: Encodable {
     case isArchived = "archived"
     case allowForking = "allow_forking"
     case webCommitSignoffRequired = "web_commit_signoff_required"
+  }
+}
+
+extension UpdateRepository {
+  public init(repository: Repository) {
+    self.name = repository.name
+    self.homepage = repository.homepage
+    self.isPrivate = repository.isPrivate
+    self.visibility = repository.visibility
+    self.securityAnalytics = repository.securityAnalytics
+    self.hasIssues = repository.hasIssues
+    self.hasProjects = repository.hasProjects
+    self.hasWiki = repository.hasWiki
+    self.isTemplate = repository.isTemplate
+    self.defaultBranch = repository.defaultBranch
+    self.allowSquashMerge = repository.allowSquashMerge
+    self.allowMergeCommit = repository.allowMergeCommit
+    self.allowRebaseMerge = repository.allowRebaseMerge
+    self.allowAutoMerge = repository.allowAutoMerge
+    self.deleteBranchOnMerge = repository.deleteBranchOnMerge
+    self.allowUpdateBranch = repository.allowUpdateBranch
+    self.useSquashPrTitleAsDefault = repository.useSquashPrTitleAsDefault
+    self.squashMergeCommitTitle = repository.squashMergeCommitTitle
+    self.squashMergeCommitMessage = repository.squashMergeCommitMessage
+    self.mergeCommitTitle = repository.mergeCommitTitle
+    self.mergeCommitMessage = repository.mergeCommitMessage
+    self.isArchived = repository.isArchived
+    self.allowForking = repository.allowForking
+    self.webCommitSignoffRequired = repository.webCommitSignoffRequired
   }
 }

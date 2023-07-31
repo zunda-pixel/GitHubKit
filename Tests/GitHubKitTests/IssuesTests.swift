@@ -8,8 +8,17 @@ import XCTest
 @testable import GitHubAPI
 
 final class IssuesTests: XCTestCase {
+  func testIssue() async throws {
+    let issue = try await api.issue(
+      ownerID: "zunda-pixel",
+      repositoryName: "GitHubKit",
+      issueNumber: 1
+    )
+    
+    print(issue)
+  }
+  
   func testIssues() async throws {
-    let api = GitHubAPI(type: authorizationType)
     let response = try await api.issues(
       ownerID: "apple",
       repositoryName: "swift",
@@ -29,7 +38,6 @@ final class IssuesTests: XCTestCase {
   }
   
   func testIssueComments() async throws {
-    let api = GitHubAPI(type: authorizationType)
     let comments = try await api.comments(
       ownerID: "apple",
       repositoryName: "swift",
