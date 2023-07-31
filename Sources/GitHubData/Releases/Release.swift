@@ -4,7 +4,7 @@
 
 import Foundation
 
-public struct Release: Codable, Sendable, Hashable {
+public struct Release: Codable, Sendable, Hashable, Identifiable {
   public let id: Int
   public let nodeID: String
   public let name: String

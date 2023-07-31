@@ -4,7 +4,7 @@
 
 import Foundation
 
-public struct Asset: Codable, Sendable, Hashable {
+public struct Asset: Codable, Sendable, Hashable, Identifiable {
   public let id: Int
   public let nodeID: String
   public let label: String
