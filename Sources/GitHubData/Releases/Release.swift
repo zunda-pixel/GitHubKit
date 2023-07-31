@@ -16,7 +16,7 @@ public struct Release: Codable, Sendable, Hashable, Identifiable {
   public let zipballURL: URL
   public let tagName: String
   public let targetCommitish: String
-  public let body: String
+  public let body: String?
   public let draft: Bool
   public let prerelease: Bool
   public let createdAt: Date
