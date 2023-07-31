@@ -30,4 +30,29 @@ extension GitHubAPI {
     
     return release
   }
+  
+  /// Get a release by tag name
+  /// https://docs.github.com/en/rest/releases/releases?apiVersion=2022-11-28#get-a-release-by-tag-name
+  /// - Parameters:
+  ///   - ownerID: The account owner of the repository. The name is not case sensitive.
+  ///   - repositoryName: The name of the repository without the .git extension. The name is not case sensitive.
+  ///   - tag: tag parameter
+  /// - Returns: Release
+  public func release(
+    ownerID: String,
+    repositoryName: String,
+    tag: String
+  ) async throws -> Release {
+    let path = "/repos/\(ownerID)/\(repositoryName)/releases/tags/\(tag)"
+    let endpoint = baseURL.appending(path: path)
+    let method: HTTPRequest.Method = .get
+    
+    let request = HTTPRequest(method: method, url: endpoint, queries: [:], headers: headers)
+    
+    let (data, _) = try await session.data(for: request)
+    
+    let release = try JSONDecoder.github.decode(Release.self, from: data)
+    
+    return release
+  }
 }
