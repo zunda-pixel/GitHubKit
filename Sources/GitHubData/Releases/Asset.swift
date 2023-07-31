@@ -7,7 +7,7 @@ import Foundation
 public struct Asset: Codable, Sendable, Hashable, Identifiable {
   public let id: Int
   public let nodeID: String
-  public let label: String
+  public let label: String?
   public let state: State
   public let name: String
   public let url: URL
@@ -22,7 +22,7 @@ public struct Asset: Codable, Sendable, Hashable, Identifiable {
   public init(
     id: Int,
     nodeID: String,
-    label: String,
+    label: String?,
     state: State,
     name: String,
     url: URL,
