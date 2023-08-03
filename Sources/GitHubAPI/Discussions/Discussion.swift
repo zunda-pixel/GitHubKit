@@ -6,48 +6,20 @@ import Foundation
 import HTTPTypes
 
 extension GitHubAPI {
-  public func discussions(
+  public func discussion(
     ownerID: String,
     repositoryName: String,
-    first: Int? = nil,
-    last: Int? = nil,
+    discussionNumber: Int,
     commentFirst: Int? = nil,
-    commentLast: Int? = nil,
-    orderBy: DiscussionOrderField = .updatedAt,
-    direction: OrderType = .desc
-  ) async throws -> [Discussion] {
+    commentLast: Int? = nil
+  ) async throws -> Discussion {
     let endpoint = baseURL.appending(path: "/graphql")
     let method: HTTPRequest.Method = .post
     
     let query = """
   query {
     repository(owner: "\(ownerID)", name: "\(repositoryName)") {
-      discussions(
-        \(first.map { "first: \($0),"} ?? "")
-        \(last.map { "last: \($0),"} ?? "")
-        orderBy: {field: \(orderBy.rawValue), direction: \(direction.rawValue.uppercased())}) {
-        # type: DiscussionConnection
-        totalCount # Int!
-
-        pageInfo {
-          # type: PageInfo (from the public schema)
-          startCursor
-          endCursor
-          hasNextPage
-          hasPreviousPage
-        }
-
-        edges {
-          # type: DiscussionEdge
-          cursor
-          node {
-            # type: Discussion
-            id
-          }
-        }
-
-        nodes \(discussionFields(first: commentFirst, last: commentLast))
-      }
+      discussion(number: \(discussionNumber)) \(discussionFields(first: commentFirst, last: commentLast))
     }
   }
   """
@@ -57,9 +29,9 @@ extension GitHubAPI {
     urlRequest.httpBody = try JSONEncoder().encode(["query": query])
     
     let (data, _) = try await session.data(for: urlRequest)
-    let response = try JSONDecoder.github.decode(DiscussionsResponse.self, from: data)
+    let response = try JSONDecoder.github.decode(DiscussionResponse.self, from: data)
     
-    return response.discussions
+    return response.discussion
   }
   
   fileprivate func discussionFields(first: Int?, last: Int?) -> String {

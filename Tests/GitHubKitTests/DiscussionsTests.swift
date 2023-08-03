@@ -18,4 +18,15 @@ final class DiscussionsTests: XCTestCase {
     
     print(discussions)
   }
+  
+  func testDiscussion() async throws {
+    let discussion = try await api.discussion(
+      ownerID: "zunda-pixel",
+      repositoryName: "GitHubKit",
+      discussionNumber: 21,
+      commentLast: 100
+    )
+    
+    print(discussion)
+  }
 }
