@@ -1,5 +1,5 @@
 //
-//  IssueAuthorAssociation.swift
+//  AuthorAssociation.swift
 //
 
 import Foundation
