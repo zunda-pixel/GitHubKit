@@ -26,26 +26,6 @@ extension GitHubAPI {
         \(first.map { "first: \($0),"} ?? "")
         \(last.map { "last: \($0),"} ?? "")
         orderBy: {field: \(orderBy.rawValue), direction: \(direction.rawValue.uppercased())}) {
-        # type: DiscussionConnection
-        totalCount # Int!
-
-        pageInfo {
-          # type: PageInfo (from the public schema)
-          startCursor
-          endCursor
-          hasNextPage
-          hasPreviousPage
-        }
-
-        edges {
-          # type: DiscussionEdge
-          cursor
-          node {
-            # type: Discussion
-            id
-          }
-        }
-
         nodes \(discussionFields(first: commentFirst, last: commentLast))
       }
     }
