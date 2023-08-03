@@ -62,7 +62,7 @@ extension GitHubAPI {
     return response.discussions
   }
   
-  fileprivate func discussionFields(first: Int?, last: Int?) -> String {
+  func discussionFields(first: Int?, last: Int?) -> String {
     """
   {
     id
@@ -86,7 +86,7 @@ extension GitHubAPI {
   """
   }
   
-  fileprivate func userFields() -> String {
+  private func userFields() -> String {
     """
   {
     login
@@ -97,7 +97,7 @@ extension GitHubAPI {
   """
   }
   
-  fileprivate func commentFields() -> String {
+  private func commentFields() -> String {
     """
   {
     id
