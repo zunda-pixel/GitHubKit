@@ -10,6 +10,9 @@ public struct Discussion: Codable, Hashable, Sendable, Identifiable {
   public let url: URL
   public let author: User
   public let createdAt: Date
+  public let title: String
+  public let updatedAt: Date
+  public let upvoteCount: Int
   public let activeLockReason: ActiveLockReason?
   public let authorAssociation: AuthorAssociation
   public let body: String
@@ -30,6 +33,9 @@ public struct Discussion: Codable, Hashable, Sendable, Identifiable {
     url: URL,
     author: User,
     createdAt: Date,
+    title: String,
+    updatedAt: Date,
+    upvoteCount: Int,
     activeLockReason: ActiveLockReason?,
     authorAssociation: AuthorAssociation,
     body: String,
@@ -49,6 +55,9 @@ public struct Discussion: Codable, Hashable, Sendable, Identifiable {
     self.url = url
     self.author = author
     self.createdAt  = createdAt
+    self.title = title
+    self.updatedAt = updatedAt
+    self.upvoteCount = upvoteCount
     self.activeLockReason = activeLockReason
     self.authorAssociation = authorAssociation
     self.body = body
@@ -71,6 +80,9 @@ public struct Discussion: Codable, Hashable, Sendable, Identifiable {
     case url
     case author
     case createdAt
+    case title
+    case updatedAt
+    case upvoteCount
     case activeLockReason
     case authorAssociation
     case body
@@ -97,6 +109,9 @@ public struct Discussion: Codable, Hashable, Sendable, Identifiable {
     self.url = try container.decode(URL.self, forKey: .url)
     self.author = try container.decode(Discussion.User.self, forKey: .author)
     self.createdAt = try container.decode(Date.self, forKey: .createdAt)
+    self.title = try container.decode(String.self, forKey: .title)
+    self.updatedAt = try container.decode(Date.self, forKey: .updatedAt)
+    self.upvoteCount = try container.decode(Int.self, forKey: .upvoteCount)
     self.activeLockReason = try container.decodeIfPresent(ActiveLockReason.self, forKey: .activeLockReason)
     self.authorAssociation = try container.decode(AuthorAssociation.self, forKey: .authorAssociation)
     self.body = try container.decode(String.self, forKey: .body)

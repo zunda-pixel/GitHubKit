@@ -138,6 +138,9 @@ extension GitHubAPI {
       slug
       updatedAt
     }
+    title
+    updatedAt
+    upvoteCount
     author \(userFields())
     createdAt
     activeLockReason
