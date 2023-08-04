@@ -6,6 +6,8 @@ import Foundation
 
 public struct Discussion: Codable, Hashable, Sendable, Identifiable {
   public let id: String
+  public let number: Int
+  public let url: URL
   public let author: User
   public let createdAt: Date
   public let activeLockReason: ActiveLockReason?
@@ -24,6 +26,8 @@ public struct Discussion: Codable, Hashable, Sendable, Identifiable {
   
   public init(
     id: String,
+    number: Int,
+    url: URL,
     author: User,
     createdAt: Date,
     activeLockReason: ActiveLockReason?,
@@ -37,10 +41,12 @@ public struct Discussion: Codable, Hashable, Sendable, Identifiable {
     includesCreatedEdit: Bool,
     lastEditedAt: Date?,
     locked: Bool,
-    comments: [Comment]
+    comments: [Comment],
     category: Category
   ) {
     self.id = id
+    self.number = number
+    self.url = url
     self.author = author
     self.createdAt  = createdAt
     self.activeLockReason = activeLockReason
@@ -61,6 +67,8 @@ public struct Discussion: Codable, Hashable, Sendable, Identifiable {
     
   private enum CodingKeys: String, CodingKey {
     case id
+    case number
+    case url
     case author
     case createdAt
     case activeLockReason
@@ -85,6 +93,8 @@ public struct Discussion: Codable, Hashable, Sendable, Identifiable {
   public init(from decoder: Decoder) throws {
     let container = try decoder.container(keyedBy: CodingKeys.self)
     self.id = try container.decode(String.self, forKey: .id)
+    self.number = try container.decode(Int.self, forKey: .number)
+    self.url = try container.decode(URL.self, forKey: .url)
     self.author = try container.decode(Discussion.User.self, forKey: .author)
     self.createdAt = try container.decode(Date.self, forKey: .createdAt)
     self.activeLockReason = try container.decodeIfPresent(ActiveLockReason.self, forKey: .activeLockReason)

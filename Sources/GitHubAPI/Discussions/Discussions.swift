@@ -126,6 +126,8 @@ extension GitHubAPI {
     """
   {
     id
+    number
+    url
     category {
       createdAt
       description
