@@ -20,6 +20,7 @@ public struct Discussion: Codable, Hashable, Sendable, Identifiable {
   public let lastEditedAt: Date?
   public let locked: Bool
   public let comments: [Comment]
+  public let category: Category
   
   public init(
     id: String,
@@ -37,6 +38,7 @@ public struct Discussion: Codable, Hashable, Sendable, Identifiable {
     lastEditedAt: Date?,
     locked: Bool,
     comments: [Comment]
+    category: Category
   ) {
     self.id = id
     self.author = author
@@ -53,6 +55,7 @@ public struct Discussion: Codable, Hashable, Sendable, Identifiable {
     self.lastEditedAt = lastEditedAt
     self.locked = locked
     self.comments = comments
+    self.category = category
   }
   
     
@@ -72,6 +75,7 @@ public struct Discussion: Codable, Hashable, Sendable, Identifiable {
     case lastEditedAt
     case locked
     case comments
+    case category
   }
   
   private enum NodesCodingKeys: String, CodingKey {
@@ -96,5 +100,6 @@ public struct Discussion: Codable, Hashable, Sendable, Identifiable {
     self.locked = try container.decode(Bool.self, forKey: .locked)
     let commentsContainer = try container.nestedContainer(keyedBy: NodesCodingKeys.self, forKey: .comments)
     self.comments = try commentsContainer.decode([Comment].self, forKey: .nodes)
+    self.category = try container.decode(Category.self, forKey: .category)
   }
 }

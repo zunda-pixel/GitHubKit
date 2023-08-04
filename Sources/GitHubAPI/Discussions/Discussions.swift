@@ -126,6 +126,16 @@ extension GitHubAPI {
     """
   {
     id
+    category {
+      createdAt
+      description
+      emoji
+      emojiHTML
+      isAnswerable
+      name
+      slug
+      updatedAt
+    }
     author \(userFields())
     createdAt
     activeLockReason
