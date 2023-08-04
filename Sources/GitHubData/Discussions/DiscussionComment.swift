@@ -5,7 +5,7 @@
 import Foundation
 
 extension Discussion {
-  public struct Comment: Codable, Sendable, Hashable {
+  public struct Comment: Codable, Sendable, Hashable, Identifiable {
     public let id: String
     public let author: Discussion.User
     public let body: String

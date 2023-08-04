@@ -4,7 +4,7 @@
 
 import Foundation
 
-public struct Discussion: Codable, Hashable, Sendable {
+public struct Discussion: Codable, Hashable, Sendable, Identifiable {
   public let id: String
   public let author: User
   public let createdAt: Date
