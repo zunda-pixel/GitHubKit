@@ -9,6 +9,48 @@ extension GitHubAPI {
   public func discussions(
     ownerID: String,
     repositoryName: String,
+    first: Int,
+    commentFirst: Int? = nil,
+    commentLast: Int? = nil,
+    orderBy: DiscussionOrderField = .updatedAt,
+    direction: OrderType = .desc
+  ) async throws -> [Discussion] {
+    try await self.discussions(
+      ownerID: ownerID,
+      repositoryName: repositoryName,
+      first: first,
+      last: nil,
+      commentFirst: commentFirst,
+      commentLast: commentLast,
+      orderBy: orderBy,
+      direction: direction
+    )
+  }
+  
+  public func discussions(
+    ownerID: String,
+    repositoryName: String,
+    last: Int,
+    commentFirst: Int? = nil,
+    commentLast: Int? = nil,
+    orderBy: DiscussionOrderField = .updatedAt,
+    direction: OrderType = .desc
+  ) async throws -> [Discussion] {
+    try await self.discussions(
+      ownerID: ownerID,
+      repositoryName: repositoryName,
+      first: nil,
+      last: last,
+      commentFirst: commentFirst,
+      commentLast: commentLast,
+      orderBy: orderBy,
+      direction: direction
+    )
+  }
+  
+  private func discussions(
+    ownerID: String,
+    repositoryName: String,
     first: Int? = nil,
     last: Int? = nil,
     commentFirst: Int? = nil,

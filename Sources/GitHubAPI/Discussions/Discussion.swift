@@ -10,6 +10,36 @@ extension GitHubAPI {
     ownerID: String,
     repositoryName: String,
     discussionNumber: Int,
+    commentFirst: Int
+  ) async throws -> Discussion {
+    try await self.discussion(
+      ownerID: ownerID,
+      repositoryName: repositoryName,
+      discussionNumber: discussionNumber,
+      commentFirst: commentFirst,
+      commentLast: nil
+    )
+  }
+  
+  public func discussion(
+    ownerID: String,
+    repositoryName: String,
+    discussionNumber: Int,
+    commentLast: Int
+  ) async throws -> Discussion {
+    try await self.discussion(
+      ownerID: ownerID,
+      repositoryName: repositoryName,
+      discussionNumber: discussionNumber,
+      commentFirst: nil,
+      commentLast: commentLast
+    )
+  }
+  
+  private func discussion(
+    ownerID: String,
+    repositoryName: String,
+    discussionNumber: Int,
     commentFirst: Int? = nil,
     commentLast: Int? = nil
   ) async throws -> Discussion {
