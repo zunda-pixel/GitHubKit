@@ -14,7 +14,7 @@ public struct Category: Codable, Hashable, Sendable {
   public let slug: String
   public let updateAt: Date?
   
-  init(
+  public init(
     createdAt: Date,
     description: String,
     emoji: String,

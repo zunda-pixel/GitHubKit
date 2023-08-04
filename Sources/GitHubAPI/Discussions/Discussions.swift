@@ -128,19 +128,10 @@ extension GitHubAPI {
     id
     number
     url
-    category {
-      createdAt
-      description
-      emoji
-      emojiHTML
-      isAnswerable
-      name
-      slug
-      updatedAt
-    }
     title
     updatedAt
     upvoteCount
+    stateReason
     author \(userFields())
     createdAt
     activeLockReason
@@ -154,6 +145,7 @@ extension GitHubAPI {
     includesCreatedEdit
     lastEditedAt
     locked
+    category \(categoryFields())
     comments(\(last.map { "last: \($0)"} ?? "") \(first.map { "first: \($0)"} ?? "")) {
       nodes \(commentFields())
     }
@@ -161,6 +153,20 @@ extension GitHubAPI {
   """
   }
   
+  private func categoryFields() -> String {
+    """
+  {
+    createdAt
+    description
+    emoji
+    emojiHTML
+    isAnswerable
+    name
+    slug
+    updatedAt
+  }
+  """
+  }
   private func userFields() -> String {
     """
   {

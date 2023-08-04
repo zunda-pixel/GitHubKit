@@ -13,6 +13,7 @@ public struct Discussion: Codable, Hashable, Sendable, Identifiable {
   public let title: String
   public let updatedAt: Date
   public let upvoteCount: Int
+  public let stateReason: StateReason?
   public let activeLockReason: ActiveLockReason?
   public let authorAssociation: AuthorAssociation
   public let body: String
@@ -36,6 +37,7 @@ public struct Discussion: Codable, Hashable, Sendable, Identifiable {
     title: String,
     updatedAt: Date,
     upvoteCount: Int,
+    stateReason: StateReason?,
     activeLockReason: ActiveLockReason?,
     authorAssociation: AuthorAssociation,
     body: String,
@@ -58,6 +60,7 @@ public struct Discussion: Codable, Hashable, Sendable, Identifiable {
     self.title = title
     self.updatedAt = updatedAt
     self.upvoteCount = upvoteCount
+    self.stateReason = stateReason
     self.activeLockReason = activeLockReason
     self.authorAssociation = authorAssociation
     self.body = body
@@ -96,6 +99,7 @@ public struct Discussion: Codable, Hashable, Sendable, Identifiable {
     case locked
     case comments
     case category
+    case stateReason
   }
   
   private enum NodesCodingKeys: String, CodingKey {
@@ -112,6 +116,7 @@ public struct Discussion: Codable, Hashable, Sendable, Identifiable {
     self.title = try container.decode(String.self, forKey: .title)
     self.updatedAt = try container.decode(Date.self, forKey: .updatedAt)
     self.upvoteCount = try container.decode(Int.self, forKey: .upvoteCount)
+    self.stateReason = try container.decodeIfPresent(StateReason.self, forKey: .stateReason)
     self.activeLockReason = try container.decodeIfPresent(ActiveLockReason.self, forKey: .activeLockReason)
     self.authorAssociation = try container.decode(AuthorAssociation.self, forKey: .authorAssociation)
     self.body = try container.decode(String.self, forKey: .body)
