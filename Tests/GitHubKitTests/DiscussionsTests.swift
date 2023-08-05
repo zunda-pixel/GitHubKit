@@ -10,8 +10,8 @@ import XCTest
 final class DiscussionsTests: XCTestCase {
   func testDiscussions() async throws {
     let discussions = try await api.discussions(
-      ownerID: "zunda-pixel",
-      repositoryName: "GitHubKit",
+      ownerID: "community",
+      repositoryName: "community",
       last: 100,
       commentLast: 100
     )

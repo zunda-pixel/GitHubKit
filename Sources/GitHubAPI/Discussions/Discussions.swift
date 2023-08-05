@@ -105,7 +105,8 @@ extension GitHubAPI {
       discussions(
         \(first.map { "first: \($0),"} ?? "")
         \(last.map { "last: \($0),"} ?? "")
-        orderBy: {field: \(orderBy.rawValue), direction: \(direction.rawValue.uppercased())}) {
+        orderBy: {field: \(orderBy.rawValue), direction: \(direction.rawValue.uppercased())}
+      ) {
         nodes \(discussionFields(first: commentFirst, last: commentLast))
       }
     }
@@ -145,6 +146,16 @@ extension GitHubAPI {
     includesCreatedEdit
     lastEditedAt
     locked
+    viewerCanClose
+    viewerCanDelete
+    viewerCanReact
+    viewerCanReopen
+    viewerCanSubscribe
+    viewerCanUpdate
+    viewerCanUpvote
+    viewerDidAuthor
+    viewerHasUpvoted
+    viewerSubscription
     category \(categoryFields())
     comments(\(last.map { "last: \($0)"} ?? "") \(first.map { "first: \($0)"} ?? "")) {
       nodes \(commentFields())
