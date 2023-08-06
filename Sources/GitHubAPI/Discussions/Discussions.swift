@@ -156,14 +156,46 @@ extension GitHubAPI {
     viewerDidAuthor
     viewerHasUpvoted
     viewerSubscription
+    poll \(pollFields())
     category \(categoryFields())
     comments(\(last.map { "last: \($0)"} ?? "") \(first.map { "first: \($0)"} ?? "")) {
       nodes \(commentFields())
+    }
+    labels(last: 100) {
+      nodes \(labelFields())
+    }
+    reactions(last: 100) {
+      nodes \(reactionFields())
     }
   }
   """
   }
   
+  private func reactionFields() -> String {
+    """
+    {
+      content
+      createdAt
+      databaseId
+      user \(userFields())
+    }
+    """
+  }
+  
+  private func labelFields() -> String {
+    """
+    {
+      name
+      color
+      createdAt
+      description
+      isDefault
+      resourcePath
+      updatedAt
+      url
+    }
+    """
+  }
   private func categoryFields() -> String {
     """
   {
@@ -178,6 +210,17 @@ extension GitHubAPI {
   }
   """
   }
+  
+  private func pollFields() -> String {
+    """
+  {
+    question
+    viewerCanVote
+    viewerHasVoted
+  }
+  """
+  }
+  
   private func userFields() -> String {
     """
   {

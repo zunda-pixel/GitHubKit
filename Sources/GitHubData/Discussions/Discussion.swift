@@ -37,6 +37,9 @@ public struct Discussion: Codable, Hashable, Sendable, Identifiable {
   public let viewerSubscription: SubscriptionState
   public let comments: [Comment]
   public let category: Category
+  public let labels: [Label]
+  public let reactions: [Reaction]
+  public let poll: Poll?
   
   public init(
     id: String,
@@ -70,7 +73,10 @@ public struct Discussion: Codable, Hashable, Sendable, Identifiable {
     viewerHasUpvoted: Bool,
     viewerSubscription: SubscriptionState,
     comments: [Comment],
-    category: Category
+    category: Category,
+    labels: [Label],
+    reactions: [Reaction],
+    poll: Poll?
   ) {
     self.id = id
     self.number = number
@@ -104,9 +110,11 @@ public struct Discussion: Codable, Hashable, Sendable, Identifiable {
     self.viewerSubscription = viewerSubscription
     self.comments = comments
     self.category = category
+    self.labels = labels
+    self.reactions = reactions
+    self.poll = poll
   }
   
-    
   private enum CodingKeys: String, CodingKey {
     case id
     case number
@@ -140,6 +148,9 @@ public struct Discussion: Codable, Hashable, Sendable, Identifiable {
     case comments
     case category
     case stateReason
+    case labels
+    case reactions
+    case poll
   }
   
   private enum NodesCodingKeys: String, CodingKey {
@@ -181,5 +192,10 @@ public struct Discussion: Codable, Hashable, Sendable, Identifiable {
     let commentsContainer = try container.nestedContainer(keyedBy: NodesCodingKeys.self, forKey: .comments)
     self.comments = try commentsContainer.decode([Comment].self, forKey: .nodes)
     self.category = try container.decode(Category.self, forKey: .category)
+    let labelsContainer = try container.nestedContainer(keyedBy: NodesCodingKeys.self, forKey: .labels)
+    self.labels = try labelsContainer.decode([Label].self, forKey: .nodes)
+    let reactionsContainer = try container.nestedContainer(keyedBy: NodesCodingKeys.self, forKey: .reactions)
+    self.reactions = try reactionsContainer.decode([Reaction].self, forKey: .nodes)
+    self.poll = try container.decodeIfPresent(Poll.self, forKey: .poll)
   }
 }
