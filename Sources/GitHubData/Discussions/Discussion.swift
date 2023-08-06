@@ -8,7 +8,7 @@ public struct Discussion: Codable, Hashable, Sendable, Identifiable {
   public let id: String
   public let number: Int
   public let url: URL
-  public let author: User
+  public let author: User?
   public let createdAt: Date
   public let title: String
   public let updatedAt: Date
@@ -45,7 +45,7 @@ public struct Discussion: Codable, Hashable, Sendable, Identifiable {
     id: String,
     number: Int,
     url: URL,
-    author: User,
+    author: User?,
     createdAt: Date,
     title: String,
     updatedAt: Date,
@@ -162,7 +162,7 @@ public struct Discussion: Codable, Hashable, Sendable, Identifiable {
     self.id = try container.decode(String.self, forKey: .id)
     self.number = try container.decode(Int.self, forKey: .number)
     self.url = try container.decode(URL.self, forKey: .url)
-    self.author = try container.decode(Discussion.User.self, forKey: .author)
+    self.author = try container.decodeIfPresent(Discussion.User.self, forKey: .author)
     self.createdAt = try container.decode(Date.self, forKey: .createdAt)
     self.title = try container.decode(String.self, forKey: .title)
     self.updatedAt = try container.decode(Date.self, forKey: .updatedAt)
