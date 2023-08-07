@@ -214,9 +214,17 @@ extension GitHubAPI {
   private func pollFields() -> String {
     """
   {
+    totalVoteCount
     question
     viewerCanVote
     viewerHasVoted
+    options(last: 100) {
+      nodes {
+        option
+        totalVoteCount
+        viewerHasVoted
+      }
+    }
   }
   """
   }
