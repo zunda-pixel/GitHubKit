@@ -256,4 +256,24 @@ final class RepositoriesTests: XCTestCase {
     )
     print(tags)
   }
+  
+  func testCreateProtectionTag() async throws {
+    let tag = try await api.createProtectionTag(
+      ownerID: "zunda-pixel",
+      repositoryName: "GitHubKit",
+      pattern: "v1.*"
+    )
+    print(tag)
+  }
+  
+  func testDeleteTag() async throws {
+    let tags = try await api.protectionTags(
+      ownerID: "zunda-pixel",
+      repositoryName: "GitHubKit"
+    )
+    
+    for tag in tags {
+      try await api.deleteProtectionTag(ownerID: "zunda-pixel", repositoryName: "GitHubKit", tagID: tag.id)
+    }
+  }
 }
