@@ -10,7 +10,6 @@ extension GitHubAPI {
     ownerID: String,
     repositoryName: String,
     first: Int,
-    commentFirst: Int? = nil,
     orderBy: DiscussionOrderField = .updatedAt,
     direction: OrderType = .desc
   ) async throws -> [Discussion] {
@@ -19,28 +18,6 @@ extension GitHubAPI {
       repositoryName: repositoryName,
       first: first,
       last: nil,
-      commentFirst: commentFirst,
-      commentLast: nil,
-      orderBy: orderBy,
-      direction: direction
-    )
-  }
-  
-  public func discussions(
-    ownerID: String,
-    repositoryName: String,
-    first: Int,
-    commentLast: Int? = nil,
-    orderBy: DiscussionOrderField = .updatedAt,
-    direction: OrderType = .desc
-  ) async throws -> [Discussion] {
-    try await self.discussions(
-      ownerID: ownerID,
-      repositoryName: repositoryName,
-      first: first,
-      last: nil,
-      commentFirst: nil,
-      commentLast: commentLast,
       orderBy: orderBy,
       direction: direction
     )
@@ -50,7 +27,6 @@ extension GitHubAPI {
     ownerID: String,
     repositoryName: String,
     last: Int,
-    commentFirst: Int? = nil,
     orderBy: DiscussionOrderField = .updatedAt,
     direction: OrderType = .desc
   ) async throws -> [Discussion] {
@@ -59,28 +35,6 @@ extension GitHubAPI {
       repositoryName: repositoryName,
       first: nil,
       last: last,
-      commentFirst: commentFirst,
-      commentLast: nil,
-      orderBy: orderBy,
-      direction: direction
-    )
-  }
-  
-  public func discussions(
-    ownerID: String,
-    repositoryName: String,
-    last: Int,
-    commentLast: Int? = nil,
-    orderBy: DiscussionOrderField = .updatedAt,
-    direction: OrderType = .desc
-  ) async throws -> [Discussion] {
-    try await self.discussions(
-      ownerID: ownerID,
-      repositoryName: repositoryName,
-      first: nil,
-      last: last,
-      commentFirst: nil,
-      commentLast: commentLast,
       orderBy: orderBy,
       direction: direction
     )
@@ -91,8 +45,6 @@ extension GitHubAPI {
     repositoryName: String,
     first: Int? = nil,
     last: Int? = nil,
-    commentFirst: Int? = nil,
-    commentLast: Int? = nil,
     orderBy: DiscussionOrderField = .updatedAt,
     direction: OrderType = .desc
   ) async throws -> [Discussion] {
@@ -107,7 +59,7 @@ extension GitHubAPI {
         \(last.map { "last: \($0),"} ?? "")
         orderBy: {field: \(orderBy.rawValue), direction: \(direction.rawValue.uppercased())}
       ) {
-        nodes \(discussionFields(first: commentFirst, last: commentLast))
+        nodes \(discussionFields(first: first, last: last))
       }
     }
   }
@@ -156,15 +108,15 @@ extension GitHubAPI {
     viewerDidAuthor
     viewerHasUpvoted
     viewerSubscription
-    poll \(pollFields())
+    poll \(pollFields(first: first, last: last))
     category \(categoryFields())
     comments(\(last.map { "last: \($0)"} ?? "") \(first.map { "first: \($0)"} ?? "")) {
       nodes \(commentFields())
     }
-    labels(last: 100) {
+    labels(\(last.map { "last: \($0)"} ?? "") \(first.map { "first: \($0)"} ?? "")) {
       nodes \(labelFields())
     }
-    reactions(last: 100) {
+    reactions(\(last.map { "last: \($0)"} ?? "") \(first.map { "first: \($0)"} ?? "")) {
       nodes \(reactionFields())
     }
   }
@@ -211,14 +163,14 @@ extension GitHubAPI {
   """
   }
   
-  private func pollFields() -> String {
+  private func pollFields(first: Int?, last: Int? = nil) -> String {
     """
   {
     totalVoteCount
     question
     viewerCanVote
     viewerHasVoted
-    options(last: 100) {
+    options(\(last.map { "last: \($0)"} ?? "") \(first.map { "first: \($0)"} ?? "")) {
       nodes {
         option
         totalVoteCount

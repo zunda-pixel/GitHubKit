@@ -12,8 +12,7 @@ final class DiscussionsTests: XCTestCase {
     let discussions = try await api.discussions(
       ownerID: "community",
       repositoryName: "community",
-      last: 100,
-      commentLast: 100
+      last: 100
     )
     
     print(discussions)
@@ -22,9 +21,9 @@ final class DiscussionsTests: XCTestCase {
   func testDiscussion() async throws {
     let discussion = try await api.discussion(
       ownerID: "zunda-pixel",
-      repositoryName: "GitHubKit",
-      discussionNumber: 21,
-      commentLast: 100
+      repositoryName: "GitHubkit",
+      discussionNumber: 25,
+      itemLast: 100
     )
     
     print(discussion)

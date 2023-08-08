@@ -10,14 +10,14 @@ extension GitHubAPI {
     ownerID: String,
     repositoryName: String,
     discussionNumber: Int,
-    commentFirst: Int
+    itemFirst: Int
   ) async throws -> Discussion {
     try await self.discussion(
       ownerID: ownerID,
       repositoryName: repositoryName,
       discussionNumber: discussionNumber,
-      commentFirst: commentFirst,
-      commentLast: nil
+      itemFirst: itemFirst,
+      itemLast: nil
     )
   }
   
@@ -25,14 +25,14 @@ extension GitHubAPI {
     ownerID: String,
     repositoryName: String,
     discussionNumber: Int,
-    commentLast: Int
+    itemLast: Int
   ) async throws -> Discussion {
     try await self.discussion(
       ownerID: ownerID,
       repositoryName: repositoryName,
       discussionNumber: discussionNumber,
-      commentFirst: nil,
-      commentLast: commentLast
+      itemFirst: nil,
+      itemLast: itemLast
     )
   }
   
@@ -40,8 +40,8 @@ extension GitHubAPI {
     ownerID: String,
     repositoryName: String,
     discussionNumber: Int,
-    commentFirst: Int? = nil,
-    commentLast: Int? = nil
+    itemFirst: Int? = nil,
+    itemLast: Int? = nil
   ) async throws -> Discussion {
     let endpoint = baseURL.appending(path: "/graphql")
     let method: HTTPRequest.Method = .post
@@ -49,7 +49,7 @@ extension GitHubAPI {
     let query = """
   query {
     repository(owner: "\(ownerID)", name: "\(repositoryName)") {
-      discussion(number: \(discussionNumber)) \(discussionFields(first: commentFirst, last: commentLast))
+      discussion(number: \(discussionNumber)) \(discussionFields(first: itemFirst, last: itemLast))
     }
   }
   """
