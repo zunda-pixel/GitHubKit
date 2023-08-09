@@ -5,6 +5,6 @@
 import Foundation
 
 public struct UnknownError: Error {
-  let decodeError: any Error
-  let data: Data
+  public let decodeError: any Error
+  public let data: Data
 }
