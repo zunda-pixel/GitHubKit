@@ -26,7 +26,7 @@ extension GitHubAPI {
     
     let (data, _) = try await session.data(for: request)
     
-    let release = try JSONDecoder.github.decode(Release.self, from: data)
+    let release = try decode(Release.self, from: data)
     
     return release
   }
@@ -51,7 +51,7 @@ extension GitHubAPI {
     
     let (data, _) = try await session.data(for: request)
     
-    let release = try JSONDecoder.github.decode(Release.self, from: data)
+    let release = try decode(Release.self, from: data)
     
     return release
   }

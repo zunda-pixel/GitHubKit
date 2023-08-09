@@ -24,7 +24,7 @@ extension GitHubAPI {
     
     let (data, _) = try await session.data(for: request)
     
-    let languages = try JSONDecoder.github.decode([String: Int].self, from: data)
+    let languages = try decode([String: Int].self, from: data)
     
     return languages
   }

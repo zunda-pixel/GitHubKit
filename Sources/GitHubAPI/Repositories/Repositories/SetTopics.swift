@@ -30,7 +30,7 @@ extension GitHubAPI {
     
     let (data, _) = try await session.data(for: urlRequest)
     
-    let response = try JSONDecoder.github.decode(TopicsResponse.self, from: data)
+    let response = try decode(TopicsResponse.self, from: data)
     
     return response.names
   }

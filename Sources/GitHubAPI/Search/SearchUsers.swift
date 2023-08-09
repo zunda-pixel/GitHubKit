@@ -44,7 +44,7 @@ extension GitHubAPI {
     
     let (data, _) = try await session.data(for: request)
     
-    let response = try JSONDecoder.github.decode(UsersResponse.self, from: data)
+    let response = try decode(UsersResponse.self, from: data)
     
     return response
   }
