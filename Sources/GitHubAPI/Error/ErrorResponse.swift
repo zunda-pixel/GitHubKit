@@ -18,6 +18,7 @@ struct ErrorResponse: Codable {
     case "Not Found": return .notFound
     case "Bad credentials": return .notAuthorized
     case "Requires authentication": return .requireAuthorization
+    case "This endpoint requires you to be authenticated.": return .requireAuthorization
     default: return nil
     }
   }
