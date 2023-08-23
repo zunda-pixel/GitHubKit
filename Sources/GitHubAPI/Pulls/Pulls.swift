@@ -5,14 +5,14 @@
 import Foundation
 import HTTPTypes
 
-public enum PullSortType: String {
+public enum PullSortType: String, Sendable {
   case created
   case updated
   case popularity
   case longRunning = "long-running"
 }
 
-public enum PullSearchType: String {
+public enum PullSearchType: String, Sendable {
   case open
   case closed
   case all

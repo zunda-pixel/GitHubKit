@@ -5,13 +5,13 @@
 import Foundation
 import HTTPTypes
 
-public enum RepositoryAffiliationType: String {
+public enum RepositoryAffiliationType: String, Sendable {
   case owner
   case collaborator
   case organizationMember = "organization_member"
 }
 
-public enum RepositorySearchVisibility: String {
+public enum RepositorySearchVisibility: String, Sendable {
   case all
   case `public`
   case `private`
