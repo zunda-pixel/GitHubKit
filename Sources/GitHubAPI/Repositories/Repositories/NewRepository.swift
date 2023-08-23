@@ -4,7 +4,7 @@
 
 import Foundation
 
-public struct NewRepository: Encodable {
+public struct NewRepository: Encodable, Sendable {
   public var name: String
   public var description: String?
   public var homepage: String?

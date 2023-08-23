@@ -4,7 +4,7 @@
 
 import Foundation
 
-public struct OAuthResponse: Decodable {
+public struct OAuthResponse: Decodable, Sendable {
   public let accessToken: String
   public let scopes: [Scope]
   public let tokenType: TokenType

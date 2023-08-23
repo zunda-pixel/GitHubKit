@@ -4,7 +4,7 @@
 
 import Foundation
 
-struct ErrorResponse: Codable {
+struct ErrorResponse: Codable, Sendable {
   let message: String
   let documentationURL: URL
   

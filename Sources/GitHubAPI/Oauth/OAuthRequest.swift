@@ -6,7 +6,7 @@ import Foundation
 
 /// OAuth
 /// https://docs.github.com/en/apps/oauth-apps/building-oauth-apps/authorizing-oauth-apps#1-request-a-users-github-identity
-public struct OAuthRequest {
+public struct OAuthRequest: Sendable {
   public var baseURL = URL(string: "https://github.com")!
   public let path = "login/oauth/authorize"
   public var clientID: String

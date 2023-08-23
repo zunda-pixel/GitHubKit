@@ -7,7 +7,7 @@ import HTTPTypes
 
 /// OAuth
 /// https://docs.github.com/en/apps/oauth-apps/building-oauth-apps/authorizing-oauth-apps#2-users-are-redirected-back-to-your-site-by-github
-public struct OAuth {
+public struct OAuth: Sendable {
   public enum ResponseType: String {
     case `default`
     case json = "application/json"

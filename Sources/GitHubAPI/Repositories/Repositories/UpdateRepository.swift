@@ -36,7 +36,7 @@ extension GitHubAPI {
   }
 }
 
-public struct UpdateRepository: Encodable {
+public struct UpdateRepository: Encodable, Sendable {
   public var name: String?
   public var homepage: String?
   public var isPrivate: Bool?

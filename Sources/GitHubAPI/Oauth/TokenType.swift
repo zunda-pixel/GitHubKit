@@ -2,6 +2,6 @@
 //  TokenType.swift
 //
 
-public enum TokenType: String {
+public enum TokenType: String, Sendable {
   case bearer
 }
