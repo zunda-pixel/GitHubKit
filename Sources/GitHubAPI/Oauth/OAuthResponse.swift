@@ -15,7 +15,7 @@ public struct OAuthResponse: Decodable {
     case tokenType = "token_type"
   }
   
-  public init(from decoder: Decoder) throws {
+  public init(from decoder: any Decoder) throws {
     let container = try decoder.container(keyedBy: CodingKeys.self)
     self.accessToken = try container.decode(String.self, forKey: .accessToken)
     let rawScopes = try container.decode(String.self, forKey: .scopes)

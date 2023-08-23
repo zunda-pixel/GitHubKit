@@ -21,13 +21,13 @@ public struct Contributor: Codable, Sendable, Hashable, Identifiable {
     case contributionCount = "contributions"
   }
   
-  public init(from decoder: Decoder) throws {
+  public init(from decoder: any Decoder) throws {
     self.user = try .init(from: decoder)
     let container = try decoder.container(keyedBy: CodingKeys.self)
     self.contributionCount = try container.decode(Int.self, forKey: .contributionCount)
   }
   
-  public func encode(to encoder: Encoder) throws {
+  public func encode(to encoder: any Encoder) throws {
     try self.user.encode(to: encoder)
     
     var container = encoder.container(keyedBy: CodingKeys.self)

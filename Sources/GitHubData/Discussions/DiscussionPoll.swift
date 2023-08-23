@@ -30,7 +30,7 @@ extension Discussion {
       case nodes
     }
     
-    public init(from decoder: Decoder) throws {
+    public init(from decoder: any Decoder) throws {
       let container = try decoder.container(keyedBy: CodingKeys.self)
       self.question = try container.decode(String.self, forKey: .question)
       self.totalVoteCount = try container.decode(Int.self, forKey: .totalVoteCount)

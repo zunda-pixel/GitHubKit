@@ -10,7 +10,7 @@ public enum ActiveLockReason: String, Codable, Sendable {
   case resolved
   case spam
   
-  public init(from decoder: Decoder) throws {
+  public init(from decoder: any Decoder) throws {
     let container = try decoder.singleValueContainer()
     let rawValue = try container.decode(String.self)
     self.init(rawValue: rawValue.lowercased())!

@@ -38,7 +38,7 @@ public struct SecurityAnalytics: Codable, Sendable, Hashable {
     self.secretScanningPushProtection = secretScanningPushProtection
   }
   
-  public init(from decoder: Decoder) throws {
+  public init(from decoder: any Decoder) throws {
     let container = try decoder.container(keyedBy: CodingKeys.self)
     do {
       let nestedContainer = try? container.nestedContainer(keyedBy: StatusCodingKeys.self, forKey: .advancedSecurity)
@@ -58,7 +58,7 @@ public struct SecurityAnalytics: Codable, Sendable, Hashable {
     }
   }
   
-  public func encode(to encoder: Encoder) throws {
+  public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
     do {
       var nestedContainer = container.nestedContainer(keyedBy: StatusCodingKeys.self, forKey: .advancedSecurity)

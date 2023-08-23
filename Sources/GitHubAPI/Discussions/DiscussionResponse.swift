@@ -13,7 +13,7 @@ struct DiscussionResponse: Decodable, Sendable {
     case discussion
   }
   
-  init(from decoder: Decoder) throws {
+  init(from decoder: any Decoder) throws {
     let container = try decoder.container(keyedBy: CodingKeys.self)
     let dataContainer = try container.nestedContainer(keyedBy: CodingKeys.self, forKey: .data)
     let repositoryContainer = try dataContainer.nestedContainer(keyedBy: CodingKeys.self, forKey: .repository)
@@ -32,7 +32,7 @@ struct DiscussionsResponse: Decodable, Sendable {
     case nodes
   }
   
-  init(from decoder: Decoder) throws {
+  init(from decoder: any Decoder) throws {
     let container = try decoder.container(keyedBy: CodingKeys.self)
     let dataContainer = try container.nestedContainer(keyedBy: CodingKeys.self, forKey: .data)
     let repositoryContainer = try dataContainer.nestedContainer(keyedBy: CodingKeys.self, forKey: .repository)
