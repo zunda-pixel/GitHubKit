@@ -4,7 +4,7 @@
 
 import Foundation
 
-public struct GitHubAPI {
+public struct GitHubAPI: Sendable {
   public var baseURL = URL(string: "https://api.github.com")!
   public var authorizationType: AuthorizationType
   public var session: URLSession

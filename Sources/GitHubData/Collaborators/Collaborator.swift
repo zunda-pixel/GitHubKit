@@ -21,13 +21,13 @@ public struct Collaborator: Codable, Sendable, Hashable, Identifiable {
     case role = "role_name"
   }
   
-  public init(from decoder: Decoder) throws {
+  public init(from decoder: any Decoder) throws {
     self.user = try .init(from: decoder)
     let container = try decoder.container(keyedBy: CodingKeys.self)
     self.role = try container.decode(Role.self, forKey: .role)
   }
   
-  public func encode(to encoder: Encoder) throws {
+  public func encode(to encoder: any Encoder) throws {
     try self.user.encode(to: encoder)
     
     var container = encoder.container(keyedBy: CodingKeys.self)

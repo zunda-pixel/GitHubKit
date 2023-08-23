@@ -30,13 +30,13 @@ extension GitHubAPI {
     
     let (data, _) = try await session.data(for: urlRequest)
     
-    let repository = try JSONDecoder.github.decode(Repository.self, from: data)
+    let repository = try decode(Repository.self, from: data)
     
     return repository
   }
 }
 
-public struct UpdateRepository: Encodable {
+public struct UpdateRepository: Encodable, Sendable {
   public var name: String?
   public var homepage: String?
   public var isPrivate: Bool?

@@ -20,7 +20,7 @@ extension GitHubAPI {
     
     let (data, _) = try await session.data(for: request)
     
-    let template = try JSONDecoder.github.decode(GitignoreTemplate.self, from: data)
+    let template = try decode(GitignoreTemplate.self, from: data)
     
     return template
   }

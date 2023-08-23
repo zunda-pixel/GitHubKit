@@ -24,7 +24,7 @@ extension GitHubAPI {
     
     let (data, _) = try await session.data(for: request)
     
-    let tags = try JSONDecoder.github.decode([ProtectionTag].self, from: data)
+    let tags = try decode([ProtectionTag].self, from: data)
     
     return tags
   }

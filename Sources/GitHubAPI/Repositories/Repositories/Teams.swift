@@ -33,7 +33,7 @@ extension GitHubAPI {
     
     let (data, _) = try await session.data(for: request)
     
-    let teams = try JSONDecoder.github.decode([Team].self, from: data)
+    let teams = try decode([Team].self, from: data)
     
     return teams
   }

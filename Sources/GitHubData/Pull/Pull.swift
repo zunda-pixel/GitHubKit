@@ -38,7 +38,7 @@ public struct Pull: Hashable, Sendable, Identifiable, Codable {
   public let head: Branch
   public let base: Branch
   public let authorAssociation: AuthorAssociation
-  public let autoMerge: Merge?
+  public let autoMerge: AutoMerge?
   public let activeLockReason: ActiveLockReason?
   
   public init(
@@ -75,7 +75,7 @@ public struct Pull: Hashable, Sendable, Identifiable, Codable {
     head: Branch,
     base: Branch,
     authorAssociation: AuthorAssociation,
-    autoMerge: Merge?,
+    autoMerge: AutoMerge?,
     activeLockReason: ActiveLockReason?
   ) {
     self.id = id

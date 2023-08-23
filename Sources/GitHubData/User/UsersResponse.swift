@@ -4,7 +4,7 @@
 
 import Foundation
 
-public struct UsersResponse: Codable {
+public struct UsersResponse: Codable, Sendable {
   public let totalCount: Int
   public let incompleteResults: Bool
   public let users: [User]

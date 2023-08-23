@@ -1,10 +1,10 @@
 //
-//  Merge.swift
+//  AutoMerge.swift
 //
 
 import Foundation
 
-public struct Merge: Codable, Hashable, Sendable {
+public struct AutoMerge: Codable, Hashable, Sendable {
   public let enabledBy: User
   public let method: Method
   public let commitTitle: String?

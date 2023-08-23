@@ -4,7 +4,7 @@
 
 import Foundation
 
-extension Merge {
+extension AutoMerge {
   public enum Method: String, Codable, Sendable {
     case merge
     case squash

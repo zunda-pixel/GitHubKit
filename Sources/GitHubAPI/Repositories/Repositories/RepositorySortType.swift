@@ -4,7 +4,7 @@
 
 import Foundation
 
-public enum RepositorySortType: String {
+public enum RepositorySortType: String, Sendable {
   case created
   case updated
   case pushed

@@ -4,7 +4,7 @@
 
 import Foundation
 
-public enum OrganizationRepositorySearchType: String {
+public enum OrganizationRepositorySearchType: String, Sendable {
   case all
   case `public`
   case `private`

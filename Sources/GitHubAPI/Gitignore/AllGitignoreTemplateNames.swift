@@ -18,7 +18,7 @@ extension GitHubAPI {
     
     let (data, _) = try await session.data(for: request)
     
-    let templates = try JSONDecoder.github.decode([String].self, from: data)
+    let templates = try decode([String].self, from: data)
     
     return templates
   }

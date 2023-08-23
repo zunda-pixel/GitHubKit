@@ -5,13 +5,13 @@
 import Foundation
 import HTTPTypes
 
-public enum RepositoryAffiliationType: String {
+public enum RepositoryAffiliationType: String, Sendable {
   case owner
   case collaborator
   case organizationMember = "organization_member"
 }
 
-public enum RepositorySearchVisibility: String {
+public enum RepositorySearchVisibility: String, Sendable {
   case all
   case `public`
   case `private`
@@ -70,7 +70,7 @@ extension GitHubAPI {
     
     let (data, _) = try await session.data(for: request)
     
-    let response = try JSONDecoder.github.decode([Repository].self, from: data)
+    let response = try decode([Repository].self, from: data)
     return response
   }
 }

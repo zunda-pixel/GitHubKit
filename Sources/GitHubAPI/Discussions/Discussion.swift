@@ -59,7 +59,7 @@ extension GitHubAPI {
     urlRequest.httpBody = try JSONEncoder().encode(["query": query])
     
     let (data, _) = try await session.data(for: urlRequest)
-    let response = try JSONDecoder.github.decode(DiscussionResponse.self, from: data)
+    let response = try decode(DiscussionResponse.self, from: data)
     
     return response.discussion
   }

@@ -157,7 +157,7 @@ public struct Discussion: Codable, Hashable, Sendable, Identifiable {
     case nodes
   }
     
-  public init(from decoder: Decoder) throws {
+  public init(from decoder: any Decoder) throws {
     let container = try decoder.container(keyedBy: CodingKeys.self)
     self.id = try container.decode(String.self, forKey: .id)
     self.number = try container.decode(Int.self, forKey: .number)
