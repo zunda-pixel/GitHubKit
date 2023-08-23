@@ -22,4 +22,9 @@ final class UserTests: XCTestCase {
     let users = try await api.following(userID: "zunda-pixel")
     print(users.count)
   }
+  
+  func testUser() async throws {
+    let user = try await api.user(userID: "zunda-pixel")
+    print(user)
+  }
 }
