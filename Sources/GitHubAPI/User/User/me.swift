@@ -7,6 +7,7 @@ import HTTPTypes
 
 extension GitHubAPI {
   /// Get the authenticated user
+  /// https://docs.github.com/en/rest/users/users?apiVersion=2022-11-28#get-the-authenticated-user
   /// - Returns: User
   public func me() async throws -> User {
     let path = "/user"
