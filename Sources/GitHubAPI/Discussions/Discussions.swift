@@ -110,6 +110,9 @@ extension GitHubAPI {
     viewerSubscription
     poll \(pollFields)
     category \(categoryFields)
+    comments {
+      totalCount
+    }
     labels(first: 100) {
       nodes \(labelFields)
     }
