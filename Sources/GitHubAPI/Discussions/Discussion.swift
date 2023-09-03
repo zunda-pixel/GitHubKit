@@ -49,7 +49,7 @@ extension GitHubAPI {
     let query = """
   query {
     repository(owner: "\(ownerID)", name: "\(repositoryName)") {
-      discussion(number: \(discussionNumber)) \(discussionFields(first: itemFirst, last: itemLast))
+      discussion(number: \(discussionNumber)) \(discussionFields())
     }
   }
   """

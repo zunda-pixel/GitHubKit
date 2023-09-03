@@ -59,7 +59,7 @@ extension GitHubAPI {
         \(last.map { "last: \($0),"} ?? "")
         orderBy: {field: \(orderBy.rawValue), direction: \(direction.rawValue.uppercased())}
       ) {
-        nodes \(discussionFields(first: first, last: last))
+        nodes \(discussionFields())
       }
     }
   }
@@ -75,7 +75,7 @@ extension GitHubAPI {
     return response.discussions
   }
   
-  func discussionFields(first: Int?, last: Int?) -> String {
+  func discussionFields() -> String {
     """
   {
     id
@@ -85,7 +85,7 @@ extension GitHubAPI {
     updatedAt
     upvoteCount
     stateReason
-    author \(userFields())
+    author \(userFields)
     createdAt
     activeLockReason
     authorAssociation
@@ -94,7 +94,7 @@ extension GitHubAPI {
     bodyText
     createdViaEmail
     databaseId
-    editor \(userFields())
+    editor \(userFields)
     includesCreatedEdit
     lastEditedAt
     locked
@@ -108,33 +108,30 @@ extension GitHubAPI {
     viewerDidAuthor
     viewerHasUpvoted
     viewerSubscription
-    poll \(pollFields(first: first, last: last))
-    category \(categoryFields())
-    comments(\(last.map { "last: \($0)"} ?? "") \(first.map { "first: \($0)"} ?? "")) {
-      nodes \(commentFields())
+    poll \(pollFields)
+    category \(categoryFields)
+    labels(first: 100) {
+      nodes \(labelFields)
     }
-    labels(\(last.map { "last: \($0)"} ?? "") \(first.map { "first: \($0)"} ?? "")) {
-      nodes \(labelFields())
-    }
-    reactions(\(last.map { "last: \($0)"} ?? "") \(first.map { "first: \($0)"} ?? "")) {
-      nodes \(reactionFields())
+    reactions(first: 100) {
+      nodes \(reactionFields)
     }
   }
   """
   }
   
-  private func reactionFields() -> String {
+  private var reactionFields: String {
     """
     {
       content
       createdAt
       databaseId
-      user \(userFields())
+      user \(userFields)
     }
     """
   }
   
-  private func labelFields() -> String {
+  private var labelFields: String {
     """
     {
       name
@@ -148,7 +145,7 @@ extension GitHubAPI {
     }
     """
   }
-  private func categoryFields() -> String {
+  private var categoryFields: String {
     """
   {
     createdAt
@@ -163,14 +160,14 @@ extension GitHubAPI {
   """
   }
   
-  private func pollFields(first: Int?, last: Int? = nil) -> String {
+  private var pollFields: String {
     """
   {
     totalVoteCount
     question
     viewerCanVote
     viewerHasVoted
-    options(\(last.map { "last: \($0)"} ?? "") \(first.map { "first: \($0)"} ?? "")) {
+    options(first: 100) {
       nodes {
         option
         totalVoteCount
@@ -181,7 +178,7 @@ extension GitHubAPI {
   """
   }
   
-  private func userFields() -> String {
+  private var userFields: String {
     """
   {
     login
@@ -192,17 +189,17 @@ extension GitHubAPI {
   """
   }
   
-  private func commentFields() -> String {
+  var commentFields: String {
     """
   {
     id
-    author \(userFields())
+    author \(userFields)
     body
     bodyHTML
     bodyText
     createdAt
     createdViaEmail
-    editor \(userFields())
+    editor \(userFields)
     authorAssociation
     includesCreatedEdit
     lastEditedAt

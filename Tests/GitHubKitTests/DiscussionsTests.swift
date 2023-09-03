@@ -10,8 +10,8 @@ import XCTest
 final class DiscussionsTests: XCTestCase {
   func testDiscussions() async throws {
     let discussions = try await api.discussions(
-      ownerID: "community",
-      repositoryName: "community",
+      ownerID: "nodejs",
+      repositoryName: "node",
       last: 100
     )
     
@@ -27,5 +27,17 @@ final class DiscussionsTests: XCTestCase {
     )
     
     print(discussion)
+  }
+  
+  func testDiscussionComments() async throws {
+    let commentsResponse = try await api.discussionComments(
+      ownerID: "nodejs",
+      repositoryName: "node",
+      discussionNumber: 37857,
+      first: 100,
+      after: nil
+    )
+
+    print(commentsResponse)
   }
 }
