@@ -35,7 +35,6 @@ public struct Discussion: Codable, Hashable, Sendable, Identifiable {
   public let viewerDidAuthor: Bool
   public let viewerHasUpvoted: Bool
   public let viewerSubscription: SubscriptionState
-  public let comments: [Comment]
   public let category: Category
   public let labels: [Label]
   public let reactions: [Reaction]
@@ -108,7 +107,6 @@ public struct Discussion: Codable, Hashable, Sendable, Identifiable {
     self.viewerDidAuthor = viewerDidAuthor
     self.viewerHasUpvoted = viewerHasUpvoted
     self.viewerSubscription = viewerSubscription
-    self.comments = comments
     self.category = category
     self.labels = labels
     self.reactions = reactions
@@ -145,7 +143,6 @@ public struct Discussion: Codable, Hashable, Sendable, Identifiable {
     case viewerDidAuthor
     case viewerHasUpvoted
     case viewerSubscription
-    case comments
     case category
     case stateReason
     case labels
@@ -189,8 +186,6 @@ public struct Discussion: Codable, Hashable, Sendable, Identifiable {
     self.viewerDidAuthor = try container.decode(Bool.self, forKey: .viewerDidAuthor)
     self.viewerHasUpvoted = try container.decode(Bool.self, forKey: .viewerHasUpvoted)
     self.viewerSubscription = try container.decode(SubscriptionState.self, forKey: .viewerSubscription)
-    let commentsContainer = try container.nestedContainer(keyedBy: NodesCodingKeys.self, forKey: .comments)
-    self.comments = try commentsContainer.decode([Comment].self, forKey: .nodes)
     self.category = try container.decode(Category.self, forKey: .category)
     let labelsContainer = try container.nestedContainer(keyedBy: NodesCodingKeys.self, forKey: .labels)
     self.labels = try labelsContainer.decode([Label].self, forKey: .nodes)
