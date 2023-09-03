@@ -72,7 +72,6 @@ public struct Discussion: Codable, Hashable, Sendable, Identifiable {
     viewerDidAuthor: Bool,
     viewerHasUpvoted: Bool,
     viewerSubscription: SubscriptionState,
-    comments: [Comment],
     category: Category,
     labels: [Label],
     reactions: [Reaction],
