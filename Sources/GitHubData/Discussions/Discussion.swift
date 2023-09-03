@@ -39,6 +39,7 @@ public struct Discussion: Codable, Hashable, Sendable, Identifiable {
   public let labels: [Label]
   public let reactions: [Reaction]
   public let poll: Poll?
+  public let commentsCount: Int
   
   public init(
     id: String,
@@ -75,7 +76,8 @@ public struct Discussion: Codable, Hashable, Sendable, Identifiable {
     category: Category,
     labels: [Label],
     reactions: [Reaction],
-    poll: Poll?
+    poll: Poll?,
+    commentsCount: Int
   ) {
     self.id = id
     self.number = number
@@ -111,6 +113,7 @@ public struct Discussion: Codable, Hashable, Sendable, Identifiable {
     self.labels = labels
     self.reactions = reactions
     self.poll = poll
+    self.commentsCount = commentsCount
   }
   
   private enum CodingKeys: String, CodingKey {
@@ -148,10 +151,12 @@ public struct Discussion: Codable, Hashable, Sendable, Identifiable {
     case labels
     case reactions
     case poll
+    case commentsCount = "comments"
   }
   
-  private enum NodesCodingKeys: String, CodingKey {
+  private enum NestCodingKeys: String, CodingKey {
     case nodes
+    case totalCount
   }
     
   public init(from decoder: any Decoder) throws {
@@ -187,10 +192,12 @@ public struct Discussion: Codable, Hashable, Sendable, Identifiable {
     self.viewerHasUpvoted = try container.decode(Bool.self, forKey: .viewerHasUpvoted)
     self.viewerSubscription = try container.decode(SubscriptionState.self, forKey: .viewerSubscription)
     self.category = try container.decode(Category.self, forKey: .category)
-    let labelsContainer = try container.nestedContainer(keyedBy: NodesCodingKeys.self, forKey: .labels)
+    let labelsContainer = try container.nestedContainer(keyedBy: NestCodingKeys.self, forKey: .labels)
     self.labels = try labelsContainer.decode([Label].self, forKey: .nodes)
-    let reactionsContainer = try container.nestedContainer(keyedBy: NodesCodingKeys.self, forKey: .reactions)
+    let reactionsContainer = try container.nestedContainer(keyedBy: NestCodingKeys.self, forKey: .reactions)
     self.reactions = try reactionsContainer.decode([Reaction].self, forKey: .nodes)
     self.poll = try container.decodeIfPresent(Poll.self, forKey: .poll)
+    let commentsContainer = try container.nestedContainer(keyedBy: NestCodingKeys.self, forKey: .commentsCount)
+    self.commentsCount = try commentsContainer.decode(Int.self, forKey: .totalCount)
   }
 }
