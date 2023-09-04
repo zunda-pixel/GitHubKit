@@ -21,13 +21,13 @@ extension GitHubAPI {
     let path = "/repos/\(ownerID)/\(repositoryName)/pulls/\(pullNumber)"
     let endpoint = baseURL.appending(path: path)
     let method: HTTPRequest.Method = .get
-    
+
     let request = HTTPRequest(method: method, url: endpoint, queries: [:], headers: headers)
-    
+
     let (data, _) = try await session.data(for: request)
-    
+
     let pull = try decode(Pull.self, from: data)
-    
+
     return pull
   }
 }

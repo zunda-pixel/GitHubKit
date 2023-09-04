@@ -28,7 +28,7 @@ extension GitHubAPI {
     let path = "/users/\(ownerID)/repos"
     let method: HTTPRequest.Method = .get
     let endpoint = baseURL.appending(path: path)
-    
+
     let queries: [String: String] = [
       "type": type.rawValue,
       "sort": sort.rawValue,
@@ -36,16 +36,16 @@ extension GitHubAPI {
       "per_page": String(perPage),
       "page": String(page),
     ]
-    
+
     let request = HTTPRequest(
       method: method,
       url: endpoint,
       queries: queries,
       headers: headers
     )
-    
+
     let (data, _) = try await session.data(for: request)
-    
+
     let response = try decode([Repository].self, from: data)
     return response
   }

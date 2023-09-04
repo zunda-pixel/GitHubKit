@@ -19,13 +19,13 @@ extension GitHubAPI {
     let path = "/repos/\(ownerID)/\(repositoryName)/license"
     let endpoint = baseURL.appending(path: path)
     let method: HTTPRequest.Method = .get
-    
+
     let request = HTTPRequest(method: method, url: endpoint, queries: [:], headers: headers)
-    
+
     let (data, _) = try await session.data(for: request)
-    
+
     let license = try decode(License.self, from: data)
-    
+
     return license
   }
 }

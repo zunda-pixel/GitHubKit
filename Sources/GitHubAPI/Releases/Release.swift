@@ -21,16 +21,16 @@ extension GitHubAPI {
     let path = "/repos/\(ownerID)/\(repositoryName)/releases/\(releaseID)"
     let endpoint = baseURL.appending(path: path)
     let method: HTTPRequest.Method = .get
-    
+
     let request = HTTPRequest(method: method, url: endpoint, queries: [:], headers: headers)
-    
+
     let (data, _) = try await session.data(for: request)
-    
+
     let release = try decode(Release.self, from: data)
-    
+
     return release
   }
-  
+
   /// Get a release by tag name
   /// https://docs.github.com/en/rest/releases/releases?apiVersion=2022-11-28#get-a-release-by-tag-name
   /// - Parameters:
@@ -46,13 +46,13 @@ extension GitHubAPI {
     let path = "/repos/\(ownerID)/\(repositoryName)/releases/tags/\(tag)"
     let endpoint = baseURL.appending(path: path)
     let method: HTTPRequest.Method = .get
-    
+
     let request = HTTPRequest(method: method, url: endpoint, queries: [:], headers: headers)
-    
+
     let (data, _) = try await session.data(for: request)
-    
+
     let release = try decode(Release.self, from: data)
-    
+
     return release
   }
 }

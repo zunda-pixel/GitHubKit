@@ -3,12 +3,12 @@
 //
 
 import Foundation
-
 import XCTest
+
 @testable import GitHubAPI
 
 final class CollaboratorsTests: XCTestCase {
-  func testCollaborators() async throws {    
+  func testCollaborators() async throws {
     let collaborators = try await api.collaborators(
       ownerID: "zunda-pixel",
       repositoryName: "GitHubKit",
@@ -17,7 +17,7 @@ final class CollaboratorsTests: XCTestCase {
       perPage: 100,
       page: 1
     )
-    
+
     print(collaborators)
   }
 }

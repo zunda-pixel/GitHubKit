@@ -46,7 +46,7 @@ extension GitHubAPI {
     let path = "/repos/\(ownerID)/\(repositoryName)/pulls"
     let endpoint = baseURL.appending(path: path)
     let method: HTTPRequest.Method = .get
-    
+
     var queries: [String: String] = [
       "state": state.rawValue,
       "sort": sort.rawValue,
@@ -54,16 +54,16 @@ extension GitHubAPI {
       "per_page": String(perPage),
       "page": String(page),
     ]
-    
+
     head.map { queries["head"] = $0 }
     branchName.map { queries["base"] = $0 }
-    
+
     let request = HTTPRequest(method: method, url: endpoint, queries: queries, headers: headers)
-    
-    let (data, _) =  try await session.data(for: request)
+
+    let (data, _) = try await session.data(for: request)
 
     let pulls = try decode([Pull].self, from: data)
-    
+
     return pulls
   }
 }

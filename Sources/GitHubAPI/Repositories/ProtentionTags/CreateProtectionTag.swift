@@ -21,16 +21,16 @@ extension GitHubAPI {
     let path = "/repos/\(ownerID)/\(repositoryName)/tags/protection"
     let endpoint = baseURL.appending(path: path)
     let method: HTTPRequest.Method = .post
-    
+
     let body = try JSONEncoder.github.encode(["pattern": pattern])
     let httpRequest = HTTPRequest(method: method, url: endpoint, queries: [:], headers: headers)
     var urlRequest = URLRequest(httpRequest: httpRequest)!
     urlRequest.httpBody = body
-    
+
     let (data, _) = try await session.data(for: urlRequest)
-    
+
     let tag = try decode(ProtectionTag.self, from: data)
-    
+
     return tag
   }
 }

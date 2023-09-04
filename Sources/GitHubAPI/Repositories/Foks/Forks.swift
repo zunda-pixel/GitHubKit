@@ -25,19 +25,19 @@ extension GitHubAPI {
     let path = "/repos/\(ownerID)/\(repositoryName)/forks"
     let endpoint = baseURL.appending(path: path)
     let method: HTTPRequest.Method = .get
-    
+
     let queries: [String: String] = [
       "sort": sort.rawValue,
       "per_page": String(perPage),
       "page": String(page),
     ]
-    
+
     let request = HTTPRequest(method: method, url: endpoint, queries: queries, headers: headers)
-    
+
     let (data, _) = try await session.data(for: request)
-    
+
     let repositories = try decode([Repository].self, from: data)
-    
+
     return repositories
   }
 }

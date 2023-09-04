@@ -23,7 +23,7 @@ extension GitHubAPI {
       before: nil
     )
   }
-  
+
   public func discussionComments(
     ownerID: String,
     repositoryName: String,
@@ -41,7 +41,7 @@ extension GitHubAPI {
       before: before
     )
   }
-  
+
   public func discussionComments(
     ownerID: String,
     repositoryName: String,
@@ -59,7 +59,7 @@ extension GitHubAPI {
       before: nil
     )
   }
-  
+
   public func discussionComments(
     ownerID: String,
     repositoryName: String,
@@ -77,7 +77,7 @@ extension GitHubAPI {
       before: before
     )
   }
-  
+
   private func discussionComments(
     ownerID: String,
     repositoryName: String,
@@ -89,43 +89,42 @@ extension GitHubAPI {
   ) async throws -> (pageInfo: PageInfo, comments: [Discussion.Comment]) {
     let endpoint = baseURL.appending(path: "/graphql")
     let method: HTTPRequest.Method = .post
-    
+
     let arguments: [String] = [
       "last": last.map { String($0) },
       "first": first.map { String($0) },
       "after": after.map { "\"\($0)\"" },
       "before": before.map { "\"\($0)\"" },
     ]
-      .compactMapValues { $0 }
-      .map { "\($0.key): \($0.value)" }
-    
+    .compactMapValues { $0 }
+    .map { "\($0.key): \($0.value)" }
+
     let query = """
-  query {
-    repository(owner: "\(ownerID)", name: "\(repositoryName)") {
-      discussion(number: \(discussionNumber)) {
-        comments(\(arguments.joined(separator: ","))) {
-          nodes \(commentFields)
-          pageInfo {
-            endCursor
-            hasNextPage
-            hasPreviousPage
-            startCursor
+      query {
+        repository(owner: "\(ownerID)", name: "\(repositoryName)") {
+          discussion(number: \(discussionNumber)) {
+            comments(\(arguments.joined(separator: ","))) {
+              nodes \(commentFields)
+              pageInfo {
+                endCursor
+                hasNextPage
+                hasPreviousPage
+                startCursor
+              }
+            }
           }
         }
       }
-    }
-  }
-  """
-    
+      """
+
     let httpRequest = HTTPRequest(method: method, url: endpoint, queries: [:], headers: headers)
     var urlRequest = URLRequest(httpRequest: httpRequest)!
     urlRequest.httpBody = try JSONEncoder().encode(["query": query])
-    
+
     let (data, _) = try await session.data(for: urlRequest)
 
     let response = try decode(DiscussionCommentResponse.self, from: data)
-    
-    
+
     return (response.pageInfo, response.comments)
   }
 }
@@ -133,8 +132,7 @@ extension GitHubAPI {
 struct DiscussionCommentResponse: Sendable, Decodable {
   let comments: [Discussion.Comment]
   let pageInfo: PageInfo
-  
-  
+
   private enum CodingKeys: String, CodingKey {
     case data
     case repository
@@ -143,13 +141,17 @@ struct DiscussionCommentResponse: Sendable, Decodable {
     case nodes
     case pageInfo
   }
-  
+
   init(from decoder: Decoder) throws {
     let rootContainer = try decoder.container(keyedBy: CodingKeys.self)
-    let repositoryContainer = try rootContainer.nestedContainer(keyedBy: CodingKeys.self, forKey: .data)
-    let discussionContainer = try repositoryContainer.nestedContainer(keyedBy: CodingKeys.self, forKey: .repository)
-    let commentsContainer = try discussionContainer.nestedContainer(keyedBy: CodingKeys.self, forKey: .discussion)
-    let nodesContainer = try commentsContainer.nestedContainer(keyedBy: CodingKeys.self, forKey: .comments)
+    let repositoryContainer = try rootContainer.nestedContainer(
+      keyedBy: CodingKeys.self, forKey: .data)
+    let discussionContainer = try repositoryContainer.nestedContainer(
+      keyedBy: CodingKeys.self, forKey: .repository)
+    let commentsContainer = try discussionContainer.nestedContainer(
+      keyedBy: CodingKeys.self, forKey: .discussion)
+    let nodesContainer = try commentsContainer.nestedContainer(
+      keyedBy: CodingKeys.self, forKey: .comments)
     self.comments = try nodesContainer.decode([Discussion.Comment].self, forKey: .nodes)
     self.pageInfo = try nodesContainer.decode(PageInfo.self, forKey: .pageInfo)
   }

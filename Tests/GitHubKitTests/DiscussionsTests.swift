@@ -3,8 +3,8 @@
 //
 
 import Foundation
-
 import XCTest
+
 @testable import GitHubAPI
 
 final class DiscussionsTests: XCTestCase {
@@ -14,21 +14,20 @@ final class DiscussionsTests: XCTestCase {
       repositoryName: "node",
       last: 100
     )
-    
+
     print(discussions)
   }
-  
+
   func testDiscussion() async throws {
     let discussion = try await api.discussion(
       ownerID: "zunda-pixel",
       repositoryName: "GitHubkit",
-      discussionNumber: 25,
-      itemLast: 100
+      discussionNumber: 25
     )
-    
+
     print(discussion)
   }
-  
+
   func testDiscussionComments() async throws {
     let commentsResponse = try await api.discussionComments(
       ownerID: "nodejs",

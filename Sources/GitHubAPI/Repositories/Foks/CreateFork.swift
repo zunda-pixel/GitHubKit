@@ -25,26 +25,26 @@ extension GitHubAPI {
     let path = "/repos/\(ownerID)/\(repositoryName)/forks"
     let endpoint = baseURL.appending(path: path)
     let method: HTTPRequest.Method = .post
-    
+
     var body: [String: String] = [
       "name": name,
       "default_branch_only": defaultBranchOnly.description,
     ]
-    
+
     organization.map {
       body["organization"] = $0
     }
-    
+
     let bodyData = try JSONEncoder().encode(body)
-    
+
     let httpRequest = HTTPRequest(method: method, url: endpoint, queries: [:], headers: headers)
     var urlRequest = URLRequest(httpRequest: httpRequest)!
     urlRequest.httpBody = bodyData
-    
+
     let (data, _) = try await session.data(for: urlRequest)
-    
+
     let repository = try decode(Repository.self, from: data)
-    
+
     return repository
   }
 }

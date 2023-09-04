@@ -20,17 +20,17 @@ extension GitHubAPI {
     let path = "/users/\(userID)/followers"
     let endpoint = baseURL.appending(path: path)
     let method: HTTPRequest.Method = .get
-    
+
     let queries: [String: String] = [
-      "per_page": String(perPage) ,
-      "page": String(page)
+      "per_page": String(perPage),
+      "page": String(page),
     ]
-    
+
     let request = HTTPRequest(method: method, url: endpoint, queries: queries, headers: headers)
     let (data, _) = try await session.data(for: request)
-    
-    let users =  try decode([User].self, from: data)
-    
+
+    let users = try decode([User].self, from: data)
+
     return users
   }
 }

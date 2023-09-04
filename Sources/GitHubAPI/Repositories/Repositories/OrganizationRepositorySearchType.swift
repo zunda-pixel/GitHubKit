@@ -12,4 +12,3 @@ public enum OrganizationRepositorySearchType: String, Sendable {
   case sources
   case member
 }
-

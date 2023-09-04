@@ -25,27 +25,27 @@ extension GitHubAPI {
     let path = "/search/repositories"
     let method: HTTPRequest.Method = .get
     let endpoint = baseURL.appending(path: path)
-    
+
     var queries: [String: String] = [
       "q": query,
       "order": order.rawValue,
       "per_page": String(perPage),
-      "page": String(page)
+      "page": String(page),
     ]
-    
+
     sort.map { queries["sort"] = $0.rawValue }
-    
+
     let request = HTTPRequest(
       method: method,
       url: endpoint,
       queries: queries,
       headers: headers
     )
-    
+
     let (data, _) = try await session.data(for: request)
-    
+
     let response = try decode(RepositoriesResponse.self, from: data)
-    
+
     return response
   }
 }

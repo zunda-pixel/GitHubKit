@@ -33,23 +33,23 @@ extension GitHubAPI {
     let path = "/repos/\(ownerID)/\(repositoryName)/collaborators"
     let endpoint = baseURL.appending(path: path)
     let method: HTTPRequest.Method = .get
-    
+
     var queries: [String: String] = [
       "affiliation": affiliation.rawValue,
       "per_page": String(perPage),
       "page": String(page),
     ]
-    
+
     permission.map {
       queries["permission"] = $0.rawValue
     }
-    
+
     let request = HTTPRequest(method: method, url: endpoint, queries: queries, headers: headers)
-    
+
     let (data, _) = try await session.data(for: request)
-    
+
     let collaborators = try decode([Collaborator].self, from: data)
-    
+
     return collaborators
   }
 }

@@ -20,11 +20,11 @@ extension GitHubAPI {
     let path = "/repos/\(ownerID)/\(repositoryName)/tags/protection/\(tagID)"
     let endpoint = baseURL.appending(path: path)
     let method: HTTPRequest.Method = .delete
-    
+
     let request = HTTPRequest(method: method, url: endpoint, queries: [:], headers: headers)
-    
+
     let (data, response) = try await session.data(for: request)
-        
+
     if response.status.code != 204 {
       throw RequestError.deleteProtectionTag(data: data)
     }

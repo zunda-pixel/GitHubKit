@@ -22,7 +22,7 @@ extension GitHubAPI {
       direction: direction
     )
   }
-  
+
   public func discussions(
     ownerID: String,
     repositoryName: String,
@@ -39,7 +39,7 @@ extension GitHubAPI {
       direction: direction
     )
   }
-  
+
   private func discussions(
     ownerID: String,
     repositoryName: String,
@@ -50,79 +50,79 @@ extension GitHubAPI {
   ) async throws -> [Discussion] {
     let endpoint = baseURL.appending(path: "/graphql")
     let method: HTTPRequest.Method = .post
-    
+
     let query = """
-  query {
-    repository(owner: "\(ownerID)", name: "\(repositoryName)") {
-      discussions(
-        \(first.map { "first: \($0),"} ?? "")
-        \(last.map { "last: \($0),"} ?? "")
-        orderBy: {field: \(orderBy.rawValue), direction: \(direction.rawValue.uppercased())}
-      ) {
-        nodes \(discussionFields())
+      query {
+        repository(owner: "\(ownerID)", name: "\(repositoryName)") {
+          discussions(
+            \(first.map { "first: \($0),"} ?? "")
+            \(last.map { "last: \($0),"} ?? "")
+            orderBy: {field: \(orderBy.rawValue), direction: \(direction.rawValue.uppercased())}
+          ) {
+            nodes \(discussionFields())
+          }
+        }
       }
-    }
-  }
-  """
-    
+      """
+
     let httpRequest = HTTPRequest(method: method, url: endpoint, queries: [:], headers: headers)
     var urlRequest = URLRequest(httpRequest: httpRequest)!
     urlRequest.httpBody = try JSONEncoder().encode(["query": query])
-    
+
     let (data, _) = try await session.data(for: urlRequest)
     let response = try decode(DiscussionsResponse.self, from: data)
-    
+
     return response.discussions
   }
-  
+
   func discussionFields() -> String {
     """
-  {
-    id
-    number
-    url
-    title
-    updatedAt
-    upvoteCount
-    stateReason
-    author \(userFields)
-    createdAt
-    activeLockReason
-    authorAssociation
-    body
-    bodyHTML
-    bodyText
-    createdViaEmail
-    databaseId
-    editor \(userFields)
-    includesCreatedEdit
-    lastEditedAt
-    locked
-    viewerCanClose
-    viewerCanDelete
-    viewerCanReact
-    viewerCanReopen
-    viewerCanSubscribe
-    viewerCanUpdate
-    viewerCanUpvote
-    viewerDidAuthor
-    viewerHasUpvoted
-    viewerSubscription
-    poll \(pollFields)
-    category \(categoryFields)
-    comments {
-      totalCount
+    {
+      id
+      number
+      url
+      title
+      updatedAt
+      upvoteCount
+      stateReason
+      author \(userFields)
+      createdAt
+      activeLockReason
+      authorAssociation
+      body
+      bodyHTML
+      bodyText
+      createdViaEmail
+      databaseId
+      editor \(userFields)
+      includesCreatedEdit
+      lastEditedAt
+      locked
+      viewerCanClose
+      viewerCanDelete
+      viewerCanReact
+      viewerCanReopen
+      viewerCanSubscribe
+      viewerCanUpdate
+      viewerCanUpvote
+      viewerDidAuthor
+      viewerHasUpvoted
+      viewerSubscription
+      poll \(pollFields)
+      category \(categoryFields)
+      comments {
+        totalCount
+      }
+      labels(first: 100) {
+        nodes \(labelFields)
+      }
+      reactions(first: 100) {
+        nodes \(reactionFields)
+      }
     }
-    labels(first: 100) {
-      nodes \(labelFields)
-    }
-    reactions(first: 100) {
-      nodes \(reactionFields)
-    }
+    """
   }
-  """
-  }
-  
+
   private var reactionFields: String {
     """
     {
@@ -133,7 +133,7 @@ extension GitHubAPI {
     }
     """
   }
-  
+
   private var labelFields: String {
     """
     {
@@ -150,66 +150,66 @@ extension GitHubAPI {
   }
   private var categoryFields: String {
     """
-  {
-    createdAt
-    description
-    emoji
-    emojiHTML
-    isAnswerable
-    name
-    slug
-    updatedAt
+    {
+      createdAt
+      description
+      emoji
+      emojiHTML
+      isAnswerable
+      name
+      slug
+      updatedAt
+    }
+    """
   }
-  """
-  }
-  
+
   private var pollFields: String {
     """
-  {
-    totalVoteCount
-    question
-    viewerCanVote
-    viewerHasVoted
-    options(first: 100) {
-      nodes {
-        option
-        totalVoteCount
-        viewerHasVoted
+    {
+      totalVoteCount
+      question
+      viewerCanVote
+      viewerHasVoted
+      options(first: 100) {
+        nodes {
+          option
+          totalVoteCount
+          viewerHasVoted
+        }
       }
     }
+    """
   }
-  """
-  }
-  
+
   private var userFields: String {
     """
-  {
-    login
-    avatarUrl
-    resourcePath
-    url
+    {
+      login
+      avatarUrl
+      resourcePath
+      url
+    }
+    """
   }
-  """
-  }
-  
+
   var commentFields: String {
     """
-  {
-    id
-    author \(userFields)
-    body
-    bodyHTML
-    bodyText
-    createdAt
-    createdViaEmail
-    editor \(userFields)
-    authorAssociation
-    includesCreatedEdit
-    lastEditedAt
-    publishedAt
-    updatedAt
-    viewerDidAuthor
-  }
-  """
+    {
+      id
+      author \(userFields)
+      body
+      bodyHTML
+      bodyText
+      createdAt
+      createdViaEmail
+      editor \(userFields)
+      authorAssociation
+      includesCreatedEdit
+      lastEditedAt
+      publishedAt
+      updatedAt
+      viewerDidAuthor
+    }
+    """
   }
 }

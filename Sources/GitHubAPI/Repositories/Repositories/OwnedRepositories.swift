@@ -45,31 +45,31 @@ extension GitHubAPI {
     let path = "/user/repos"
     let method: HTTPRequest.Method = .get
     let endpoint = baseURL.appending(path: path)
-    
+
     var queries: [String: String] = [
       "sort": sort.rawValue,
       "direction": direction.rawValue,
       "per_page": String(perPage),
       "page": String(page),
     ]
-    
+
     visibility.map { queries["visibility"] = $0.rawValue }
     affiliation.map { queries["affiliation"] = $0.map(\.rawValue).joined(separator: ",") }
     type.map { queries["type"] = $0.rawValue }
-    
+
     let formatter = ISO8601DateFormatter()
     since.map { queries["since"] = formatter.string(from: $0) }
     before.map { queries["before"] = formatter.string(from: $0) }
-    
+
     let request = HTTPRequest(
       method: method,
       url: endpoint,
       queries: queries,
       headers: headers
     )
-    
+
     let (data, _) = try await session.data(for: request)
-    
+
     let response = try decode([Repository].self, from: data)
     return response
   }

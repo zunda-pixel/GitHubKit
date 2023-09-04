@@ -3,12 +3,12 @@
 //
 
 import Foundation
-
 import XCTest
+
 @testable import GitHubAPI
 
 final class NotificationsTests: XCTestCase {
-  func testNotifications() async throws {    
+  func testNotifications() async throws {
     let notifications = try await api.notifications(
       all: true,
       participating: false,
@@ -17,7 +17,7 @@ final class NotificationsTests: XCTestCase {
       perPage: 100,
       page: 1
     )
-    
+
     print(notifications)
   }
 }
