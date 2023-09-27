@@ -110,7 +110,7 @@ final class RepositoriesTests: XCTestCase {
   func testUpdateRepositoryEncodable() throws {
     let updateRepository = UpdateRepository(name: "Hello")
     let data = try JSONEncoder.github.encode(updateRepository)
-    print(String(data: data, encoding: .utf8)!)
+    print(String(decoding: data, as: UTF8.self))
   }
 
   func testUpdateRepository() async throws {
