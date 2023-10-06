@@ -13,7 +13,7 @@ public struct TemplateRepository: Codable, Sendable, Hashable, Identifiable {
   public let owner: User?
   public let organization: User?
   public let htmlURL: URL
-  public let description: String?
+  public let _description: String?
   public let isFork: Bool
   public let url: URL
   public let forksURL: URL
@@ -111,7 +111,7 @@ public struct TemplateRepository: Codable, Sendable, Hashable, Identifiable {
     owner: User?,
     organization: User?,
     htmlURL: URL,
-    description: String?,
+    _description: String?,
     isFork: Bool,
     url: URL,
     forksURL: URL,
@@ -208,7 +208,7 @@ public struct TemplateRepository: Codable, Sendable, Hashable, Identifiable {
     self.owner = owner
     self.organization = organization
     self.htmlURL = htmlURL
-    self.description = description
+    self._description = _description
     self.isFork = isFork
     self.url = url
     self.forksURL = forksURL
@@ -307,7 +307,7 @@ public struct TemplateRepository: Codable, Sendable, Hashable, Identifiable {
     case owner
     case organization
     case htmlURL = "html_url"
-    case description
+    case _description = "description"
     case isFork = "fork"
     case url
     case forksURL = "forks_url"

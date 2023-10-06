@@ -10,7 +10,7 @@ public struct Milestone: Codable, Sendable, Hashable, Identifiable {
   public let state: State
   public let number: Int
   public let title: String
-  public let description: String?
+  public let _description: String?
   public let url: URL
   public let htmlURL: URL
   public let labelsURL: URL
@@ -28,7 +28,7 @@ public struct Milestone: Codable, Sendable, Hashable, Identifiable {
     state: State,
     number: Int,
     title: String,
-    description: String?,
+    _description: String?,
     url: URL,
     htmlURL: URL,
     labelsURL: URL,
@@ -45,7 +45,7 @@ public struct Milestone: Codable, Sendable, Hashable, Identifiable {
     self.state = state
     self.number = number
     self.title = title
-    self.description = description
+    self._description = _description
     self.url = url
     self.htmlURL = htmlURL
     self.labelsURL = labelsURL
@@ -64,7 +64,7 @@ public struct Milestone: Codable, Sendable, Hashable, Identifiable {
     case state
     case number
     case title
-    case description
+    case _description = "description"
     case url
     case htmlURL = "html_url"
     case labelsURL = "labels_url"

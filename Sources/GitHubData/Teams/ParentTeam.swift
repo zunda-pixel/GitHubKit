@@ -9,7 +9,7 @@ public struct ParentTeam: Hashable, Sendable, Identifiable, Codable {
   public let nodeID: String
   public let membersURL: URL
   public let name: String
-  public let description: String?
+  public let _description: String?
   public let permission: PermissionType
   public let privacy: Privacy
   public let notificationSetting: NotificationSettings
@@ -23,7 +23,7 @@ public struct ParentTeam: Hashable, Sendable, Identifiable, Codable {
     nodeID: String,
     membersURL: URL,
     name: String,
-    description: String?,
+    _description: String?,
     permission: PermissionType,
     privacy: Privacy,
     notificationSetting: NotificationSettings,
@@ -36,7 +36,7 @@ public struct ParentTeam: Hashable, Sendable, Identifiable, Codable {
     self.nodeID = nodeID
     self.membersURL = membersURL
     self.name = name
-    self.description = description
+    self._description = _description
     self.permission = permission
     self.privacy = privacy
     self.notificationSetting = notificationSetting
@@ -51,7 +51,7 @@ public struct ParentTeam: Hashable, Sendable, Identifiable, Codable {
     case nodeID = "node_id"
     case membersURL = "members_url"
     case name
-    case description
+    case _description = "description"
     case permission
     case privacy
     case notificationSetting = "notification_setting"

@@ -9,7 +9,7 @@ extension Discussion {
     public let name: String
     public let color: String
     public let createdAt: Date
-    public let description: String
+    public let _description: String
     public let isDefault: Bool
     public let resourcePath: String
     public let updatedAt: Date
@@ -19,7 +19,7 @@ extension Discussion {
       name: String,
       color: String,
       createdAt: Date,
-      description: String,
+      _description: String,
       isDefault: Bool,
       resourcePath: String,
       updatedAt: Date,
@@ -28,11 +28,22 @@ extension Discussion {
       self.name = name
       self.color = color
       self.createdAt = createdAt
-      self.description = description
+      self._description = _description
       self.isDefault = isDefault
       self.resourcePath = resourcePath
       self.updatedAt = updatedAt
       self.url = url
+    }
+    
+    private enum CodingKeys: String, CodingKey {
+      case name
+      case color
+      case createdAt
+      case _description = "description"
+      case isDefault
+      case resourcePath
+      case updatedAt
+      case url
     }
   }
 }
