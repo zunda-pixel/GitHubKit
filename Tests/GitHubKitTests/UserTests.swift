@@ -27,4 +27,10 @@ final class UserTests: XCTestCase {
     let user = try await api.user(userID: "zunda-pixel")
     print(user)
   }
+  
+  func testUpdateMe() async throws {
+    let updateUser = UpdateUser(location: "new location")
+    
+    try await api.update(me: updateUser)
+  }
 }
