@@ -14,11 +14,21 @@ final class UserTests: XCTestCase {
   }
 
   func testFollowers() async throws {
+    let users = try await api.followers()
+    print(users.count)
+  }
+
+  func testUserFollowers() async throws {
     let users = try await api.followers(userID: "zunda-pixel")
     print(users.count)
   }
 
   func testFollowing() async throws {
+    let users = try await api.following()
+    print(users.count)
+  }
+  
+  func testUserFollowing() async throws {
     let users = try await api.following(userID: "zunda-pixel")
     print(users.count)
   }
@@ -85,5 +95,10 @@ final class UserTests: XCTestCase {
     ]
     
     try await api.deleteSocialAccount(socialURLs: urls)
+  }
+  
+  func testIsFollowing() async throws {
+    let isFollowing = try await api.isFollowing(userID: "swiftwasm")
+    print(isFollowing)
   }
 }
