@@ -59,7 +59,7 @@ final class UserTests: XCTestCase {
   }
   
   func testUnblockUser() async throws {
-    try await api.unblock(userID: "zunda")
+    try await api.unBlock(userID: "zunda")
   }
   
   func testIsBlockedByUser() async throws {
@@ -100,5 +100,13 @@ final class UserTests: XCTestCase {
   func testIsFollowing() async throws {
     let isFollowing = try await api.isFollowing(userID: "swiftwasm")
     print(isFollowing)
+  }
+  
+  func testFollow() async throws {
+    try await api.follow(userID: "p-player")
+  }
+  
+  func testUnFollow() async throws {
+    try await api.unFollow(userID: "p-player")
   }
 }
