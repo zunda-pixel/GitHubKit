@@ -37,7 +37,13 @@ extension GitHubAPI {
 
     let body = try JSONEncoder.github.encode(newRepository)
 
-    let httpRequest = HTTPRequest(method: method, url: endpoint, queries: [:], headers: headers)
+    let httpRequest = HTTPRequest(
+      method: method,
+      url: endpoint,
+      queries: [:],
+      headers: headers
+    )
+
     var urlRequest = URLRequest(httpRequest: httpRequest)!
     urlRequest.httpBody = body
 

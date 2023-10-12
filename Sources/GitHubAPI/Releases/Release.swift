@@ -22,7 +22,12 @@ extension GitHubAPI {
     let endpoint = baseURL.appending(path: path)
     let method: HTTPRequest.Method = .get
 
-    let request = HTTPRequest(method: method, url: endpoint, queries: [:], headers: headers)
+    let request = HTTPRequest(
+      method: method,
+      url: endpoint,
+      queries: [:],
+      headers: headers
+    )
 
     let (data, _) = try await session.data(for: request)
 
@@ -47,7 +52,12 @@ extension GitHubAPI {
     let endpoint = baseURL.appending(path: path)
     let method: HTTPRequest.Method = .get
 
-    let request = HTTPRequest(method: method, url: endpoint, queries: [:], headers: headers)
+    let request = HTTPRequest(
+      method: method,
+      url: endpoint,
+      queries: [:],
+      headers: headers
+    )
 
     let (data, _) = try await session.data(for: request)
 
