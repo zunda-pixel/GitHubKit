@@ -37,8 +37,8 @@ extension GitHubAPI {
 }
 
 extension GitHubAPI {
-  /// Check if a person is followed by the authenticated user
-  /// https://docs.github.com/en/rest/users/followers?apiVersion=2022-11-28#check-if-a-person-is-followed-by-the-authenticated-user
+  /// Check if a user follows another user
+  /// https://docs.github.com/en/rest/users/followers?apiVersion=2022-11-28#check-if-a-user-follows-another-user
   /// - Parameter userID: The handle for the GitHub user account.
   /// - Returns: Bool
   public func isFollowing(from fromUserID: String, to toUserID: String) async throws -> Bool {
