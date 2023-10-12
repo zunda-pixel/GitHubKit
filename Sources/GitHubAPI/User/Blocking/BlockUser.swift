@@ -24,7 +24,7 @@ extension GitHubAPI {
     let (_, response) = try await session.data(for: request)
     
     if response.status.code == 204 { return }
-    try verifyResopnseStatus(httpResponse: response)
+    try verifyResopnseStatus(response: response)
     throw RequestError.unknown
   }
 }

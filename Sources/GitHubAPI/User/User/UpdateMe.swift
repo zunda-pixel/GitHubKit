@@ -30,7 +30,7 @@ extension GitHubAPI {
 
     let (data, response) = try await session.data(for: urlRequest)
     
-    try verifyResopnseStatus(urlResopnse: response)
+    try verifyResponseStatus(response: response)
     
     let user = try decode(User.self, from: data)
     

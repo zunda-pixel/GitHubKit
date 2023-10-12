@@ -28,7 +28,7 @@ extension GitHubAPI {
     } else if response.status.code == 404 {
       return false
     } else {
-      try verifyResopnseStatus(httpResponse: response)
+      try verifyResopnseStatus(response: response)
     }
     
     throw RequestError.unknown

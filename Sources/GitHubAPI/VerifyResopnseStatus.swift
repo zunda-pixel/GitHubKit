@@ -6,16 +6,16 @@ import Foundation
 import HTTPTypes
 
 extension GitHubAPI {
-  func verifyResopnseStatus(httpResponse: HTTPResponse) throws {
-    try verifyResponseStatus(code: httpResponse.status.code)
+  func verifyResopnseStatus(response: HTTPResponse) throws {
+    try verifyResponseStatus(code: response.status.code)
   }
   
-  func verifyResopnseStatus(urlResopnse: URLResponse) throws {
-    guard let response = (urlResopnse as? HTTPURLResponse)?.httpResponse else {
+  func verifyResponseStatus(response: URLResponse) throws {
+    guard let response = (response as? HTTPURLResponse)?.httpResponse else {
       throw HTTPTypeConversionError.failedToConvertURLResponseToHTTPResponse
     }
-    
-    try verifyResponseStatus(code: response.status.code)
+
+    try verifyResopnseStatus(response: response)
   }
   
   func verifyResponseStatus(code: Int) throws {
@@ -31,7 +31,7 @@ extension GitHubAPI {
   }
 }
 
-private enum HTTPTypeConversionError: Error {
+enum HTTPTypeConversionError: Error {
   case failedToConvertHTTPRequestToURLRequest
   case failedToConvertURLResponseToHTTPResponse
 }
