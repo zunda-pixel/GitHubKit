@@ -56,4 +56,34 @@ final class UserTests: XCTestCase {
     let isBlocked = try await api.isBlocked(by: "zunda")
     print(isBlocked)
   }
+  
+  func testSocialAccounts() async throws {
+    let socialAccounts = try await api.socialAccounts()
+    print(socialAccounts)
+  }
+  
+  func testUserSocialAccounts() async throws {
+    let socialAccounts = try await api.socialAccounts(userID: "zunda")
+    print(socialAccounts)
+  }
+
+  func testAddSocialAccounts() async throws {
+    let urls: [URL] = [
+      URL(string: "https://facebook.com/GitHub")!,
+      URL(string: "https://www.youtube.com/@GitHub")!,
+    ]
+    
+    let socialAccounts = try await api.addSocialAccount(socialURLs: urls)
+    
+    print(socialAccounts)
+  }
+  
+  func testDeleteSocialAccounts() async throws {
+    let urls: [URL] = [
+      URL(string: "https://facebook.com/GitHub")!,
+      URL(string: "https://www.youtube.com/@GitHub")!,
+    ]
+    
+    try await api.deleteSocialAccount(socialURLs: urls)
+  }
 }
