@@ -102,11 +102,16 @@ final class UserTests: XCTestCase {
     print(isFollowing)
   }
   
+  func testIsFollowingFromTo() async throws {
+    let isFollowing = try await api.isFollowing(from: "zunda-pixel", to: "swiftwasm")
+    print(isFollowing)
+  }
+  
   func testFollow() async throws {
-    try await api.follow(userID: "p-player")
+    try await api.follow(userID: "swiftwasm")
   }
   
   func testUnFollow() async throws {
-    try await api.unFollow(userID: "p-player")
+    try await api.unFollow(userID: "swiftwasm")
   }
 }
