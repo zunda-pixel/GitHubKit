@@ -10,7 +10,7 @@ public struct PerformGitHubApp: Codable, Sendable, Hashable, Identifiable {
   public let nodeID: String
   public let owner: User
   public let name: String
-  public let description: String
+  public let _description: String
   public let externalURL: URL
   public let htmlURL: URL
   public let createdAt: Date
@@ -28,7 +28,7 @@ public struct PerformGitHubApp: Codable, Sendable, Hashable, Identifiable {
     nodeID: String,
     owner: User,
     name: String,
-    description: String,
+    _description: String,
     externalURL: URL,
     htmlURL: URL,
     createdAt: Date,
@@ -45,7 +45,7 @@ public struct PerformGitHubApp: Codable, Sendable, Hashable, Identifiable {
     self.nodeID = nodeID
     self.owner = owner
     self.name = name
-    self.description = description
+    self._description = _description
     self.externalURL = externalURL
     self.htmlURL = htmlURL
     self.createdAt = createdAt
@@ -64,7 +64,7 @@ public struct PerformGitHubApp: Codable, Sendable, Hashable, Identifiable {
     case nodeID = "node_id"
     case owner
     case name
-    case description
+    case _description = "description"
     case externalURL = "external_url"
     case htmlURL = "html_url"
     case createdAt = "created_at"

@@ -3,8 +3,8 @@
 //
 
 import Foundation
-
 import XCTest
+
 @testable import GitHubAPI
 
 final class PullsTests: XCTestCase {
@@ -14,10 +14,10 @@ final class PullsTests: XCTestCase {
       repositoryName: "GitHubKit",
       pullNumber: 1
     )
-    
+
     print(pull)
   }
-  
+
   func testPulls() async throws {
     let pulls = try await api.pulls(
       ownerID: "github",
@@ -28,7 +28,7 @@ final class PullsTests: XCTestCase {
       perPage: 100,
       page: 1
     )
-    
+
     print(pulls)
   }
 }

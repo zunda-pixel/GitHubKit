@@ -28,7 +28,7 @@ public struct NewRepository: Encodable, Sendable {
   public var mergeCommitMessage: MergeCommitMessage?
   public var hasDownloads: Bool
   public var isTemplate: Bool
-  
+
   public init(
     name: String,
     description: String? = nil,
@@ -78,7 +78,7 @@ public struct NewRepository: Encodable, Sendable {
     self.hasDownloads = hasDownloads
     self.isTemplate = isTemplate
   }
-  
+
   private enum CodingKeys: String, CodingKey {
     case name
     case description

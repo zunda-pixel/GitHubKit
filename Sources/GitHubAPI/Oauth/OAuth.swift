@@ -13,15 +13,15 @@ public struct OAuth: Sendable {
     case json = "application/json"
     case xml = "application/xml"
   }
-  
+
   public var baseURL = URL(string: "https://github.com/login")!
   private let path = "/oauth/access_token"
-  
+
   public var clientID: String
   public var clientSecret: String
   public var code: String
   public var redirectURL: URL?
-  
+
   public init(
     clientID: String,
     clientSecret: String,
@@ -34,26 +34,26 @@ public struct OAuth: Sendable {
     self.code = code
     self.redirectURL = redirectURL
   }
-  
+
   public func request(responseType: ResponseType = .default) -> HTTPRequest {
     let endpoint = baseURL.appending(path: path)
-    
+
     var queries: [String: String] = [
       "client_id": clientID,
       "client_secret": clientSecret,
-      "code": code
+      "code": code,
     ]
-    
+
     redirectURL.map { queries["redirect_uri"] = $0.absoluteString }
-    
+
     var urlComponents = URLComponents(url: endpoint, resolvingAgainstBaseURL: true)!
     urlComponents.queryItems = queries.map { .init(name: $0.key, value: $0.value) }
-    
+
     var headers: [String: String] = [:]
     if responseType != .default {
       headers["Accept"] = responseType.rawValue
     }
-    
+
     return HTTPRequest(
       method: .post,
       url: endpoint,
@@ -61,18 +61,18 @@ public struct OAuth: Sendable {
       headers: headers
     )
   }
-  
+
   public func authorize(session: URLSession = .shared) async throws -> OAuthResponse {
     let request = request(responseType: .json)
     let data: Data
     let response: HTTPResponse
-    
+
     do {
       (data, response) = try await session.data(for: request)
     } catch {
       throw GitHubError.request(request: request)
     }
-    
+
     do {
       let oauthResponse = try JSONDecoder.github.decode(OAuthResponse.self, from: data)
       return oauthResponse

@@ -27,24 +27,30 @@ extension GitHubAPI {
     let path = "/repos/\(templateOwnerID)/\(templateRepositoryName)/generate"
     let method: HTTPRequest.Method = .post
     let endpoint = baseURL.appending(path: path)
-    
+
     let newRepository = NewRepositoryWithTemplate(
       name: name,
       description: description,
       includeAllBranches: includeAllBranches,
       isPrivate: isPrivate
     )
-  
+
     let body = try JSONEncoder.github.encode(newRepository)
-    
-    let httpRequest = HTTPRequest(method: method, url: endpoint, queries: [:], headers: headers )
+
+    let httpRequest = HTTPRequest(
+      method: method,
+      url: endpoint,
+      queries: [:],
+      headers: headers
+    )
+
     var urlRequest = URLRequest(httpRequest: httpRequest)!
     urlRequest.httpBody = body
-    
+
     let (data, _) = try await session.data(for: urlRequest)
-    
+
     let repository = try decode(Repository.self, from: data)
-    
+
     return repository
   }
 }
@@ -54,7 +60,7 @@ struct NewRepositoryWithTemplate: Encodable {
   let description: String?
   let includeAllBranches: Bool
   let isPrivate: Bool
-  
+
   private enum CodingKeys: String, CodingKey {
     case name
     case description

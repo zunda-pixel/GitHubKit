@@ -21,17 +21,23 @@ extension GitHubAPI {
     let path = "/repos/\(ownerID)/\(repositoryName)"
     let endpoint = baseURL.appending(path: path)
     let method: HTTPRequest.Method = .patch
-    
+
     let body = try JSONEncoder.github.encode(repository)
-    
-    let httpRequest = HTTPRequest(method: method, url: endpoint, queries: [:], headers: headers)
+
+    let httpRequest = HTTPRequest(
+      method: method,
+      url: endpoint,
+      queries: [:],
+      headers: headers
+    )
+
     var urlRequest = URLRequest(httpRequest: httpRequest)!
     urlRequest.httpBody = body
-    
+
     let (data, _) = try await session.data(for: urlRequest)
-    
+
     let repository = try decode(Repository.self, from: data)
-    
+
     return repository
   }
 }
@@ -61,7 +67,7 @@ public struct UpdateRepository: Encodable, Sendable {
   public var isArchived: Bool?
   public var allowForking: Bool?
   public var webCommitSignoffRequired: Bool?
-  
+
   public init(
     name: String? = nil,
     homepage: String? = nil,
@@ -113,7 +119,7 @@ public struct UpdateRepository: Encodable, Sendable {
     self.allowForking = allowForking
     self.webCommitSignoffRequired = webCommitSignoffRequired
   }
-  
+
   private enum CodingKeys: String, CodingKey {
     case name
     case homepage

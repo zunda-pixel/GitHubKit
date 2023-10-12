@@ -27,26 +27,31 @@ extension GitHubAPI {
     let path = "/repos/\(ownerID)/\(repositoryName)/issues/\(issueNumber)/comments"
     let endpoint = baseURL.appending(path: path)
     let method: HTTPRequest.Method = .get
-    
+
     var queries: [String: String] = [
       "per_page": String(perPage),
       "page": String(page),
     ]
-    
+
     since.map {
       let formatter = ISO8601DateFormatter()
       queries["since"] = formatter.string(from: $0)
     }
-    
-    let request = HTTPRequest(method: method, url: endpoint, queries: queries, headers: headers)
-    
+
+    let request = HTTPRequest(
+      method: method,
+      url: endpoint,
+      queries: queries,
+      headers: headers
+    )
+
     let (data, _) = try await session.data(for: request)
-    
+
     let comments = try decode([Comment].self, from: data)
-    
+
     return comments
   }
-  
+
   /// List issue comments
   /// https://docs.github.com/en/rest/issues/comments?apiVersion=2022-11-28#list-issue-comments
   /// - Parameters:

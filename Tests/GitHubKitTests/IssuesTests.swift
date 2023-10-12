@@ -3,8 +3,8 @@
 //
 
 import Foundation
-
 import XCTest
+
 @testable import GitHubAPI
 
 final class IssuesTests: XCTestCase {
@@ -14,10 +14,10 @@ final class IssuesTests: XCTestCase {
       repositoryName: "GitHubKit",
       issueNumber: 1
     )
-    
+
     print(issue)
   }
-  
+
   func testIssues() async throws {
     let response = try await api.issues(
       ownerID: "apple",
@@ -36,7 +36,7 @@ final class IssuesTests: XCTestCase {
     )
     print(response)
   }
-  
+
   func testIssueComments() async throws {
     let comments = try await api.comments(
       ownerID: "apple",
@@ -45,7 +45,7 @@ final class IssuesTests: XCTestCase {
       perPage: 100,
       page: 1
     )
-    
+
     print(comments)
   }
 }

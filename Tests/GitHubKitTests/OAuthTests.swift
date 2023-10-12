@@ -1,10 +1,11 @@
 import XCTest
+
 @testable import GitHubAPI
 
 final class OAuthTests: XCTestCase {
   let clientID = "g7j5DeETKUfN1e1swdOU"
   let clientSecret = "QORWumaSE24K1C4ijJnUjxwYxqEr7nB2rxcHKeUo"
-  
+
   func testAuthorizingURL() {
     let oauth = OAuthRequest(
       clientID: clientID,
@@ -12,7 +13,7 @@ final class OAuthTests: XCTestCase {
     )
     print(oauth.authorizingURL())
   }
-  
+
   func testAuthorizing() async throws {
     let code = "gJJf4LnMHJlydjdRhmbS"
     let oauth = OAuth(

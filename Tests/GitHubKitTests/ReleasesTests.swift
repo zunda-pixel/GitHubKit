@@ -3,8 +3,8 @@
 //
 
 import Foundation
-
 import XCTest
+
 @testable import GitHubAPI
 
 final class ReleasesTests: XCTestCase {
@@ -14,20 +14,20 @@ final class ReleasesTests: XCTestCase {
       repositoryName: "swift",
       tag: "swift-5.8.1-RELEASE"
     )
-    
+
     print(release)
   }
-  
+
   func testRelease() async throws {
     let release = try await api.release(
       ownerID: "apple",
       repositoryName: "swift",
-      releaseID: 26735313
+      releaseID: 26_735_313
     )
-    
+
     print(release)
   }
-  
+
   func testReleases() async throws {
     let releases = try await api.releases(
       ownerID: "apple",
@@ -35,7 +35,7 @@ final class ReleasesTests: XCTestCase {
       perPage: 100,
       page: 1
     )
-    
+
     print(releases)
   }
 }

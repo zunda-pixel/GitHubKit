@@ -11,7 +11,7 @@ public struct Label: Codable, Hashable, Sendable, Identifiable {
   public let name: String
   public let color: String
   public let isDefault: Bool
-  public let description: String?
+  public let _description: String?
   
   public init(
     id: Int,
@@ -20,7 +20,7 @@ public struct Label: Codable, Hashable, Sendable, Identifiable {
     name: String,
     color: String,
     isDefault: Bool,
-    description: String?
+    _description: String?
   ) {
     self.id = id
     self.nodeID = nodeID
@@ -28,7 +28,7 @@ public struct Label: Codable, Hashable, Sendable, Identifiable {
     self.name = name
     self.color = color
     self.isDefault = isDefault
-    self.description = description
+    self._description = _description
   }
   
   private enum CodingKeys: String, CodingKey {
@@ -38,6 +38,6 @@ public struct Label: Codable, Hashable, Sendable, Identifiable {
     case name
     case color
     case isDefault = "default"
-    case description
+    case _description = "description"
   }
 }

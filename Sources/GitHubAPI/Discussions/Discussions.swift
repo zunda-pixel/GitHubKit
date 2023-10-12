@@ -22,7 +22,7 @@ extension GitHubAPI {
       direction: direction
     )
   }
-  
+
   public func discussions(
     ownerID: String,
     repositoryName: String,
@@ -39,7 +39,7 @@ extension GitHubAPI {
       direction: direction
     )
   }
-  
+
   private func discussions(
     ownerID: String,
     repositoryName: String,
@@ -50,91 +50,97 @@ extension GitHubAPI {
   ) async throws -> [Discussion] {
     let endpoint = baseURL.appending(path: "/graphql")
     let method: HTTPRequest.Method = .post
-    
+
     let query = """
-  query {
-    repository(owner: "\(ownerID)", name: "\(repositoryName)") {
-      discussions(
-        \(first.map { "first: \($0),"} ?? "")
-        \(last.map { "last: \($0),"} ?? "")
-        orderBy: {field: \(orderBy.rawValue), direction: \(direction.rawValue.uppercased())}
-      ) {
-        nodes \(discussionFields(first: first, last: last))
+      query {
+        repository(owner: "\(ownerID)", name: "\(repositoryName)") {
+          discussions(
+            \(first.map { "first: \($0),"} ?? "")
+            \(last.map { "last: \($0),"} ?? "")
+            orderBy: {field: \(orderBy.rawValue), direction: \(direction.rawValue.uppercased())}
+          ) {
+            nodes \(discussionFields())
+          }
+        }
       }
-    }
-  }
-  """
-    
-    let httpRequest = HTTPRequest(method: method, url: endpoint, queries: [:], headers: headers)
+      """
+
+    let httpRequest = HTTPRequest(
+      method: method,
+      url: endpoint,
+      queries: [:],
+      headers: headers
+    )
+
     var urlRequest = URLRequest(httpRequest: httpRequest)!
     urlRequest.httpBody = try JSONEncoder().encode(["query": query])
-    
+
     let (data, _) = try await session.data(for: urlRequest)
     let response = try decode(DiscussionsResponse.self, from: data)
-    
+
     return response.discussions
   }
-  
-  func discussionFields(first: Int?, last: Int?) -> String {
+
+  func discussionFields() -> String {
     """
-  {
-    id
-    number
-    url
-    title
-    updatedAt
-    upvoteCount
-    stateReason
-    author \(userFields())
-    createdAt
-    activeLockReason
-    authorAssociation
-    body
-    bodyHTML
-    bodyText
-    createdViaEmail
-    databaseId
-    editor \(userFields())
-    includesCreatedEdit
-    lastEditedAt
-    locked
-    viewerCanClose
-    viewerCanDelete
-    viewerCanReact
-    viewerCanReopen
-    viewerCanSubscribe
-    viewerCanUpdate
-    viewerCanUpvote
-    viewerDidAuthor
-    viewerHasUpvoted
-    viewerSubscription
-    poll \(pollFields(first: first, last: last))
-    category \(categoryFields())
-    comments(\(last.map { "last: \($0)"} ?? "") \(first.map { "first: \($0)"} ?? "")) {
-      nodes \(commentFields())
+    {
+      id
+      number
+      url
+      title
+      updatedAt
+      upvoteCount
+      stateReason
+      author \(userFields)
+      createdAt
+      activeLockReason
+      authorAssociation
+      body
+      bodyHTML
+      bodyText
+      createdViaEmail
+      databaseId
+      editor \(userFields)
+      includesCreatedEdit
+      lastEditedAt
+      locked
+      viewerCanClose
+      viewerCanDelete
+      viewerCanReact
+      viewerCanReopen
+      viewerCanSubscribe
+      viewerCanUpdate
+      viewerCanUpvote
+      viewerDidAuthor
+      viewerHasUpvoted
+      viewerSubscription
+      poll \(pollFields)
+      category \(categoryFields)
+      comments {
+        totalCount
+      }
+      labels(first: 100) {
+        nodes \(labelFields)
+      }
+      reactions(first: 100) {
+        nodes \(reactionFields)
+      }
     }
-    labels(\(last.map { "last: \($0)"} ?? "") \(first.map { "first: \($0)"} ?? "")) {
-      nodes \(labelFields())
-    }
-    reactions(\(last.map { "last: \($0)"} ?? "") \(first.map { "first: \($0)"} ?? "")) {
-      nodes \(reactionFields())
-    }
+    """
   }
-  """
-  }
-  
-  private func reactionFields() -> String {
+
+  private var reactionFields: String {
     """
     {
       content
       createdAt
       databaseId
-      user \(userFields())
+      user \(userFields)
     }
     """
   }
-  
-  private func labelFields() -> String {
+
+  private var labelFields: String {
     """
     {
       name
@@ -148,68 +154,68 @@ extension GitHubAPI {
     }
     """
   }
-  private func categoryFields() -> String {
+  private var categoryFields: String {
     """
-  {
-    createdAt
-    description
-    emoji
-    emojiHTML
-    isAnswerable
-    name
-    slug
-    updatedAt
-  }
-  """
-  }
-  
-  private func pollFields(first: Int?, last: Int? = nil) -> String {
+    {
+      createdAt
+      description
+      emoji
+      emojiHTML
+      isAnswerable
+      name
+      slug
+      updatedAt
+    }
     """
-  {
-    totalVoteCount
-    question
-    viewerCanVote
-    viewerHasVoted
-    options(\(last.map { "last: \($0)"} ?? "") \(first.map { "first: \($0)"} ?? "")) {
-      nodes {
-        option
-        totalVoteCount
-        viewerHasVoted
+  }
+
+  private var pollFields: String {
+    """
+    {
+      totalVoteCount
+      question
+      viewerCanVote
+      viewerHasVoted
+      options(first: 100) {
+        nodes {
+          option
+          totalVoteCount
+          viewerHasVoted
+        }
       }
     }
-  }
-  """
-  }
-  
-  private func userFields() -> String {
     """
-  {
-    login
-    avatarUrl
-    resourcePath
-    url
   }
-  """
-  }
-  
-  private func commentFields() -> String {
+
+  private var userFields: String {
     """
-  {
-    id
-    author \(userFields())
-    body
-    bodyHTML
-    bodyText
-    createdAt
-    createdViaEmail
-    editor \(userFields())
-    authorAssociation
-    includesCreatedEdit
-    lastEditedAt
-    publishedAt
-    updatedAt
-    viewerDidAuthor
+    {
+      login
+      avatarUrl
+      resourcePath
+      url
+    }
+    """
   }
-  """
+
+  var commentFields: String {
+    """
+    {
+      id
+      author \(userFields)
+      body
+      bodyHTML
+      bodyText
+      createdAt
+      createdViaEmail
+      editor \(userFields)
+      authorAssociation
+      includesCreatedEdit
+      lastEditedAt
+      publishedAt
+      updatedAt
+      viewerDidAuthor
+    }
+    """
   }
 }

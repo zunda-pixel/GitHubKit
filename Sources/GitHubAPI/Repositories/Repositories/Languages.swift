@@ -19,13 +19,18 @@ extension GitHubAPI {
     let path = "/repos/\(ownerID)/\(repositoryName)/languages"
     let endpoint = baseURL.appending(path: path)
     let method: HTTPRequest.Method = .get
-    
-    let request = HTTPRequest(method: method, url: endpoint, queries: [:], headers: headers)
-    
+
+    let request = HTTPRequest(
+      method: method,
+      url: endpoint,
+      queries: [:],
+      headers: headers
+    )
+
     let (data, _) = try await session.data(for: request)
-    
+
     let languages = try decode([String: Int].self, from: data)
-    
+
     return languages
   }
 }

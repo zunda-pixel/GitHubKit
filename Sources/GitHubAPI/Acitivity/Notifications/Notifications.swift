@@ -27,14 +27,14 @@ extension GitHubAPI {
     let path = "/notifications"
     let endpoint = baseURL.appending(path: path)
     let method: HTTPRequest.Method = .get
-    
+
     var queries: [String: String] = [
       "all": all.description,
       "participating": participating.description,
       "per_page": String(perPage),
       "page": String(page),
     ]
-    
+
     let formatter = ISO8601DateFormatter()
     since.map {
       queries["since"] = formatter.string(from: $0)
@@ -42,13 +42,18 @@ extension GitHubAPI {
     before.map {
       queries["before"] = formatter.string(from: $0)
     }
-    
-    let request = HTTPRequest(method: method, url: endpoint, queries: queries, headers: headers)
-    
+
+    let request = HTTPRequest(
+      method: method,
+      url: endpoint,
+      queries: queries,
+      headers: headers
+    )
+
     let (data, _) = try await session.data(for: request)
-    
+
     let notifications = try decode([GitHubData.Notification].self, from: data)
-   
+
     return notifications
   }
 }

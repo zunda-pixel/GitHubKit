@@ -35,11 +35,11 @@ public struct Discussion: Codable, Hashable, Sendable, Identifiable {
   public let viewerDidAuthor: Bool
   public let viewerHasUpvoted: Bool
   public let viewerSubscription: SubscriptionState
-  public let comments: [Comment]
   public let category: Category
   public let labels: [Label]
   public let reactions: [Reaction]
   public let poll: Poll?
+  public let commentsCount: Int
   
   public init(
     id: String,
@@ -72,11 +72,11 @@ public struct Discussion: Codable, Hashable, Sendable, Identifiable {
     viewerDidAuthor: Bool,
     viewerHasUpvoted: Bool,
     viewerSubscription: SubscriptionState,
-    comments: [Comment],
     category: Category,
     labels: [Label],
     reactions: [Reaction],
-    poll: Poll?
+    poll: Poll?,
+    commentsCount: Int
   ) {
     self.id = id
     self.number = number
@@ -108,11 +108,11 @@ public struct Discussion: Codable, Hashable, Sendable, Identifiable {
     self.viewerDidAuthor = viewerDidAuthor
     self.viewerHasUpvoted = viewerHasUpvoted
     self.viewerSubscription = viewerSubscription
-    self.comments = comments
     self.category = category
     self.labels = labels
     self.reactions = reactions
     self.poll = poll
+    self.commentsCount = commentsCount
   }
   
   private enum CodingKeys: String, CodingKey {
@@ -145,16 +145,17 @@ public struct Discussion: Codable, Hashable, Sendable, Identifiable {
     case viewerDidAuthor
     case viewerHasUpvoted
     case viewerSubscription
-    case comments
     case category
     case stateReason
     case labels
     case reactions
     case poll
+    case commentsCount = "comments"
   }
   
-  private enum NodesCodingKeys: String, CodingKey {
+  private enum NestCodingKeys: String, CodingKey {
     case nodes
+    case totalCount
   }
     
   public init(from decoder: any Decoder) throws {
@@ -189,13 +190,13 @@ public struct Discussion: Codable, Hashable, Sendable, Identifiable {
     self.viewerDidAuthor = try container.decode(Bool.self, forKey: .viewerDidAuthor)
     self.viewerHasUpvoted = try container.decode(Bool.self, forKey: .viewerHasUpvoted)
     self.viewerSubscription = try container.decode(SubscriptionState.self, forKey: .viewerSubscription)
-    let commentsContainer = try container.nestedContainer(keyedBy: NodesCodingKeys.self, forKey: .comments)
-    self.comments = try commentsContainer.decode([Comment].self, forKey: .nodes)
     self.category = try container.decode(Category.self, forKey: .category)
-    let labelsContainer = try container.nestedContainer(keyedBy: NodesCodingKeys.self, forKey: .labels)
+    let labelsContainer = try container.nestedContainer(keyedBy: NestCodingKeys.self, forKey: .labels)
     self.labels = try labelsContainer.decode([Label].self, forKey: .nodes)
-    let reactionsContainer = try container.nestedContainer(keyedBy: NodesCodingKeys.self, forKey: .reactions)
+    let reactionsContainer = try container.nestedContainer(keyedBy: NestCodingKeys.self, forKey: .reactions)
     self.reactions = try reactionsContainer.decode([Reaction].self, forKey: .nodes)
     self.poll = try container.decodeIfPresent(Poll.self, forKey: .poll)
+    let commentsContainer = try container.nestedContainer(keyedBy: NestCodingKeys.self, forKey: .commentsCount)
+    self.commentsCount = try commentsContainer.decode(Int.self, forKey: .totalCount)
   }
 }

@@ -18,21 +18,21 @@ extension GitHubAPI {
     let path = "/user/repos"
     let method: HTTPRequest.Method = .post
     let endpoint = baseURL.appending(path: path)
-    
+
     let httpRequest = HTTPRequest(
       method: method,
       url: endpoint,
       queries: [:],
       headers: headers
     )
-    
+
     var urlRequest = URLRequest(httpRequest: httpRequest)!
     urlRequest.httpBody = try JSONEncoder.github.encode(repository)
-    
+
     let (data, _) = try await session.data(for: urlRequest)
-    
+
     let repository = try decode(Repository.self, from: data)
-    
+
     return repository
   }
 }

@@ -1,6 +1,6 @@
 //
 //  OrganizationRepositories.swift
-//  
+//
 //
 //  Created by zunda on 2023/07/26.
 //
@@ -19,7 +19,7 @@ extension GitHubAPI {
   ///   - perPage: The number of results per page (max 100).
   ///   - page: Page number of the results to fetch.
   /// - Returns: [Repository]
-  func repositories(
+  public func repositories(
     organization: String,
     type: OrganizationRepositorySearchType = .all,
     sort: RepositorySortType = .created,
@@ -30,7 +30,7 @@ extension GitHubAPI {
     let path = "/orgs/\(organization)/repos"
     let endpoint = baseURL.appending(path: path)
     let method: HTTPRequest.Method = .get
-    
+
     let queries: [String: String] = [
       "type": type.rawValue,
       "sort": sort.rawValue,
@@ -38,13 +38,18 @@ extension GitHubAPI {
       "per_page": String(perPage),
       "page": String(page),
     ]
-    
-    let request = HTTPRequest(method: method, url: endpoint, queries: queries, headers: headers)
-    
+
+    let request = HTTPRequest(
+      method: method,
+      url: endpoint,
+      queries: queries,
+      headers: headers
+    )
+
     let (data, _) = try await session.data(for: request)
-    
+
     let repositories = try decode([Repository].self, from: data)
-    
+
     return repositories
   }
 }

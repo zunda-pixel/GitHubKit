@@ -15,7 +15,7 @@ public struct OAuthRequest: Sendable {
   public var scopes: [Scope]
   public var state: String?
   public var allowSignUp: Bool
-  
+
   public init(
     clientID: String,
     redirectURL: URL? = nil,
@@ -31,26 +31,25 @@ public struct OAuthRequest: Sendable {
     self.state = state
     self.allowSignUp = allowSignUp
   }
-  
+
   public func authorizingURL() -> URL {
     let endpoint = baseURL.appending(path: path)
     var queries: [String: String] = [
       "client_id": clientID,
       "allow_signup": allowSignUp.description,
     ]
-    
+
     redirectURL.map { queries["redirect_uri"] = $0.absoluteString }
     userID.map { queries["login"] = $0 }
     state.map { queries["state"] = $0 }
-    
+
     if !scopes.isEmpty {
       queries["scope"] = scopes.map(\.rawValue).joined(separator: " ")
     }
-    
+
     var urlComponents = URLComponents(url: endpoint, resolvingAgainstBaseURL: true)!
     urlComponents.queryItems = queries.map { .init(name: $0.key, value: $0.value) }
-    
-    
+
     return urlComponents.url!
   }
 }

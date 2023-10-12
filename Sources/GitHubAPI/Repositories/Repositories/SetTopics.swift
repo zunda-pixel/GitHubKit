@@ -21,17 +21,23 @@ extension GitHubAPI {
     let path = "/repos/\(ownerID)/\(repositoryName)/topics"
     let endpoint = baseURL.appending(path: path)
     let method: HTTPRequest.Method = .put
-    
+
     let body = TopicsResponse(names: topics)
-    
-    let httpRequest = HTTPRequest(method: method, url: endpoint, queries: [:], headers: headers)
+
+    let httpRequest = HTTPRequest(
+      method: method,
+      url: endpoint,
+      queries: [:],
+      headers: headers
+    )
+
     var urlRequest = URLRequest(httpRequest: httpRequest)!
     urlRequest.httpBody = try JSONEncoder.github.encode(body)
-    
+
     let (data, _) = try await session.data(for: urlRequest)
-    
+
     let response = try decode(TopicsResponse.self, from: data)
-    
+
     return response.names
   }
 }

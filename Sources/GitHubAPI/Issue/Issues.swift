@@ -41,7 +41,7 @@ extension GitHubAPI {
     let path = "/repos/\(ownerID)/\(repositoryName)/issues"
     let method: HTTPRequest.Method = .get
     let endpoint = baseURL.appending(path: path)
-    
+
     var queries: [String: String] = [
       "state": state.rawValue,
       "sort": sort.rawValue,
@@ -49,7 +49,7 @@ extension GitHubAPI {
       "per_page": String(perPage),
       "page": String(page),
     ]
-    
+
     milestone.map { queries["milestone"] = String($0) }
     assignee.map { queries["assignee"] = String($0) }
     creator.map { queries["creator"] = String($0) }
@@ -59,18 +59,18 @@ extension GitHubAPI {
       let formatter = ISO8601DateFormatter()
       queries["since"] = formatter.string(from: $0)
     }
-    
+
     let request = HTTPRequest(
       method: method,
       url: endpoint,
       queries: queries,
       headers: headers
     )
-    
+
     let (data, _) = try await session.data(for: request)
-    
+
     let response = try decode([Issue].self, from: data)
-    
+
     return response
   }
 }

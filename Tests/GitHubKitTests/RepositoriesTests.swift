@@ -3,8 +3,8 @@
 //
 
 import Foundation
-
 import XCTest
+
 @testable import GitHubAPI
 
 final class RepositoriesTests: XCTestCase {
@@ -20,10 +20,10 @@ final class RepositoriesTests: XCTestCase {
       perPage: 100,
       page: 1
     )
-    
+
     print(repositories.count)
   }
-  
+
   func testCreateRepositoryWithTemplate() async throws {
     let repository = try await api.createRepository(
       templateOwnerID: "zunda-pixel",
@@ -33,10 +33,10 @@ final class RepositoriesTests: XCTestCase {
       includeAllBranches: false,
       isPrivate: false
     )
-    
+
     print(repository)
   }
-  
+
   func testCreateRepository() async throws {
     let newRepository = NewRepository(
       name: "TestRepository",
@@ -66,17 +66,17 @@ final class RepositoriesTests: XCTestCase {
     let repository = try await api.createRepository(repository: newRepository)
     print(repository)
   }
-  
+
   func testSetTopics() async throws {
     let topics = try await api.setTopics(
       ownerID: "zunda-pixel",
       repositoryName: "GitHubKit",
       topics: ["github-api", "swift", "apple"]
     )
-    
+
     print(topics)
   }
-  
+
   func testTopics() async throws {
     let topics = try await api.topics(
       ownerID: "zunda-pixel",
@@ -84,10 +84,10 @@ final class RepositoriesTests: XCTestCase {
       perPage: 100,
       page: 1
     )
-    
+
     print(topics)
   }
-  
+
   func testRepositoryTeams() async throws {
     let teams = try await api.teams(
       ownerID: "zunda-pixel",
@@ -95,10 +95,10 @@ final class RepositoriesTests: XCTestCase {
       perPage: 100,
       page: 1
     )
-    
+
     print(teams)
   }
-  
+
   func testRepositoryLanguages() async throws {
     let languages = try await api.languages(
       ownerID: "apple",
@@ -106,13 +106,13 @@ final class RepositoriesTests: XCTestCase {
     )
     print(languages)
   }
-  
+
   func testUpdateRepositoryEncodable() throws {
     let updateRepository = UpdateRepository(name: "Hello")
     let data = try JSONEncoder.github.encode(updateRepository)
-    print(String(data: data, encoding: .utf8)!)
+    print(String(decoding: data, as: UTF8.self))
   }
-  
+
   func testUpdateRepository() async throws {
     let repositoryName: String = "TestRepository1111"
     let repository = try await api.updateRepository(
@@ -125,26 +125,26 @@ final class RepositoriesTests: XCTestCase {
         allowForking: false
       )
     )
-    
+
     print(repository)
   }
-  
+
   func testDeleteRepository() async throws {
     try await api.deleteRepository(
       ownerID: "zunda-pixel",
       repositoryName: "TestRepository"
     )
   }
-  
+
   func testRepository() async throws {
     let repository = try await api.repository(
       ownerID: "apple",
       repositoryName: "swift"
     )
-    
+
     print(repository)
   }
-  
+
   func testRepositories() async throws {
     let repositories = try await api.repositories(
       ownerID: "apple",
@@ -156,7 +156,7 @@ final class RepositoriesTests: XCTestCase {
     )
     print(repositories)
   }
-  
+
   func testContributors() async throws {
     let contributors = try await api.contributors(
       ownerID: "apple",
@@ -166,16 +166,16 @@ final class RepositoriesTests: XCTestCase {
     )
     print(contributors.count)
   }
-  
+
   func testLicense() async throws {
     let license = try await api.license(
       ownerID: "apple",
       repositoryName: "swift"
     )
-    
+
     print(license)
   }
-  
+
   func testStargazers() async throws {
     let users = try await api.stargazers(
       ownerID: "apple",
@@ -183,10 +183,10 @@ final class RepositoriesTests: XCTestCase {
       perPage: 100,
       page: 1
     )
-    
+
     print(users.count)
   }
-  
+
   func testForks() async throws {
     let repositories = try await api.forks(
       ownerID: "apple",
@@ -195,10 +195,10 @@ final class RepositoriesTests: XCTestCase {
       perPage: 100,
       page: 1
     )
-    
+
     print(repositories.count)
   }
-  
+
   func testCreateFork() async throws {
     let repository = try await api.createFork(
       ownerID: "apple",
@@ -208,7 +208,7 @@ final class RepositoriesTests: XCTestCase {
     )
     print(repository)
   }
-  
+
   func testSecurityAnalyticsCodable() throws {
     let securityAnalytics = SecurityAnalytics(
       advancedSecurity: true,
@@ -217,16 +217,16 @@ final class RepositoriesTests: XCTestCase {
       secretScanningPushProtection: true
     )
     let encoder = JSONEncoder.github
-    
+
     let data = try encoder.encode(securityAnalytics)
-        
+
     let decoder = JSONDecoder.github
-    
+
     let decodedSecurityAnalytics = try decoder.decode(SecurityAnalytics.self, from: data)
-    
+
     XCTAssertEqual(securityAnalytics, decodedSecurityAnalytics)
   }
-  
+
   func testTags() async throws {
     let tags = try await api.tags(
       ownerID: "apple",
@@ -236,7 +236,7 @@ final class RepositoriesTests: XCTestCase {
     )
     print(tags)
   }
-  
+
   func testOrganizationRepositories() async throws {
     let repositories = try await api.repositories(
       organization: "apple",
@@ -245,10 +245,10 @@ final class RepositoriesTests: XCTestCase {
       perPage: 100,
       page: 1
     )
-    
+
     print(repositories.count)
   }
-  
+
   func testProtectionTags() async throws {
     let tags = try await api.protectionTags(
       ownerID: "zunda-pixel",
@@ -256,7 +256,7 @@ final class RepositoriesTests: XCTestCase {
     )
     print(tags)
   }
-  
+
   func testCreateProtectionTag() async throws {
     let tag = try await api.createProtectionTag(
       ownerID: "zunda-pixel",
@@ -265,15 +265,16 @@ final class RepositoriesTests: XCTestCase {
     )
     print(tag)
   }
-  
+
   func testDeleteTag() async throws {
     let tags = try await api.protectionTags(
       ownerID: "zunda-pixel",
       repositoryName: "GitHubKit"
     )
-    
+
     for tag in tags {
-      try await api.deleteProtectionTag(ownerID: "zunda-pixel", repositoryName: "GitHubKit", tagID: tag.id)
+      try await api.deleteProtectionTag(
+        ownerID: "zunda-pixel", repositoryName: "GitHubKit", tagID: tag.id)
     }
   }
 }

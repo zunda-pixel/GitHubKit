@@ -10,4 +10,8 @@ public enum RequestError: Error, Sendable {
   case notFound
   case notAuthorized
   case requireAuthorization
+  case notModified
+  case forbidden
+  case validationFailedOrEndpointHasBeenSpammed
+  case unknown
 }
