@@ -9,7 +9,7 @@ extension GitHubAPI {
   /// Block a user
   /// https://docs.github.com/en/rest/users/blocking?apiVersion=2022-11-28#block-a-user
   /// - Parameter userID: The handle for the GitHub user account.
-  func block(userID: String) async throws {
+  public func block(userID: String) async throws {
     let path = "/user/blocks/\(userID)"
     let method: HTTPRequest.Method = .put
     let endpoint = baseURL.appending(path: path)

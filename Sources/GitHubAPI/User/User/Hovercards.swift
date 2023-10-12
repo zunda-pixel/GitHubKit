@@ -12,7 +12,7 @@ extension GitHubAPI {
   ///   - userID: The handle for the GitHub user account.
   ///   - subjectType: Identifies which additional information you'd like to receive about the person's hovercard.
   ///   - subjectID: Uses the ID for the subjectType you specified. Required when using subjectType.
-  func hovercards(
+  public func hovercards(
     userID: String,
     subjectType: SubjectType? = nil,
     subjectID: String? = nil

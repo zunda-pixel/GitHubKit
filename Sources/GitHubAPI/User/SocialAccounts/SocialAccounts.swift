@@ -12,7 +12,7 @@ extension GitHubAPI {
   ///   - perPage: The number of results per page (max 100).
   ///   - page: Page number of the results to fetch.
   /// - Returns: [SocialAccount]
-  func socialAccounts(
+  public func socialAccounts(
     perPage: Int = 30,
     page: Int = 1
   ) async throws -> [SocialAccount] {
@@ -46,7 +46,7 @@ extension GitHubAPI {
   ///   - perPage: The number of results per page (max 100).
   ///   - page: Page number of the results to fetch.
   /// - Returns: [SocialAccount]
-  func socialAccounts(
+  public func socialAccounts(
     userID: String,
     perPage: Int = 30,
     page: Int = 1

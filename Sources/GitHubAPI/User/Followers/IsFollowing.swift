@@ -10,7 +10,7 @@ extension GitHubAPI {
   /// https://docs.github.com/en/rest/users/followers?apiVersion=2022-11-28#check-if-a-person-is-followed-by-the-authenticated-user
   /// - Parameter userID: The handle for the GitHub user account.
   /// - Returns: Bool
-  func isFollowing(userID: String) async throws -> Bool {
+  public func isFollowing(userID: String) async throws -> Bool {
     let path = "/user/following/\(userID)"
     let endpoint = baseURL.appending(path: path)
     let method: HTTPRequest.Method = .get

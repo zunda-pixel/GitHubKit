@@ -10,7 +10,7 @@ extension GitHubAPI {
   /// https://docs.github.com/en/rest/users/social-accounts?apiVersion=2022-11-28#add-social-accounts-for-the-authenticated-user
   /// - Parameter socialURLs: Full URLs for the social media profiles to add.
   /// - Returns: [SocialAccount]
-  func addSocialAccount(socialURLs: [URL]) async throws -> [SocialAccount] {
+  public func addSocialAccount(socialURLs: [URL]) async throws -> [SocialAccount] {
     let path = "/user/social_accounts"
     let method: HTTPRequest.Method = .post
     let endpoint = baseURL.appending(path: path)

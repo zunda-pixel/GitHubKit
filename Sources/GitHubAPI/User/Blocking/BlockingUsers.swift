@@ -12,7 +12,7 @@ extension GitHubAPI {
   ///   - perPage: The number of results per page (max 100).
   ///   - page: Page number of the results to fetch.
   /// - Returns: [User]
-  func blockingUsers(
+  public func blockingUsers(
     perPage: Int = 30,
     page: Int = 1
   ) async throws -> [User] {

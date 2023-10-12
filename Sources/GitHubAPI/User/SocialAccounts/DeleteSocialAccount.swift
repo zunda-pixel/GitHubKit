@@ -9,7 +9,7 @@ extension GitHubAPI {
   /// Delete social accounts for the authenticated user
   /// https://docs.github.com/en/rest/users/social-accounts?apiVersion=2022-11-28#delete-social-accounts-for-the-authenticated-user
   /// - Parameter socialURLs: Full URLs for the social media profiles to delete.
-  func deleteSocialAccount(socialURLs: [URL]) async throws {
+  public func deleteSocialAccount(socialURLs: [URL]) async throws {
     let path = "/user/social_accounts"
     let method: HTTPRequest.Method = .delete
     let endpoint = baseURL.appending(path: path)

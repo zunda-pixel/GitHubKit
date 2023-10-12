@@ -9,7 +9,7 @@ extension GitHubAPI {
   /// Check if a user is blocked by the authenticated user
   /// https://docs.github.com/en/rest/users/blocking?apiVersion=2022-11-28#check-if-a-user-is-blocked-by-the-authenticated-user
   /// - Parameter userID: The handle for the GitHub user account.
-  func isBlocked(by userID: String) async throws -> Bool {
+  public func isBlocked(by userID: String) async throws -> Bool {
     let path = "/user/blocks/\(userID)"
     let method: HTTPRequest.Method = .get
     let endpoint = baseURL.appending(path: path)
