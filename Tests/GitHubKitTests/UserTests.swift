@@ -38,4 +38,22 @@ final class UserTests: XCTestCase {
     let hovercards = try await api.hovercards(userID: "zunda")
     print(hovercards)
   }
+  
+  func testBlockingUsers() async throws {
+    let blockingUsers = try await api.blockingUsers()
+    print(blockingUsers)
+  }
+  
+  func testBlockUser() async throws {
+    try await api.block(userID: "zunda")
+  }
+  
+  func testUnblockUser() async throws {
+    try await api.unblock(userID: "zunda")
+  }
+  
+  func testIsBlockedByUser() async throws {
+    let isBlocked = try await api.isBlocked(by: "zunda")
+    print(isBlocked)
+  }
 }
