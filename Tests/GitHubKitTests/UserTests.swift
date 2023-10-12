@@ -33,4 +33,9 @@ final class UserTests: XCTestCase {
     
     try await api.update(me: updateUser)
   }
+  
+  func testHovercard() async throws {
+    let hovercards = try await api.hovercards(userID: "zunda")
+    print(hovercards)
+  }
 }
