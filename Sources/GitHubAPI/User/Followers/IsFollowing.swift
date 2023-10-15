@@ -31,7 +31,7 @@ extension GitHubAPI {
     } else {
       try verifyResopnseStatus(response: response)
     }
-    
+
     throw RequestError.unknown
   }
 }
@@ -62,7 +62,7 @@ extension GitHubAPI {
     } else {
       try verifyResopnseStatus(response: response)
     }
-    
+
     throw RequestError.unknown
   }
 }

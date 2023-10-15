@@ -13,16 +13,16 @@ extension GitHubAPI {
     let path = "/user/blocks/\(userID)"
     let method: HTTPRequest.Method = .get
     let endpoint = baseURL.appending(path: path)
-    
+
     let request = HTTPRequest(
       method: method,
       url: endpoint,
       queries: [:],
       headers: headers
     )
-    
+
     let (_, response) = try await session.data(for: request)
-    
+
     if response.status.code == 204 {
       return true
     } else if response.status.code == 404 {
@@ -30,7 +30,7 @@ extension GitHubAPI {
     } else {
       try verifyResopnseStatus(response: response)
     }
-    
+
     throw RequestError.unknown
   }
 }

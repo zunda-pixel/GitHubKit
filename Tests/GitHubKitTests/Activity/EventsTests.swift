@@ -14,7 +14,7 @@ final class EventsTests: XCTestCase {
       perPage: 100,
       page: 1
     )
-    
+
     print(events.count)
   }
 }

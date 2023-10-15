@@ -20,7 +20,7 @@ extension GitHubAPI {
     let path = "/users/\(userID)/hovercard"
     let endpoint = baseURL.appending(path: path)
     let method: HTTPRequest.Method = .get
-    
+
     let queries: [String: String?] = [
       "subject_type": subjectType?.rawValue,
       "subject_id": subjectID,
@@ -34,9 +34,9 @@ extension GitHubAPI {
     )
 
     let (data, _) = try await session.data(for: request)
-    
+
     let response = try decode(HovercardResponse.self, from: data)
-    
+
     return response.contexts
   }
 }

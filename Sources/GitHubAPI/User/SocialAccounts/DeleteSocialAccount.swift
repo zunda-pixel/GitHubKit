@@ -22,12 +22,12 @@ extension GitHubAPI {
       queries: [:],
       headers: headers
     )
-    
+
     var urlRequest = URLRequest(httpRequest: request)!
     urlRequest.httpBody = body
-    
+
     let (_, urlResponse) = try await session.data(for: urlRequest)
-    
+
     guard let response = (urlResponse as? HTTPURLResponse)?.httpResponse else {
       throw HTTPTypeConversionError.failedToConvertURLResponseToHTTPResponse
     }
