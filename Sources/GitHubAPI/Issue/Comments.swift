@@ -23,7 +23,7 @@ extension GitHubAPI {
     since: Date? = nil,
     perPage: Int = 30,
     page: Int = 1
-  ) async throws -> [Comment] {
+  ) async throws -> [Issue.Comment] {
     let path = "/repos/\(ownerID)/\(repositoryName)/issues/\(issueNumber)/comments"
     let endpoint = baseURL.appending(path: path)
     let method: HTTPRequest.Method = .get
@@ -47,7 +47,7 @@ extension GitHubAPI {
 
     let (data, _) = try await session.data(for: request)
 
-    let comments = try decode([Comment].self, from: data)
+    let comments = try decode([Issue.Comment].self, from: data)
 
     return comments
   }
@@ -69,7 +69,7 @@ extension GitHubAPI {
     since: Date? = nil,
     perPage: Int = 30,
     page: Int = 1
-  ) async throws -> [Comment] {
+  ) async throws -> [Issue.Comment] {
     try await comments(
       ownerID: ownerID,
       repositoryName: repositoryName,
