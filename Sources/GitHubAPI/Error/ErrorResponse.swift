@@ -4,9 +4,9 @@
 
 import Foundation
 
-struct ErrorResponse: Codable, Sendable {
-  let message: String
-  let documentationURL: URL
+public struct ErrorResponse: Codable, Sendable {
+  public let message: String
+  public let documentationURL: URL
 
   private enum CodingKeys: String, CodingKey {
     case message
