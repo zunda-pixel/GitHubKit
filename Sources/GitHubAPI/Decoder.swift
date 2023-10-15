@@ -14,7 +14,7 @@ extension GitHubAPI {
       if let error = errorResponse.error {
         throw error
       } else {
-        throw UnknownError(decodeError: decodeError, data: data)
+        throw UnknownError(error: errorResponse, decodeError: decodeError, data: data)
       }
     }
   }
