@@ -11,14 +11,14 @@ extension GitHubAPI {
   /// - Parameters:
   ///   - ownerID: The account owner of the repository. The name is not case sensitive.
   ///   - repositoryName: The name of the repository without the .git extension. The name is not case sensitive.
-  ///   - organization: Optional parameter to specify the organization name if forking into an organization.
+  ///   - organizationID: Optional parameter to specify the organization name if forking into an organization.
   ///   - name: When forking from an existing repository, a new name for the fork.
   ///   - defaultBranchOnly: When forking from an existing repository, fork with only the default branch.
   /// - Returns: Repository
   public func createFork(
     ownerID: String,
     repositoryName: String,
-    organization: String? = nil,
+    organizationID: String? = nil,
     name: String,
     defaultBranchOnly: Bool
   ) async throws -> Repository {
@@ -31,7 +31,7 @@ extension GitHubAPI {
       "default_branch_only": defaultBranchOnly.description,
     ]
 
-    organization.map {
+    organizationID.map {
       body["organization"] = $0
     }
 

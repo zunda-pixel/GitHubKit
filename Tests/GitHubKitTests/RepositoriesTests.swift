@@ -239,7 +239,7 @@ final class RepositoriesTests: XCTestCase {
 
   func testOrganizationRepositories() async throws {
     let repositories = try await api.repositories(
-      organization: "apple",
+      organizationID: "apple",
       type: .all,
       direction: .asc,
       perPage: 100,
