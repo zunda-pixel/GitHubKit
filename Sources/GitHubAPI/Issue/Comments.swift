@@ -15,7 +15,7 @@ extension GitHubAPI {
   ///   - since: Only show results that were last updated after the given time.
   ///   - perPage: The number of results per page (max 100).
   ///   - page: Page number of the results to fetch.
-  /// - Returns: [Comment]
+  /// - Returns: [Issue.Comment]
   public func comments(
     ownerID: String,
     repositoryName: String,
@@ -61,7 +61,7 @@ extension GitHubAPI {
   ///   - since: Only show results that were last updated after the given time.
   ///   - perPage: The number of results per page (max 100).
   ///   - page: Page number of the results to fetch.
-  /// - Returns: [Comment]
+  /// - Returns: [Issue.Comment]
   public func comments(
     ownerID: String,
     repositoryName: String,
