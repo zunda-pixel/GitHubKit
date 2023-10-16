@@ -26,9 +26,9 @@ extension GitHubAPI {
     if response.status.code == 204 {
       return
     }
-    
+
     try verifyResopnseStatus(response: response)
-    
+
     throw RequestError.unknown
   }
 }
@@ -54,9 +54,9 @@ extension GitHubAPI {
     if response.status.code == 204 {
       return
     }
-    
+
     try verifyResopnseStatus(response: response)
-    
+
     throw RequestError.unknown
   }
 }

@@ -23,10 +23,10 @@ extension GitHubAPI {
       queries: [:],
       headers: headers
     )
-    
+
     var urlRequest = URLRequest(httpRequest: request)!
     urlRequest.httpBody = body
-    
+
     let (data, _) = try await session.data(for: urlRequest)
 
     let socialAccounts = try decode([SocialAccount].self, from: data)

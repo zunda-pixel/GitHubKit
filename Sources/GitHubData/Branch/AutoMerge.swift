@@ -8,13 +8,13 @@ public struct AutoMerge: Codable, Hashable, Sendable {
   public let enabledBy: User
   public let method: Method
   public let commitTitle: String?
-  public let commitMessage: String
+  public let commitMessage: String?
   
   public init(
     enabledBy: User,
     method: Method,
     commitTitle: String?,
-    commitMessage: String
+    commitMessage: String?
   ) {
     self.enabledBy = enabledBy
     self.method = method

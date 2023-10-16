@@ -12,7 +12,7 @@ public struct Asset: Codable, Sendable, Hashable, Identifiable {
   public let name: String
   public let url: URL
   public let browserDownloadURL: URL
-  public let contentType: ContentType
+  public let contentType: String
   public let size: Int
   public let downloadCount: Int
   public let createdAt: Date
@@ -27,7 +27,7 @@ public struct Asset: Codable, Sendable, Hashable, Identifiable {
     name: String,
     url: URL,
     browserDownloadURL: URL,
-    contentType: ContentType,
+    contentType: String,
     size: Int,
     downloadCount: Int,
     createdAt: Date,

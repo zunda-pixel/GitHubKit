@@ -13,7 +13,7 @@ public struct UpdateUser: Encodable {
   public var location: String?
   public var hireable: Bool?
   public var bio: String?
-  
+
   public init(
     name: String? = nil,
     email: String? = nil,
@@ -33,7 +33,7 @@ public struct UpdateUser: Encodable {
     self.hireable = hireable
     self.bio = bio
   }
-  
+
   private enum CodingKeys: String, CodingKey {
     case name
     case email
@@ -44,7 +44,7 @@ public struct UpdateUser: Encodable {
     case hireable
     case bio
   }
-  
+
   public func encode(to encoder: Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encodeIfPresent(self.name, forKey: .name)

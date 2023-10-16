@@ -1,24 +1,26 @@
 //
-//  BlockingUsers.swift
+//  NetworkEvents.swift
 //
 
 import Foundation
 import HTTPTypes
 
 extension GitHubAPI {
-  /// List users blocked by the authenticated user
-  /// https://docs.github.com/en/rest/users/blocking?apiVersion=2022-11-28#list-users-blocked-by-the-authenticated-user
+  /// List public events for a network of repositories
+  /// https://docs.github.com/en/rest/activity/events?apiVersion=2022-11-28#list-public-events-for-a-network-of-repositories
   /// - Parameters:
   ///   - perPage: The number of results per page (max 100).
   ///   - page: Page number of the results to fetch.
-  /// - Returns: [User]
-  public func blockingUsers(
+  /// - Returns: [Event]
+  public func networkEvents(
+    ownerID: String,
+    repositoryName: String,
     perPage: Int = 30,
     page: Int = 1
-  ) async throws -> [User] {
-    let path = "/user/blocks"
-    let method: HTTPRequest.Method = .get
+  ) async throws -> [Event] {
+    let path = "/networks/\(ownerID)/\(repositoryName)/events"
     let endpoint = baseURL.appending(path: path)
+    let method: HTTPRequest.Method = .get
 
     let queries: [String: String] = [
       "per_page": String(perPage),
@@ -34,8 +36,8 @@ extension GitHubAPI {
 
     let (data, _) = try await session.data(for: request)
 
-    let users = try decode([User].self, from: data)
+    let events = try decode([Event].self, from: data)
 
-    return users
+    return events
   }
 }

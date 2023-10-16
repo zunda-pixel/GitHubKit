@@ -1,59 +1,61 @@
 //
-//  SocialAccounts.swift
+//  ReceivedEvents.swift
 //
 
 import Foundation
 import HTTPTypes
 
 extension GitHubAPI {
-  /// List social accounts for the authenticated user
-  /// https://docs.github.com/en/rest/users/social-accounts?apiVersion=2022-11-28#list-social-accounts-for-the-authenticated-user
-  /// - Parameters:
-  ///   - perPage: The number of results per page (max 100).
-  ///   - page: Page number of the results to fetch.
-  /// - Returns: [SocialAccount]
-  public func socialAccounts(
-    perPage: Int = 30,
-    page: Int = 1
-  ) async throws -> [SocialAccount] {
-    let path = "/user/social_accounts"
-    let method: HTTPRequest.Method = .get
-    let endpoint = baseURL.appending(path: path)
-
-    let queries: [String: String] = [
-      "per_page": String(perPage),
-      "page": String(page),
-    ]
-
-    let request = HTTPRequest(
-      method: method,
-      url: endpoint,
-      queries: queries,
-      headers: headers
-    )
-
-    let (data, _) = try await session.data(for: request)
-
-    let socialAccounts = try decode([SocialAccount].self, from: data)
-
-    return socialAccounts
-  }
-
-  /// List social accounts for a user
-  /// https://docs.github.com/en/rest/users/social-accounts?apiVersion=2022-11-28#list-social-accounts-for-a-user
+  /// List events received by the authenticated user
+  /// These are events that you've received by watching repos and following users. If you are authenticated as the given user, you will see private events. Otherwise, you'll only see public events.
+  /// https://docs.github.com/en/rest/activity/events?apiVersion=2022-11-28#list-events-received-by-the-authenticated-user
   /// - Parameters:
   ///   - userID: The handle for the GitHub user account.
   ///   - perPage: The number of results per page (max 100).
   ///   - page: Page number of the results to fetch.
-  /// - Returns: [SocialAccount]
-  public func socialAccounts(
+  /// - Returns: [Event]
+  public func receivedEvents(
     userID: String,
     perPage: Int = 30,
     page: Int = 1
-  ) async throws -> [SocialAccount] {
-    let path = "/users/\(userID)/social_accounts"
-    let method: HTTPRequest.Method = .get
+  ) async throws -> [Event] {
+    let path = "/users/\(userID)/received_events"
     let endpoint = baseURL.appending(path: path)
+    let method: HTTPRequest.Method = .get
+    
+    let queries: [String: String] = [
+      "per_page": String(perPage),
+      "page": String(page),
+    ]
+    
+    let request = HTTPRequest(
+      method: method,
+      url: endpoint,
+      queries: queries,
+      headers: headers
+    )
+    
+    let (data, _) = try await session.data(for: request)
+    
+    let events = try decode([Event].self, from: data)
+    
+    return events
+  }
+
+  /// List public events received by a user
+  /// - Parameters:
+  ///   - userID: The handle for the GitHub user account.
+  ///   - perPage: The number of results per page (max 100).
+  ///   - page: Page number of the results to fetch.
+  /// - Returns: [Event]
+  public func receivedPublicEvents(
+    userID: String,
+    perPage: Int = 30,
+    page: Int = 1
+  ) async throws -> [Event] {
+    let path = "/users/\(userID)/received_events/public"
+    let endpoint = baseURL.appending(path: path)
+    let method: HTTPRequest.Method = .get
 
     let queries: [String: String] = [
       "per_page": String(perPage),
@@ -69,8 +71,8 @@ extension GitHubAPI {
 
     let (data, _) = try await session.data(for: request)
 
-    let socialAccounts = try decode([SocialAccount].self, from: data)
+    let events = try decode([Event].self, from: data)
 
-    return socialAccounts
+    return events
   }
 }

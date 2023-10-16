@@ -48,4 +48,17 @@ final class IssuesTests: XCTestCase {
 
     print(comments)
   }
+  
+  func testPullComments() async throws {
+    let comments = try await api.comments(
+      ownerID: "apple",
+      repositoryName: "swift",
+      pullNumber: 69144,
+      perPage: 100,
+      page: 1
+    )
+    
+    print(comments.map(\.bodyHTML))
+    print(comments.map(\.bodyText))
+  }
 }

@@ -9,7 +9,7 @@ extension GitHubAPI {
   func verifyResopnseStatus(response: HTTPResponse) throws {
     try verifyResponseStatus(code: response.status.code)
   }
-  
+
   func verifyResponseStatus(response: URLResponse) throws {
     guard let response = (response as? HTTPURLResponse)?.httpResponse else {
       throw HTTPTypeConversionError.failedToConvertURLResponseToHTTPResponse
@@ -17,7 +17,7 @@ extension GitHubAPI {
 
     try verifyResopnseStatus(response: response)
   }
-  
+
   func verifyResponseStatus(code: Int) throws {
     switch code {
     case 200: break
