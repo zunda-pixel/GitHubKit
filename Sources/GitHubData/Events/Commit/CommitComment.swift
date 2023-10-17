@@ -5,7 +5,7 @@
 import Foundation
 
 extension Commit {
-  public struct Comment: Codable, Sendable, Hashable {
+  public struct Comment: Codable, Sendable, Hashable, Identifiable {
     public let id: Int
     public let nodeID: String
     public let url: URL

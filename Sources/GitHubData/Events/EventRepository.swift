@@ -5,7 +5,7 @@
 import Foundation
 
 extension Event {
-  public struct Repository: Codable, Sendable, Hashable {
+  public struct Repository: Codable, Sendable, Hashable, Identifiable {
     public let id: Int
     public let name: String
     public let url: URL
