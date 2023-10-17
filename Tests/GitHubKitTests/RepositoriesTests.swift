@@ -167,15 +167,6 @@ final class RepositoriesTests: XCTestCase {
     print(contributors.count)
   }
 
-  func testLicense() async throws {
-    let license = try await api.license(
-      ownerID: "apple",
-      repositoryName: "swift"
-    )
-
-    print(license)
-  }
-
   func testStargazers() async throws {
     let users = try await api.stargazers(
       ownerID: "apple",
