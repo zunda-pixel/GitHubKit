@@ -5,7 +5,7 @@
 import Foundation
 
 extension Event {
-  public struct User: Codable, Sendable, Hashable {
+  public struct User: Codable, Sendable, Hashable, Identifiable {
     public let id: Int
     public let userID: String
     public let userName: String?

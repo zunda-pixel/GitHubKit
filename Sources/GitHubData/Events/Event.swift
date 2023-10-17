@@ -4,7 +4,7 @@
 
 import Foundation
 
-public struct Event: Codable, Sendable, Hashable {
+public struct Event: Codable, Sendable, Hashable, Identifiable {
   public let id: String
   public let type: EventType
   public let actor: Event.User
