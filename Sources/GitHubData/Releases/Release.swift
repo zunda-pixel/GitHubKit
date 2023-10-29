@@ -7,7 +7,7 @@ import Foundation
 public struct Release: Codable, Sendable, Hashable, Identifiable {
   public let id: Int
   public let nodeID: String
-  public let name: String
+  public let name: String?
   public let url: URL
   public let htmlURL: URL
   public let assetsURL: URL
@@ -32,7 +32,7 @@ public struct Release: Codable, Sendable, Hashable, Identifiable {
   public init(
     id: Int,
     nodeID: String,
-    name: String,
+    name: String?,
     url: URL,
     htmlURL: URL,
     assetsURL: URL,
