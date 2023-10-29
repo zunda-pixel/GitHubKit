@@ -7,20 +7,20 @@ import Foundation
 extension Event {
   public enum Payload: Codable, Sendable, Hashable {
     case push(repositoryID: Int, pushID: Int, size: Int, distinctSize: Int, ref: String, head: String, before: String, commits: [Commit])
-    case pullRequest(action: String, number: Int, pullRequest: Pull)
+    case pullRequest(action: RepositoryAction, number: Int, pullRequest: Pull)
     case create(ref: String?, refType: String, masterBranch: String, description: String?, pusherType: String)
-    case issueComment(action: String, issue: Issue, comment: Issue.Comment)
-    case issue(action: String, issue: Issue)
-    case watch(action: String)
+    case issueComment(action: CommentAction, issue: Issue, comment: Issue.Comment)
+    case issue(action: RepositoryAction, issue: Issue)
+    case watch(action: WatchAction)
     case fork(repository: GitHubData.Repository)
     case delete(ref: String, refType: String, pusherType: String)
     case gollum(pages: [Page])
-    case pullRequestReview(action: String, review: Pull.Review, pull: Pull)
-    case pullRequestReviewComment(action: String, comment: Pull.Comment, pull: Pull)
-    case release(action: String, release: Release)
+    case pullRequestReview(action: CommentAction, review: Pull.Review, pull: Pull)
+    case pullRequestReviewComment(action: CommentAction, comment: Pull.Comment, pull: Pull)
+    case release(action: ReleaseAction, release: Release)
     case commitComment(comment: Commit.Comment)
     case publicEvent
-    case member(action: String, member: GitHubData.User)
+    case member(action: MemeberAction, member: GitHubData.User)
 
     enum CodingKeys: String, CodingKey {
       case repositoryID = "repository_id"
@@ -137,7 +137,7 @@ extension Event {
         )
       case .issueComment:
         let issue = try container.decode(Issue.self, forKey: .issue)
-        let action = try container.decode(String.self, forKey: .action)
+        let action = try container.decode(CommentAction.self, forKey: .action)
         let comment = try container.decode(Issue.Comment.self, forKey: .comment)
         self = .issueComment(
           action: action,
@@ -146,7 +146,7 @@ extension Event {
         )
       case .issue:
         let issue = try container.decode(Issue.self, forKey: .issue)
-        let action = try container.decode(String.self, forKey: .action)
+        let action = try container.decode(RepositoryAction.self, forKey: .action)
         self = .issue(
           action: action,
           issue: issue
@@ -171,7 +171,7 @@ extension Event {
         self = .delete(ref: ref, refType: refType, pusherType: pusherType)
       case .pullRequest:
         let pull = try container.decode(Pull.self, forKey: .pullRequest)
-        let action = try container.decode(String.self, forKey: .action)
+        let action = try container.decode(RepositoryAction.self, forKey: .action)
         let number = try container.decode(Int.self, forKey: .number)
         self = .pullRequest(
           action: action,
@@ -179,7 +179,7 @@ extension Event {
           pullRequest: pull
         )
       case .pullRequestReview:
-        let action = try container.decode(String.self, forKey: .action)
+        let action = try container.decode(CommentAction.self, forKey: .action)
         let review = try container.decode(Pull.Review.self, forKey: .review)
         let pull = try container.decode(Pull.self, forKey: .pullRequest)
         self = .pullRequestReview(
@@ -188,7 +188,7 @@ extension Event {
           pull: pull
         )
       case .pullRequestReviewComment:
-        let action = try container.decode(String.self, forKey: .action)
+        let action = try container.decode(CommentAction.self, forKey: .action)
         let comment = try container.decode(Pull.Comment.self, forKey: .comment)
         let pull = try container.decode(Pull.self, forKey: .pullRequest)
         self = .pullRequestReviewComment(
@@ -197,14 +197,14 @@ extension Event {
           pull: pull
         )
       case .release:
-        let action = try container.decode(String.self, forKey: .action)
+        let action = try container.decode(ReleaseAction.self, forKey: .action)
         let release = try container.decode(Release.self, forKey: .release)
         self = .release(
           action: action,
           release: release
         )
       case .watch:
-        let action = try container.decode(String.self, forKey: .action)
+        let action = try container.decode(WatchAction.self, forKey: .action)
         self = .watch(action: action)
       case .fork:
         let repository = try container.decode(GitHubData.Repository.self, forKey: .forkee)
@@ -218,7 +218,7 @@ extension Event {
       case .publicEvent:
         self = .publicEvent
       case .member:
-        let action = try container.decode(String.self, forKey: .action)
+        let action = try container.decode(MemeberAction.self, forKey: .action)
         let member = try container.decode(GitHubData.User.self, forKey: .member)
         self = .member(action: action, member: member)
       }
