@@ -3,9 +3,11 @@
 //
 
 import Foundation
+import Tagged
 
 public struct Release: Codable, Sendable, Hashable, Identifiable {
-  public let id: Int
+  public typealias ID = Tagged<Self, Int>
+  public let id: ID
   public let nodeID: String
   public let name: String?
   public let url: URL
@@ -30,7 +32,7 @@ public struct Release: Codable, Sendable, Hashable, Identifiable {
   public let reactions: Reaction?
   
   public init(
-    id: Int,
+    id: ID,
     nodeID: String,
     name: String?,
     url: URL,

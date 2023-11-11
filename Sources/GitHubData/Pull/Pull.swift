@@ -3,9 +3,11 @@
 //
 
 import Foundation
+import Tagged
 
 public struct Pull: Hashable, Sendable, Identifiable, Codable {
-  public let id: Int
+  public typealias ID = Tagged<Self, Int>
+  public let id: ID
   public let nodeID: String
   public let number: Int
   public let state: State
@@ -42,7 +44,7 @@ public struct Pull: Hashable, Sendable, Identifiable, Codable {
   public let activeLockReason: ActiveLockReason?
   
   public init(
-    id: Int,
+    id: ID,
     nodeID: String,
     number: Int,
     state: State,

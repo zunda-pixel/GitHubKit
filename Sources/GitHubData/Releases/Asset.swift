@@ -3,9 +3,11 @@
 //
 
 import Foundation
+import Tagged
 
 public struct Asset: Codable, Sendable, Hashable, Identifiable {
-  public let id: Int
+  public typealias ID = Tagged<Self, Int>
+  public let id: ID
   public let nodeID: String
   public let label: String?
   public let state: State
@@ -20,7 +22,7 @@ public struct Asset: Codable, Sendable, Hashable, Identifiable {
   public let uploader: User
   
   public init(
-    id: Int,
+    id: ID,
     nodeID: String,
     label: String?,
     state: State,

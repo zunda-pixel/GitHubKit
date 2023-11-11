@@ -3,9 +3,11 @@
 //
 
 import Foundation
+import Tagged
 
 public struct Notification: Codable, Sendable, Hashable, Identifiable {
-  public let id: String
+  public typealias ID = Tagged<Self, String>
+  public let id: ID
   public let repository: Repository
   public let subject: Subject
   public let reason: Reason
@@ -16,7 +18,7 @@ public struct Notification: Codable, Sendable, Hashable, Identifiable {
   public let subscriptionURL: URL
   
   public init(
-    id: String,
+    id: ID,
     repository: Repository,
     subject: Subject,
     reason: Reason,

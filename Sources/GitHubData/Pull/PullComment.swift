@@ -3,10 +3,12 @@
 //
 
 import Foundation
+import Tagged
 
 extension Pull {
   public struct Comment: Codable, Sendable, Hashable, Identifiable {
-    public let id: Int
+    public typealias ID = Tagged<Self, Int>
+    public let id: ID
     public let nodeID: String
     public let pullRequestReviewID: Int
     public let url: URL
@@ -34,7 +36,7 @@ extension Pull {
     public let subjectType: String
     
     public init(
-      id: Int,
+      id: ID,
       nodeID: String,
       pullRequestReviewID: Int,
       url: URL,

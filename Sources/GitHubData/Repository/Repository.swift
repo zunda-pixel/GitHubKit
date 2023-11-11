@@ -3,9 +3,11 @@
 //
 
 import Foundation
+import Tagged
 
 public struct Repository: Codable, Sendable, Hashable, Identifiable {
-  public let id: Int
+  public typealias ID = Tagged<Self, Int>
+  public let id: ID
   public let nodeID: String
   public let name: String
   public let fullName: String
@@ -106,7 +108,7 @@ public struct Repository: Codable, Sendable, Hashable, Identifiable {
   public let allowRebaseMerge: Bool?
   
   public init(
-    id: Int,
+    id: ID,
     nodeID: String,
     name: String,
     fullName: String,
