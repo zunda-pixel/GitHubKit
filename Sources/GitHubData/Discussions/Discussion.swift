@@ -3,9 +3,11 @@
 //
 
 import Foundation
+import Tagged
 
 public struct Discussion: Codable, Hashable, Sendable, Identifiable {
-  public let id: String
+  public typealias ID = Tagged<Self, String>
+  public let id: ID
   public let number: Int
   public let url: URL
   public let author: User?
@@ -42,7 +44,7 @@ public struct Discussion: Codable, Hashable, Sendable, Identifiable {
   public let commentsCount: Int
   
   public init(
-    id: String,
+    id: ID,
     number: Int,
     url: URL,
     author: User?,
@@ -160,7 +162,7 @@ public struct Discussion: Codable, Hashable, Sendable, Identifiable {
     
   public init(from decoder: any Decoder) throws {
     let container = try decoder.container(keyedBy: CodingKeys.self)
-    self.id = try container.decode(String.self, forKey: .id)
+    self.id = try container.decode(ID.self, forKey: .id)
     self.number = try container.decode(Int.self, forKey: .number)
     self.url = try container.decode(URL.self, forKey: .url)
     self.author = try container.decodeIfPresent(Discussion.User.self, forKey: .author)

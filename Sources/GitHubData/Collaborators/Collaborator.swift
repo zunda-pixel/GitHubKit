@@ -3,9 +3,11 @@
 //
 
 import Foundation
+import Tagged
 
 public struct Collaborator: Codable, Sendable, Hashable, Identifiable {
-  public var id: Int { user.id }
+  public typealias ID = Tagged<Self, User.ID.RawValue>
+  public var id: ID { .init(user.id.rawValue) }
   public let user: User
   public let role: Role
   

@@ -3,10 +3,12 @@
 //
 
 import Foundation
+import Tagged
 
 extension Issue {
   public struct Comment: Codable, Sendable, Hashable, Identifiable {
-    public let id: Int
+    public typealias ID = Tagged<Self, Int>
+    public let id: ID
     public let nodeID: String
     public let url: URL
     public let body: String
@@ -22,7 +24,7 @@ extension Issue {
     public let performGitHubApp: PerformGitHubApp?
     
     public init(
-      id: Int,
+      id: ID,
       nodeID: String,
       url: URL,
       body: String,

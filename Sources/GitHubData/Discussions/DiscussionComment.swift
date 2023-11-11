@@ -3,10 +3,12 @@
 //
 
 import Foundation
+import Tagged
 
 extension Discussion {
   public struct Comment: Codable, Sendable, Hashable, Identifiable {
-    public let id: String
+    public typealias ID = Tagged<Self, String>
+    public let id: ID
     public let author: Discussion.User
     public let body: String
     public let bodyHTML: String
@@ -22,7 +24,7 @@ extension Discussion {
     public let viewerDidAuthor: Bool
     
     public init(
-      id: String,
+      id: ID,
       author: Discussion.User,
       body: String,
       bodyHTML: String,

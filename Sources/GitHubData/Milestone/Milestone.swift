@@ -3,9 +3,11 @@
 //
 
 import Foundation
+import Tagged
 
 public struct Milestone: Codable, Sendable, Hashable, Identifiable {
-  public let id: Int
+  public typealias ID = Tagged<Self, Int>
+  public let id: ID
   public let nodeID: String
   public let state: State
   public let number: Int
@@ -23,7 +25,7 @@ public struct Milestone: Codable, Sendable, Hashable, Identifiable {
   public let dueOn: Date?
   
   public init(
-    id: Int,
+    id: ID,
     nodeID: String,
     state: State,
     number: Int,

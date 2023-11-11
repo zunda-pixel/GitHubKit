@@ -3,10 +3,12 @@
 //
 
 import Foundation
+import Tagged
 
 extension Event {
   public struct User: Codable, Sendable, Hashable, Identifiable {
-    public let id: Int
+    public typealias ID = Tagged<Self, Int>
+    public let id: ID
     public let userID: String
     public let userName: String?
     public let gravatarID: String
@@ -23,7 +25,7 @@ extension Event {
     }
     
     public init(
-      id: Int,
+      id: ID,
       userID: String,
       userName: String?,
       gravatarID: String,

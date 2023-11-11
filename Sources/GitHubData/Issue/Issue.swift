@@ -3,9 +3,11 @@
 //
 
 import Foundation
+import Tagged
 
 public struct Issue: Codable, Sendable, Identifiable, Hashable {
-  public let id: Int
+  public typealias ID = Tagged<Self, Int>
+  public let id: ID
   public let number: Int
   public let title: String
   public let body: String?
@@ -41,7 +43,7 @@ public struct Issue: Codable, Sendable, Identifiable, Hashable {
   public let repository: Repository?
   
   public init(
-    id: Int,
+    id: ID,
     number: Int,
     title: String,
     body: String?,

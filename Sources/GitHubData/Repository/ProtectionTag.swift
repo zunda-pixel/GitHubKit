@@ -3,16 +3,18 @@
 //
 
 import Foundation
+import Tagged
 
 public struct ProtectionTag: Codable, Sendable, Hashable, Identifiable {
-  public let id: Int
+  public typealias ID = Tagged<Self, Int>
+  public let id: ID
   public let createdAt: Date?
   public let updatedAt: Date?
   public let enabled: Bool?
   public let pattern: String
   
   public init(
-    id: Int,
+    id: ID,
     createdAt: Date?,
     updatedAt: Date?,
     enabled: Bool?,

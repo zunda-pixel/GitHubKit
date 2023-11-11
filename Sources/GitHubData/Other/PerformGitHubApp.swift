@@ -3,9 +3,11 @@
 //
 
 import Foundation
+import Tagged
 
 public struct PerformGitHubApp: Codable, Sendable, Hashable, Identifiable {
-  public let id: Int
+  public typealias ID = Tagged<Self, Int>
+  public let id: ID
   public let slug: String?
   public let nodeID: String
   public let owner: User
@@ -23,7 +25,7 @@ public struct PerformGitHubApp: Codable, Sendable, Hashable, Identifiable {
   public let pem: String?
   
   public init(
-    id: Int,
+    id: ID,
     slug: String?,
     nodeID: String,
     owner: User,

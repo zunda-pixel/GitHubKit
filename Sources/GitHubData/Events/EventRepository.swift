@@ -3,15 +3,17 @@
 //
 
 import Foundation
+import Tagged
 
 extension Event {
   public struct Repository: Codable, Sendable, Hashable, Identifiable {
-    public let id: Int
+    public typealias ID = Tagged<Self, Int>
+    public let id: ID
     public let name: String
     public let url: URL
     
     public init(
-      id: Int,
+      id: ID,
       name: String,
       url: URL
     ) {

@@ -3,9 +3,11 @@
 //
 
 import Foundation
+import Tagged
 
 public struct ParentTeam: Hashable, Sendable, Identifiable, Codable {
-  public let id: Int
+  public typealias ID = Tagged<Self, Int>
+  public let id: ID
   public let nodeID: String
   public let membersURL: URL
   public let name: String
@@ -19,7 +21,7 @@ public struct ParentTeam: Hashable, Sendable, Identifiable, Codable {
   public let ldapDn: String?
   
   public init(
-    id: Int,
+    id: ID,
     nodeID: String,
     membersURL: URL,
     name: String,

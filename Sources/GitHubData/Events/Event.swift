@@ -3,9 +3,11 @@
 //
 
 import Foundation
+import Tagged
 
 public struct Event: Codable, Sendable, Hashable, Identifiable {
-  public let id: String
+  public typealias ID = Tagged<Self, String>
+  public let id: ID
   public let type: EventType
   public let actor: Event.User
   public let repository: Event.Repository
@@ -31,7 +33,7 @@ public struct Event: Codable, Sendable, Hashable, Identifiable {
   
   public init(from decoder: Decoder) throws {
     let container = try decoder.container(keyedBy: CodingKeys.self)
-    self.id = try container.decode(String.self, forKey: .id)
+    self.id = try container.decode(ID.self, forKey: .id)
     self.type = try container.decode(EventType.self, forKey: .type)
     self.actor = try container.decode(Event.User.self, forKey: .actor)
     self.repository = try container.decode(Event.Repository.self, forKey: .repository)
@@ -45,7 +47,7 @@ public struct Event: Codable, Sendable, Hashable, Identifiable {
   }
   
   public init(
-    id: String,
+    id: ID,
     type: EventType,
     actor: Event.User,
     repository: Event.Repository,
