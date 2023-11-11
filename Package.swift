@@ -26,11 +26,13 @@ let package = Package(
         .target(name: "GitHubData"),
         .product(name: "HTTPTypes", package: "swift-http-types"),
         .product(name: "HTTPTypesFoundation", package: "swift-http-types"),
-        .product(name: "Tagged", package: "swift-tagged"),
       ]
     ),
     .target(
-      name: "GitHubData"
+      name: "GitHubData",
+      dependencies: [
+        .product(name: "Tagged", package: "swift-tagged"),
+      ]
     ),
     .testTarget(
       name: "GitHubKitTests",
