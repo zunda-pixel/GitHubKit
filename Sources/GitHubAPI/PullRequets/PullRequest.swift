@@ -13,7 +13,7 @@ extension GitHubAPI {
   ///   - repositoryName: The name of the repository without the .git extension. The name is not case sensitive.
   ///   - pullNumber: The number that identifies the pull request.
   /// - Returns: Pull
-  public func pullRequet(
+  public func pullRequest(
     ownerID: String,
     repositoryName: String,
     pullNumber: Int

@@ -32,7 +32,7 @@ extension GitHubAPI {
   ///   - perPage: The number of results per page (max 100).
   ///   - page: Page number of the results to fetch.
   /// - Returns: [PullRequest]
-  public func pullRequets(
+  public func pullRequests(
     ownerID: String,
     repositoryName: String,
     state: PullRequestSearchType = .open,
