@@ -1,5 +1,5 @@
 //
-//  PullsTests.swift
+//  PullRequestsTests.swift
 //
 
 import Foundation
@@ -7,8 +7,8 @@ import XCTest
 
 @testable import GitHubAPI
 
-final class PullsTests: XCTestCase {
-  func testPull() async throws {
+final class PullRequestsTests: XCTestCase {
+  func testPullRequest() async throws {
     let pullRequest = try await api.pullRequest(
       ownerID: "zunda-pixel",
       repositoryName: "GitHubKit",
@@ -18,7 +18,7 @@ final class PullsTests: XCTestCase {
     print(pullRequest)
   }
 
-  func testPulls() async throws {
+  func testPullRequests() async throws {
     let pullRequests = try await api.pullRequests(
       ownerID: "github",
       repositoryName: "explore",
