@@ -9,17 +9,17 @@ import XCTest
 
 final class PullsTests: XCTestCase {
   func testPull() async throws {
-    let pullRequet = try await api.pullRequet(
+    let pullRequest = try await api.pullRequest(
       ownerID: "zunda-pixel",
       repositoryName: "GitHubKit",
       pullNumber: 1
     )
 
-    print(pullRequet)
+    print(pullRequest)
   }
 
   func testPulls() async throws {
-    let pullRequests = try await api.pullRequets(
+    let pullRequests = try await api.pullRequests(
       ownerID: "github",
       repositoryName: "explore",
       state: .all,
