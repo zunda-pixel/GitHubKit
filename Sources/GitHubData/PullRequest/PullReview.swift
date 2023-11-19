@@ -4,7 +4,7 @@
 
 import Foundation
 
-extension Pull {
+extension PullRequest {
   public struct Review: Codable, Sendable, Hashable {
     public let id: Int
     public let nodeID: String

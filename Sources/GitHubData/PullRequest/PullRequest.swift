@@ -1,11 +1,11 @@
 //
-//  Pull.swift
+//  PullRequest.swift
 //
 
 import Foundation
 import Tagged
 
-public struct Pull: Hashable, Sendable, Identifiable, Codable {
+public struct PullRequest: Hashable, Sendable, Identifiable, Codable {
   public typealias ID = Tagged<Self, Int>
   public let id: ID
   public let nodeID: String
