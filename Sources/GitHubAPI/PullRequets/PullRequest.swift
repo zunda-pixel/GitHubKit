@@ -1,5 +1,5 @@
 //
-//  Pull.swift
+//  PullRequest.swift
 //
 
 import Foundation
@@ -13,11 +13,11 @@ extension GitHubAPI {
   ///   - repositoryName: The name of the repository without the .git extension. The name is not case sensitive.
   ///   - pullNumber: The number that identifies the pull request.
   /// - Returns: Pull
-  public func pull(
+  public func pullRequet(
     ownerID: String,
     repositoryName: String,
     pullNumber: Int
-  ) async throws -> Pull {
+  ) async throws -> PullRequest {
     let path = "/repos/\(ownerID)/\(repositoryName)/pulls/\(pullNumber)"
     let endpoint = baseURL.appending(path: path)
     let method: HTTPRequest.Method = .get
@@ -31,8 +31,8 @@ extension GitHubAPI {
 
     let (data, _) = try await session.data(for: request)
 
-    let pull = try decode(Pull.self, from: data)
+    let pullRequest = try decode(PullRequest.self, from: data)
 
-    return pull
+    return pullRequest
   }
 }

@@ -4,7 +4,7 @@
 
 import Foundation
 
-public struct SimplePull: Codable, Hashable, Sendable {
+public struct SimplePullRequest: Codable, Hashable, Sendable {
   public let url: URL
   public let htmlURL: URL
   public let diffURL: URL

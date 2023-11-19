@@ -5,7 +5,7 @@
 import Foundation
 import Tagged
 
-extension Pull {
+extension PullRequest {
   public struct Comment: Codable, Sendable, Hashable, Identifiable {
     public typealias ID = Tagged<Self, Int>
     public let id: ID

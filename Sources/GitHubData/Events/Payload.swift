@@ -7,7 +7,7 @@ import Foundation
 extension Event {
   public enum Payload: Codable, Sendable, Hashable {
     case push(repositoryID: Int, pushID: Int, size: Int, distinctSize: Int, ref: String, head: String, before: String, commits: [Commit])
-    case pullRequest(action: RepositoryAction, number: Int, pullRequest: Pull)
+    case pullRequest(action: RepositoryAction, number: Int, pullRequest: PullRequest)
     case create(ref: String?, refType: String, masterBranch: String, description: String?, pusherType: String)
     case issueComment(action: CommentAction, issue: Issue, comment: Issue.Comment)
     case issue(action: RepositoryAction, issue: Issue)
@@ -15,8 +15,8 @@ extension Event {
     case fork(repository: GitHubData.Repository)
     case delete(ref: String, refType: String, pusherType: String)
     case gollum(pages: [Page])
-    case pullRequestReview(action: CommentAction, review: Pull.Review, pull: Pull)
-    case pullRequestReviewComment(action: CommentAction, comment: Pull.Comment, pull: Pull)
+    case pullRequestReview(action: CommentAction, review: PullRequest.Review, pullRequest: PullRequest)
+    case pullRequestReviewComment(action: CommentAction, comment: PullRequest.Comment, pullRequest: PullRequest)
     case release(action: ReleaseAction, release: Release)
     case commitComment(comment: Commit.Comment)
     case publicEvent
@@ -170,31 +170,31 @@ extension Event {
         let refType = try container.decode(String.self, forKey: .refType)
         self = .delete(ref: ref, refType: refType, pusherType: pusherType)
       case .pullRequest:
-        let pull = try container.decode(Pull.self, forKey: .pullRequest)
+        let pullRequest = try container.decode(PullRequest.self, forKey: .pullRequest)
         let action = try container.decode(RepositoryAction.self, forKey: .action)
         let number = try container.decode(Int.self, forKey: .number)
         self = .pullRequest(
           action: action,
           number: number,
-          pullRequest: pull
+          pullRequest: pullRequest
         )
       case .pullRequestReview:
         let action = try container.decode(CommentAction.self, forKey: .action)
-        let review = try container.decode(Pull.Review.self, forKey: .review)
-        let pull = try container.decode(Pull.self, forKey: .pullRequest)
+        let review = try container.decode(PullRequest.Review.self, forKey: .review)
+        let pullRequest = try container.decode(PullRequest.self, forKey: .pullRequest)
         self = .pullRequestReview(
           action: action,
           review: review,
-          pull: pull
+          pullRequest: pullRequest
         )
       case .pullRequestReviewComment:
         let action = try container.decode(CommentAction.self, forKey: .action)
-        let comment = try container.decode(Pull.Comment.self, forKey: .comment)
-        let pull = try container.decode(Pull.self, forKey: .pullRequest)
+        let comment = try container.decode(PullRequest.Comment.self, forKey: .comment)
+        let pullRequest = try container.decode(PullRequest.self, forKey: .pullRequest)
         self = .pullRequestReviewComment(
           action: action,
           comment: comment,
-          pull: pull
+          pullRequest: pullRequest
         )
       case .release:
         let action = try container.decode(ReleaseAction.self, forKey: .action)

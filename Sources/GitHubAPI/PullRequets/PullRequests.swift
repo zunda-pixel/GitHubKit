@@ -1,18 +1,18 @@
 //
-//  Pulls.swift
+//  PullRequests.swift
 //
 
 import Foundation
 import HTTPTypes
 
-public enum PullSortType: String, Sendable {
+public enum PullRequestSortType: String, Sendable {
   case created
   case updated
   case popularity
   case longRunning = "long-running"
 }
 
-public enum PullSearchType: String, Sendable {
+public enum PullRequestSearchType: String, Sendable {
   case open
   case closed
   case all
@@ -31,18 +31,18 @@ extension GitHubAPI {
   ///   - direction: The direction of the sort. Default: desc when sort is created or sort is not specified, otherwise asc.
   ///   - perPage: The number of results per page (max 100).
   ///   - page: Page number of the results to fetch.
-  /// - Returns: [Pull]
-  public func pulls(
+  /// - Returns: [PullRequest]
+  public func pullRequets(
     ownerID: String,
     repositoryName: String,
-    state: PullSearchType = .open,
+    state: PullRequestSearchType = .open,
     head: String? = nil,
     branchName: String? = nil,
-    sort: PullSortType = .created,
+    sort: PullRequestSortType = .created,
     direction: OrderType = .asc,
     perPage: Int = 30,
     page: Int = 1
-  ) async throws -> [Pull] {
+  ) async throws -> [PullRequest] {
     let path = "/repos/\(ownerID)/\(repositoryName)/pulls"
     let endpoint = baseURL.appending(path: path)
     let method: HTTPRequest.Method = .get
@@ -67,7 +67,7 @@ extension GitHubAPI {
 
     let (data, _) = try await session.data(for: request)
 
-    let pulls = try decode([Pull].self, from: data)
+    let pulls = try decode([PullRequest].self, from: data)
 
     return pulls
   }
