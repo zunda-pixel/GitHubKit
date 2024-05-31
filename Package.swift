@@ -16,7 +16,7 @@ let package = Package(
     ),
   ],
   dependencies: [
-    .package(url: "https://github.com/apple/swift-http-types", .upToNextMajor(from: "0.1.1")),
+    .package(url: "https://github.com/apple/swift-http-types", .upToNextMajor(from: "1.1.0")),
     .package(url: "https://github.com/pointfreeco/swift-tagged", .upToNextMajor(from: "0.10.0")),
   ],
   targets: [
