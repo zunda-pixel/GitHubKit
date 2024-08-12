@@ -11,14 +11,13 @@ extension GitHubAPI {
   /// - Returns: TemplateLicense
   public func templateLicenses() async throws -> [TemplateLicense] {
     let path = "/licenses"
-    let endpoint = baseURL.appending(path: path)
     let method: HTTPRequest.Method = .get
+    let endpoint = baseURL.appending(path: path)
 
     let request = HTTPRequest(
       method: method,
       url: endpoint,
-      queries: [:],
-      headers: headers
+      headerFields: headers
     )
 
     let (data, _) = try await httpClient.execute(for: request, from: nil)
@@ -34,14 +33,13 @@ extension GitHubAPI {
   /// - Returns: TemplateLicense
   public func templateLicense(key licenseKey: String) async throws -> TemplateLicense {
     let path = "/licenses/\(licenseKey)"
-    let endpoint = baseURL.appending(path: path)
     let method: HTTPRequest.Method = .get
+    let endpoint = baseURL.appending(path: path)
 
     let request = HTTPRequest(
       method: method,
       url: endpoint,
-      queries: [:],
-      headers: headers
+      headerFields: headers
     )
 
     let (data, _) = try await httpClient.execute(for: request, from: nil)

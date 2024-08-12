@@ -28,22 +28,23 @@ extension GitHubAPI {
     page: Int = 1
   ) async throws -> [Repository] {
     let path = "/orgs/\(organizationID)/repos"
-    let endpoint = baseURL.appending(path: path)
     let method: HTTPRequest.Method = .get
 
-    let queries: [String: String] = [
-      "type": type.rawValue,
-      "sort": sort.rawValue,
-      "order": direction.rawValue,
-      "per_page": String(perPage),
-      "page": String(page),
-    ]
+    let endpoint =
+      baseURL
+      .appending(path: path)
+      .appending(queryItems: [
+        .init(name: "type", value: type.rawValue),
+        .init(name: "sort", value: sort.rawValue),
+        .init(name: "order", value: direction.rawValue),
+        .init(name: "per_page", value: String(perPage)),
+        .init(name: "page", value: String(page)),
+      ])
 
     let request = HTTPRequest(
       method: method,
       url: endpoint,
-      queries: queries,
-      headers: headers
+      headerFields: headers
     )
 
     let (data, _) = try await httpClient.execute(for: request, from: nil)

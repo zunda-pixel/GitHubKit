@@ -19,15 +19,14 @@ extension GitHubAPI {
     pattern: String
   ) async throws -> ProtectionTag {
     let path = "/repos/\(ownerID)/\(repositoryName)/tags/protection"
-    let endpoint = baseURL.appending(path: path)
     let method: HTTPRequest.Method = .post
+    let endpoint = baseURL.appending(path: path)
 
     let body = try JSONEncoder.github.encode(["pattern": pattern])
     let request = HTTPRequest(
       method: method,
       url: endpoint,
-      queries: [:],
-      headers: headers
+      headerFields: headers
     )
 
     let (data, _) = try await httpClient.execute(for: request, from: body)

@@ -21,20 +21,20 @@ extension GitHubAPI {
     page: Int = 1
   ) async throws -> [Contributor] {
     let path = "/repos/\(ownerID)/\(repositoryName)/contributors"
-    let endpoint = baseURL.appending(path: path)
     let method: HTTPRequest.Method = .get
-
-    let queries: [String: String] = [
-      "anon": "false",  // Set False to not get anonymous contributors. anonymous contributors has invalid data model
-      "per_page": String(perPage),
-      "page": String(page),
-    ]
+    let endpoint =
+      baseURL
+      .appending(path: path)
+      .appending(queryItems: [
+        .init(name: "anon", value: false.description),  // Set False to not get anonymous contributors. anonymous contributors has invalid data model
+        .init(name: "per_page", value: String(perPage)),
+        .init(name: "page", value: String(page)),
+      ])
 
     let request = HTTPRequest(
       method: method,
       url: endpoint,
-      queries: queries,
-      headers: headers
+      headerFields: headers
     )
 
     let (data, _) = try await httpClient.execute(for: request, from: nil)

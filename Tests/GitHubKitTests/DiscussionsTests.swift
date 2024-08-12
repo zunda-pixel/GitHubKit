@@ -6,7 +6,10 @@ import Foundation
 import GitHubAPI
 import Testing
 
-@Test(arguments: [("nodejs", "node"), ("zunda-pixel", "GitHubKit")])
+@Test(arguments: [
+  ("nodejs", "node"),
+  ("zunda-pixel", "GitHubKit")
+])
 func discussions(ownerID: String, repositoryName: String) async throws {
   _ = try await api.discussions(
     ownerID: ownerID,
@@ -15,7 +18,9 @@ func discussions(ownerID: String, repositoryName: String) async throws {
   )
 }
 
-@Test(arguments: [("zunda-pixel", "GitHubKit", 25)])
+@Test(arguments: [
+  ("zunda-pixel", "GitHubKit", 25),
+])
 func discussion(ownerID: String, repositoryName: String, discussionNumer: Int) async throws {
   _ = try await api.discussion(
     ownerID: ownerID,
@@ -24,8 +29,11 @@ func discussion(ownerID: String, repositoryName: String, discussionNumer: Int) a
   )
 }
 
-@Test(arguments: [("nodejs", "node", 37857)])
-func discussionComments(ownerID: String, repositoryName: String, discussionNumer: Int) async throws {
+@Test(arguments: [
+  ("nodejs", "node", 37857)
+])
+func discussionComments(ownerID: String, repositoryName: String, discussionNumer: Int) async throws
+{
   _ = try await api.discussionComments(
     ownerID: ownerID,
     repositoryName: repositoryName,

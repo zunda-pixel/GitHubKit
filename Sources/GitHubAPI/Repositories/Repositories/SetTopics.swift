@@ -19,16 +19,15 @@ extension GitHubAPI {
     topics: [String]
   ) async throws -> [String] {
     let path = "/repos/\(ownerID)/\(repositoryName)/topics"
-    let endpoint = baseURL.appending(path: path)
     let method: HTTPRequest.Method = .put
+    let endpoint = baseURL.appending(path: path)
 
     let body = TopicsResponse(names: topics)
 
     let request = HTTPRequest(
       method: method,
       url: endpoint,
-      queries: [:],
-      headers: headers
+      headerFields: headers
     )
 
     let bodyData = try JSONEncoder.github.encode(body)

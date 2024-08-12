@@ -6,7 +6,10 @@ import Foundation
 import GitHubAPI
 import Testing
 
-@Test(arguments: [("zunda-pixel", "GitHubKit"), ("swiftlang", "swift")])
+@Test(arguments: [
+  ("zunda-pixel", "GitHubKit"),
+  ("swiftlang", "swift")
+])
 func repositoryLicenses(ownerID: String, repositoryName: String) async throws {
   let license = try await api.license(
     ownerID: ownerID,

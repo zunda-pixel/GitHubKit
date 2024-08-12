@@ -83,7 +83,8 @@ func setTopics(ownerID: String, repositoryName: String, topics: [String]) async 
 }
 
 @Test(arguments: [
-  ("zunda-pixel", "GitHubKit"),
+  ("swiftlang", "swift"),
+  ("zunda-pixel", "GitHubKit")
 ])
 func topics(ownerID: String, repositoryName: String) async throws {
   _ = try await api.topics(
@@ -95,7 +96,8 @@ func topics(ownerID: String, repositoryName: String) async throws {
 }
 
 @Test(arguments: [
-  ("zunda-pixel", "GitHubKit"),
+  ("swiftlang", "swift"),
+  ("zunda-pixel", "GitHubKit")
 ])
 func repositoryTeams(ownerID: String, repositoryName: String) async throws {
   _ = try await api.teams(
@@ -108,6 +110,7 @@ func repositoryTeams(ownerID: String, repositoryName: String) async throws {
 
 @Test(arguments: [
   ("swiftlang", "swift"),
+  ("zunda-pixel", "GitHubKit")
 ])
 func repositoryLanguages(ownerID: String, repositoryName: String) async throws {
   _ = try await api.languages(
@@ -130,7 +133,7 @@ func updateRepository() async throws {
     homepage: UUID().uuidString,
     isPrivate: true
   )
-  
+
   let updateRepository = UpdateRepository(
     name: "TestRepository\(Int.random(in: Int.min..<Int.max))",
     homepage: UUID().uuidString,
@@ -162,7 +165,7 @@ func updateRepository() async throws {
     allowForking: .random(),
     webCommitSignoffRequired: .random()
   )
-  
+
   _ = try await api.updateRepository(
     ownerID: "zunda-pixel",
     repositoryName: repositoryName,
@@ -177,14 +180,18 @@ func deleteRepository(repositoryName: String) async throws {
     homepage: "homepage",
     isPrivate: true
   )
-  
+
   try await api.deleteRepository(
     ownerID: "zunda-pixel",
     repositoryName: repositoryName
   )
 }
 
-@Test(arguments: [("github", "explore"), ("swiftlang", "swift"), ("zunda-pixel", "GitHubKit")])
+@Test(arguments: [
+  ("github", "explore"),
+  ("swiftlang", "swift"),
+  ("zunda-pixel", "GitHubKit")
+])
 func repository(ownerID: String, repositoryName: String) async throws {
   _ = try await api.repository(
     ownerID: ownerID,
@@ -208,7 +215,7 @@ func repositories(ownerID: String) async throws {
   ("github", "explore"),
   ("swiftlang", "swift"),
   ("swiftlang", "swift-format"),
-  ("zunda-pixel", "GitHubKit")
+  ("zunda-pixel", "GitHubKit"),
 ])
 func contributors(ownerID: String, repositoryName: String) async throws {
   _ = try await api.contributors(
@@ -223,7 +230,7 @@ func contributors(ownerID: String, repositoryName: String) async throws {
   ("github", "explore"),
   ("swiftlang", "swift"),
   ("swiftlang", "swift-format"),
-  ("zunda-pixel", "GitHubKit")
+  ("zunda-pixel", "GitHubKit"),
 ])
 func stargazers(ownerID: String, repositoryName: String) async throws {
   _ = try await api.stargazers(
@@ -238,7 +245,7 @@ func stargazers(ownerID: String, repositoryName: String) async throws {
   ("github", "explore"),
   ("swiftlang", "swift"),
   ("swiftlang", "swift-format"),
-  ("zunda-pixel", "GitHubKit")
+  ("zunda-pixel", "GitHubKit"),
 ])
 func forks(ownerID: String, repositoryName: String) async throws {
   _ = try await api.forks(
@@ -291,7 +298,7 @@ func securityAnalyticsCodable() throws {
   ("github", "explore"),
   ("swiftlang", "swift"),
   ("swiftlang", "swift-format"),
-  ("zunda-pixel", "GitHubKit")
+  ("zunda-pixel", "GitHubKit"),
 ])
 func tags(ownerID: String, repositoryName: String) async throws {
   _ = try await api.tags(
@@ -325,7 +332,7 @@ func protectionTags(ownerID: String, repositoryName: String) async throws {
 }
 
 @Test(arguments: [
-  ("zunda-pixel", "GitHubKit", "v1.*"),
+  ("zunda-pixel", "GitHubKit", "v1.*")
 ])
 func createProtectionTag(ownerID: String, repositoryName: String, pattern: String) async throws {
   let tag = try await api.createProtectionTag(
@@ -341,8 +348,8 @@ func createProtectionTag(ownerID: String, repositoryName: String, pattern: Strin
 }
 
 @Test(arguments: [
-  ("zunda-pixel", "GitHubKit"),
-])func deleteProtectionTag(ownerID: String, repositoryName: String) async throws {
+  ("zunda-pixel", "GitHubKit")
+]) func deleteProtectionTag(ownerID: String, repositoryName: String) async throws {
   let tags = try await api.protectionTags(
     ownerID: ownerID,
     repositoryName: repositoryName

@@ -6,7 +6,10 @@ import Foundation
 import GitHubAPI
 import Testing
 
-@Test(arguments: [("zunda-pixel", "GitHubKit"), ("zunda-pixel", "GitBoard")])
+@Test(arguments: [
+  ("zunda-pixel", "GitHubKit"),
+  ("zunda-pixel", "GitBoard")
+])
 func issue(ownerID: String, repositoryName: String) async throws {
   _ = try await api.issue(
     ownerID: ownerID,
@@ -15,7 +18,10 @@ func issue(ownerID: String, repositoryName: String) async throws {
   )
 }
 
-@Test(arguments: [("swiftlang", "swift"), ("zunda-pixel", "GitHubKit")])
+@Test(arguments: [
+  ("swiftlang", "swift"),
+  ("zunda-pixel", "GitHubKit")
+])
 func issues(ownerID: String, repositoryName: String) async throws {
   _ = try await api.issues(
     ownerID: ownerID,
@@ -34,7 +40,10 @@ func issues(ownerID: String, repositoryName: String) async throws {
   )
 }
 
-@Test(arguments: [("swiftlang", "swift", 67351), ("zunda-pixel", "GitHubKit", 1)])
+@Test(arguments: [
+  ("swiftlang", "swift", 67351),
+  ("zunda-pixel", "GitHubKit", 1)
+])
 func issueComments(ownerID: String, repositoryName: String, issueNumber: Int) async throws {
   _ = try await api.comments(
     ownerID: ownerID,
@@ -45,7 +54,10 @@ func issueComments(ownerID: String, repositoryName: String, issueNumber: Int) as
   )
 }
 
-@Test(arguments: [("swiftlang", "swift", 69144), ("zunda-pixel", "GitHubKit", 1)])
+@Test(arguments: [
+  ("swiftlang", "swift", 69144),
+  ("zunda-pixel", "GitHubKit", 1)
+])
 func pullComments(ownerID: String, repositoryName: String, pullNumber: Int) async throws {
   _ = try await api.comments(
     ownerID: ownerID,

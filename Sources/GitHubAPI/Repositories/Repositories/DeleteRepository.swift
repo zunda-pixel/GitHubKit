@@ -16,14 +16,13 @@ extension GitHubAPI {
     repositoryName: String
   ) async throws {
     let path = "/repos/\(ownerID)/\(repositoryName)"
-    let endpoint = baseURL.appending(path: path)
     let method: HTTPRequest.Method = .delete
+    let endpoint = baseURL.appending(path: path)
 
     let request = HTTPRequest(
       method: method,
       url: endpoint,
-      queries: [:],
-      headers: headers
+      headerFields: headers
     )
 
     let (data, httpResponse) = try await httpClient.execute(for: request, from: nil)

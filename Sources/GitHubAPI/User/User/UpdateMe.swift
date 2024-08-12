@@ -21,8 +21,7 @@ extension GitHubAPI {
     let request = HTTPRequest(
       method: method,
       url: endpoint,
-      queries: [:],
-      headers: headers
+      headerFields: headers
     )
 
     let (data, response) = try await httpClient.execute(for: request, from: body)

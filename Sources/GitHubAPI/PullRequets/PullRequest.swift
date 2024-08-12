@@ -19,14 +19,13 @@ extension GitHubAPI {
     pullNumber: Int
   ) async throws -> PullRequest {
     let path = "/repos/\(ownerID)/\(repositoryName)/pulls/\(pullNumber)"
-    let endpoint = baseURL.appending(path: path)
     let method: HTTPRequest.Method = .get
+    let endpoint = baseURL.appending(path: path)
 
     let request = HTTPRequest(
       method: method,
       url: endpoint,
-      queries: [:],
-      headers: headers
+      headerFields: headers
     )
 
     let (data, _) = try await httpClient.execute(for: request, from: nil)

@@ -19,16 +19,15 @@ extension GitHubAPI {
     repository: UpdateRepository
   ) async throws -> Repository {
     let path = "/repos/\(ownerID)/\(repositoryName)"
-    let endpoint = baseURL.appending(path: path)
     let method: HTTPRequest.Method = .patch
+    let endpoint = baseURL.appending(path: path)
 
     let body = try JSONEncoder.github.encode(repository)
 
     let request = HTTPRequest(
       method: method,
       url: endpoint,
-      queries: [:],
-      headers: headers
+      headerFields: headers
     )
 
     let (data, _) = try await httpClient.execute(for: request, from: body)

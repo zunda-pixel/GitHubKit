@@ -3,8 +3,8 @@
 //
 
 import Foundation
-import HTTPTypes
 import HTTPClient
+import HTTPTypes
 
 /// OAuth
 /// https://docs.github.com/en/apps/oauth-apps/building-oauth-apps/authorizing-oauth-apps#2-users-are-redirected-back-to-your-site-by-github
@@ -39,16 +39,13 @@ public struct OAuth: Sendable {
   public func request(responseType: ResponseType = .default) -> HTTPRequest {
     let endpoint = baseURL.appending(path: path)
 
-    var queries: [String: String] = [
-      "client_id": clientID,
-      "client_secret": clientSecret,
-      "code": code,
+    var queries: [URLQueryItem] = [
+      .init(name: "client_id", value: clientID),
+      .init(name: "client_secret", value: clientSecret),
+      .init(name: "code", value: code),
     ]
 
-    redirectURL.map { queries["redirect_uri"] = $0.absoluteString }
-
-    var urlComponents = URLComponents(url: endpoint, resolvingAgainstBaseURL: false)!
-    urlComponents.queryItems = queries.map { .init(name: $0.key, value: $0.value) }
+    redirectURL.map { queries.append(.init(name: "redirect_uri", value: $0.absoluteString)) }
 
     var headers: HTTPFields = [:]
     if responseType != .default {
@@ -58,12 +55,13 @@ public struct OAuth: Sendable {
     return HTTPRequest(
       method: .post,
       url: endpoint,
-      queries: queries,
-      headers: headers
+      headerFields: headers
     )
   }
 
-  public func authorize<HTTPClient: HTTPClientProtocol>(httpClient: HTTPClient) async throws -> OAuthResponse where HTTPClient.Data == Foundation.Data {
+  public func authorize<HTTPClient: HTTPClientProtocol>(httpClient: HTTPClient) async throws
+    -> OAuthResponse where HTTPClient.Data == Foundation.Data
+  {
     let request = request(responseType: .json)
     let data: Data
     let response: HTTPResponse

@@ -18,18 +18,18 @@ extension GitHubAPI {
   ) async throws -> [User] {
     let path = "/user/blocks"
     let method: HTTPRequest.Method = .get
-    let endpoint = baseURL.appending(path: path)
-
-    let queries: [String: String] = [
-      "per_page": String(perPage),
-      "page": String(page),
-    ]
+    let endpoint =
+      baseURL
+      .appending(path: path)
+      .appending(queryItems: [
+        .init(name: "per_page", value: String(perPage)),
+        .init(name: "page", value: String(page)),
+      ])
 
     let request = HTTPRequest(
       method: method,
       url: endpoint,
-      queries: queries,
-      headers: headers
+      headerFields: headers
     )
 
     let (data, _) = try await httpClient.execute(for: request, from: nil)

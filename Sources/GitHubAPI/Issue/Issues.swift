@@ -40,31 +40,36 @@ extension GitHubAPI {
   ) async throws -> [Issue] {
     let path = "/repos/\(ownerID)/\(repositoryName)/issues"
     let method: HTTPRequest.Method = .get
-    let endpoint = baseURL.appending(path: path)
 
-    var queries: [String: String] = [
-      "state": state.rawValue,
-      "sort": sort.rawValue,
-      "direction": direction.rawValue,
-      "per_page": String(perPage),
-      "page": String(page),
+    var queries: [URLQueryItem] = [
+      .init(name: "state", value: state.rawValue),
+      .init(name: "sort", value: sort.rawValue),
+      .init(name: "direction", value: direction.rawValue),
+      .init(name: "per_page", value: String(perPage)),
+      .init(name: "page", value: String(page)),
     ]
 
-    milestone.map { queries["milestone"] = String($0) }
-    assignee.map { queries["assignee"] = String($0) }
-    creator.map { queries["creator"] = String($0) }
-    mentioned.map { queries["mentioned"] = String($0) }
-    if !labels.isEmpty { queries["labels"] = labels.joined(separator: ",") }
+    milestone.map { queries.append(.init(name: "milestone", value: String($0))) }
+    assignee.map { queries.append(.init(name: "assignee", value: String($0))) }
+    creator.map { queries.append(.init(name: "creator", value: String($0))) }
+    mentioned.map { queries.append(.init(name: "mentioned", value: String($0))) }
+    if !labels.isEmpty {
+      queries.append(.init(name: "labels", value: labels.joined(separator: ",")))
+    }
     since.map {
       let formatter = ISO8601DateFormatter()
-      queries["since"] = formatter.string(from: $0)
+      queries.append(.init(name: "since", value: formatter.string(from: $0)))
     }
+
+    let endpoint =
+      baseURL
+      .appending(path: path)
+      .appending(queryItems: queries)
 
     let request = HTTPRequest(
       method: method,
       url: endpoint,
-      queries: queries,
-      headers: headers
+      headerFields: headers
     )
 
     let (data, _) = try await httpClient.execute(for: request, from: nil)

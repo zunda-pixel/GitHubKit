@@ -24,22 +24,24 @@ extension GitHubAPI {
     let path = "/search/users"
     let method: HTTPRequest.Method = .get
 
-    let endpoint = baseURL.appending(path: path)
-
-    var queries: [String: String] = [
-      "q": query,
-      "order": order.rawValue,
-      "per_page": String(perPage),
-      "page": String(page),
+    var queries: [URLQueryItem] = [
+      .init(name: "q", value: query),
+      .init(name: "order", value: order.rawValue),
+      .init(name: "per_page", value: String(perPage)),
+      .init(name: "page", value: String(page)),
     ]
 
-    sort.map { queries["sort"] = $0.rawValue }
+    sort.map { queries.append(.init(name: "sort", value: $0.rawValue)) }
+
+    let endpoint =
+      baseURL
+      .appending(path: path)
+      .appending(queryItems: queries)
 
     let request = HTTPRequest(
       method: method,
       url: endpoint,
-      queries: queries,
-      headers: headers
+      headerFields: headers
     )
 
     let (data, _) = try await httpClient.execute(for: request, from: nil)
