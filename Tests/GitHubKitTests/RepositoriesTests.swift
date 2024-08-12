@@ -83,6 +83,7 @@ func setTopics(ownerID: String, repositoryName: String, topics: [String]) async 
 }
 
 @Test(arguments: [
+  ("swiftlang", "swift"),
   ("zunda-pixel", "GitHubKit")
 ])
 func topics(ownerID: String, repositoryName: String) async throws {
@@ -95,6 +96,7 @@ func topics(ownerID: String, repositoryName: String) async throws {
 }
 
 @Test(arguments: [
+  ("swiftlang", "swift"),
   ("zunda-pixel", "GitHubKit")
 ])
 func repositoryTeams(ownerID: String, repositoryName: String) async throws {
@@ -107,7 +109,8 @@ func repositoryTeams(ownerID: String, repositoryName: String) async throws {
 }
 
 @Test(arguments: [
-  ("swiftlang", "swift")
+  ("swiftlang", "swift"),
+  ("zunda-pixel", "GitHubKit")
 ])
 func repositoryLanguages(ownerID: String, repositoryName: String) async throws {
   _ = try await api.languages(
@@ -184,7 +187,11 @@ func deleteRepository(repositoryName: String) async throws {
   )
 }
 
-@Test(arguments: [("github", "explore"), ("swiftlang", "swift"), ("zunda-pixel", "GitHubKit")])
+@Test(arguments: [
+  ("github", "explore"),
+  ("swiftlang", "swift"),
+  ("zunda-pixel", "GitHubKit")
+])
 func repository(ownerID: String, repositoryName: String) async throws {
   _ = try await api.repository(
     ownerID: ownerID,

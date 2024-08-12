@@ -6,7 +6,10 @@ import Foundation
 import GitHubAPI
 import Testing
 
-@Test(arguments: [("zunda-pixel", "GitHubKit"), ("zunda-pixel", "GitBoard")])
+@Test(arguments: [
+  ("zunda-pixel", "GitHubKit"),
+  ("zunda-pixel", "GitBoard")
+])
 func collaborators(ownerID: String, repositoryName: String) async throws {
   _ = try await api.collaborators(
     ownerID: ownerID,

@@ -6,7 +6,9 @@ import Foundation
 import GitHubAPI
 import Testing
 
-@Test(arguments: [("swiftlang", "swift", "swift-5.8.1-RELEASE")])
+@Test(arguments: [
+  ("swiftlang", "swift", "swift-5.8.1-RELEASE")
+])
 func releaseWithTag(ownerID: String, repositoryName: String, releaseTag: String) async throws {
   _ = try await api.release(
     ownerID: ownerID,
@@ -15,7 +17,9 @@ func releaseWithTag(ownerID: String, repositoryName: String, releaseTag: String)
   )
 }
 
-@Test(arguments: [("swiftlang", "swift", 26_735_313)])
+@Test(arguments: [
+  ("swiftlang", "swift", 26_735_313)
+])
 func release(ownerID: String, repositoryName: String, releaseID: Int) async throws {
   _ = try await api.release(
     ownerID: ownerID,
@@ -24,7 +28,10 @@ func release(ownerID: String, repositoryName: String, releaseID: Int) async thro
   )
 }
 
-@Test(arguments: [("swiftlang", "swift")])
+@Test(arguments: [
+  ("swiftlang", "swift"),
+  ("swiftlang", "swift-format")
+])
 func releases(ownerID: String, repositoryName: String) async throws {
   _ = try await api.releases(
     ownerID: ownerID,
