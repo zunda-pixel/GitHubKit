@@ -44,28 +44,30 @@ extension GitHubAPI {
   ) async throws -> [Repository] {
     let path = "/user/repos"
     let method: HTTPRequest.Method = .get
-    let endpoint = baseURL.appending(path: path)
 
-    var queries: [String: String] = [
-      "sort": sort.rawValue,
-      "direction": direction.rawValue,
-      "per_page": String(perPage),
-      "page": String(page),
+    var queries: [URLQueryItem] = [
+      .init(name: "sort", value: sort.rawValue),
+      .init(name: "direction", value: direction.rawValue),
+      .init(name: "per_page", value: String(perPage)),
+      .init(name: "page", value: String(page)),
     ]
 
-    visibility.map { queries["visibility"] = $0.rawValue }
-    affiliation.map { queries["affiliation"] = $0.map(\.rawValue).joined(separator: ",") }
-    type.map { queries["type"] = $0.rawValue }
+    visibility.map { queries.append(.init(name: "visibility", value: $0.rawValue)) }
+    affiliation.map { queries.append(.init(name:"affiliation", value: $0.map(\.rawValue).joined(separator: ","))) }
+    type.map { queries.append(.init(name: "type", value: $0.rawValue)) }
 
     let formatter = ISO8601DateFormatter()
-    since.map { queries["since"] = formatter.string(from: $0) }
-    before.map { queries["before"] = formatter.string(from: $0) }
+    since.map { queries.append(.init(name: "since", value: formatter.string(from: $0))) }
+    before.map { queries.append(.init(name: "before", value: formatter.string(from: $0))) }
 
+    let endpoint = baseURL
+      .appending(path: path)
+      .appending(queryItems: queries)
+    
     let request = HTTPRequest(
       method: method,
       url: endpoint,
-      queries: queries,
-      headers: headers
+      headerFields: headers
     )
 
     let (data, _) = try await httpClient.execute(for: request, from: nil)

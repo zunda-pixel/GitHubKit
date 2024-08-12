@@ -28,21 +28,20 @@ extension GitHubAPI {
     let endpoint = baseURL.appending(path: path)
     let method: HTTPRequest.Method = .get
 
-    var queries: [String: String] = [
-      "per_page": String(perPage),
-      "page": String(page),
+    var queries: [URLQueryItem] = [
+      .init(name: "per_page", value: String(perPage)),
+      .init(name: "page", value: String(page)),
     ]
 
     since.map {
       let formatter = ISO8601DateFormatter()
-      queries["since"] = formatter.string(from: $0)
+      queries.append(.init(name: "since", value: formatter.string(from: $0)))
     }
 
     let request = HTTPRequest(
       method: method,
       url: endpoint,
-      queries: queries,
-      headers: headers
+      headerFields: headers
     )
 
     let (data, _) = try await httpClient.execute(for: request, from: nil)

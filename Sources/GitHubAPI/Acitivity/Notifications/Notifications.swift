@@ -25,29 +25,30 @@ extension GitHubAPI {
     page: Int = 1
   ) async throws -> [GitHubData.Notification] {
     let path = "/notifications"
-    let endpoint = baseURL.appending(path: path)
-    let method: HTTPRequest.Method = .get
-
-    var queries: [String: String] = [
-      "all": all.description,
-      "participating": participating.description,
-      "per_page": String(perPage),
-      "page": String(page),
+    
+    var queries: [URLQueryItem] = [
+      .init(name: "all", value: all.description),
+      .init(name: "participating", value: participating.description),
+      .init(name: "per_page", value:  String(perPage)),
+      .init(name: "page", value:  String(page)),
     ]
-
     let formatter = ISO8601DateFormatter()
     since.map {
-      queries["since"] = formatter.string(from: $0)
+      queries.append(.init(name: "since", value: formatter.string(from: $0)))
     }
     before.map {
-      queries["before"] = formatter.string(from: $0)
+      queries.append(.init(name: "before", value: formatter.string(from: $0)))
     }
+    
+    let endpoint = baseURL
+      .appending(path: path)
+      .appending(queryItems: queries)
+    let method: HTTPRequest.Method = .get
 
     let request = HTTPRequest(
       method: method,
       url: endpoint,
-      queries: queries,
-      headers: headers
+      headerFields: headers
     )
 
     let (data, _) = try await httpClient.execute(for: request, from: nil)

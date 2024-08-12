@@ -31,24 +31,26 @@ extension GitHubAPI {
     page: Int = 1
   ) async throws -> [Collaborator] {
     let path = "/repos/\(ownerID)/\(repositoryName)/collaborators"
-    let endpoint = baseURL.appending(path: path)
     let method: HTTPRequest.Method = .get
 
-    var queries: [String: String] = [
-      "affiliation": affiliation.rawValue,
-      "per_page": String(perPage),
-      "page": String(page),
+    var queries: [URLQueryItem] = [
+      .init(name: "affiliation", value: affiliation.rawValue),
+      .init(name: "per_page", value: String(perPage)),
+      .init(name: "page", value: String(page)),
     ]
 
     permission.map {
-      queries["permission"] = $0.rawValue
+      queries.append(.init(name: "permission", value: $0.rawValue))
     }
+    
+    let endpoint = baseURL
+      .appending(path: path)
+      .appending(queryItems: queries)
 
     let request = HTTPRequest(
       method: method,
       url: endpoint,
-      queries: queries,
-      headers: headers
+      headerFields: headers
     )
 
     let (data, _) = try await httpClient.execute(for: request, from: nil)

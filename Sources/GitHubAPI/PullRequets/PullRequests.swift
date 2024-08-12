@@ -47,22 +47,21 @@ extension GitHubAPI {
     let endpoint = baseURL.appending(path: path)
     let method: HTTPRequest.Method = .get
 
-    var queries: [String: String] = [
-      "state": state.rawValue,
-      "sort": sort.rawValue,
-      "direction": direction.rawValue,
-      "per_page": String(perPage),
-      "page": String(page),
+    var queries: [URLQueryItem] = [
+      .init(name: "state", value: state.rawValue),
+      .init(name: "sort", value: sort.rawValue),
+      .init(name: "direction", value: direction.rawValue),
+      .init(name: "per_page", value: String(perPage)),
+      .init(name: "page", value: String(page)),
     ]
 
-    head.map { queries["head"] = $0 }
-    branchName.map { queries["base"] = $0 }
+    head.map { queries.append(.init(name: "head", value: $0)) }
+    branchName.map { queries.append(.init(name: "base", value: $0)) }
 
     let request = HTTPRequest(
       method: method,
       url: endpoint,
-      queries: queries,
-      headers: headers
+      headerFields: headers
     )
 
     let (data, _) = try await httpClient.execute(for: request, from: nil)
