@@ -20,19 +20,18 @@ extension GitHubAPI {
     page: Int = 1
   ) async throws -> [Event] {
     let path = "/users/\(userName)/events"
-    let endpoint = baseURL.appending(path: path)
+    let endpoint = baseURL
+      .appending(path: path)
+      .appending(queryItems: [
+        .init(name: "per_page", value: String(perPage)),
+        .init(name: "page", value: String(page))
+      ])
     let method: HTTPRequest.Method = .get
-
-    let queries: [String: String] = [
-      "per_page": String(perPage),
-      "page": String(page),
-    ]
 
     let request = HTTPRequest(
       method: method,
       url: endpoint,
-      queries: queries,
-      headers: headers
+      headerFields: headers
     )
 
     let (data, _) = try await httpClient.execute(for: request, from: nil)
@@ -55,19 +54,18 @@ extension GitHubAPI {
     page: Int = 1
   ) async throws -> [Event] {
     let path = "/users/\(userID)/events/public"
-    let endpoint = baseURL.appending(path: path)
+    let endpoint = baseURL
+      .appending(path: path)
+      .appending(queryItems: [
+        .init(name: "per_page", value: String(perPage)),
+        .init(name: "page", value: String(page)),
+      ])
     let method: HTTPRequest.Method = .get
-
-    let queries: [String: String] = [
-      "per_page": String(perPage),
-      "page": String(page),
-    ]
 
     let request = HTTPRequest(
       method: method,
       url: endpoint,
-      queries: queries,
-      headers: headers
+      headerFields: headers
     )
 
     let (data, _) = try await httpClient.execute(for: request, from: nil)
@@ -90,19 +88,18 @@ extension GitHubAPI {
     page: Int = 1
   ) async throws -> [Event] {
     let path = "/orgs/\(organizationID)/events"
-    let endpoint = baseURL.appending(path: path)
+    let endpoint = baseURL
+      .appending(path: path)
+      .appending(queryItems: [
+        .init(name: "per_page", value: String(perPage)),
+        .init(name: "page", value: String(page)),
+      ])
     let method: HTTPRequest.Method = .get
-
-    let queries: [String: String] = [
-      "per_page": String(perPage),
-      "page": String(page),
-    ]
 
     let request = HTTPRequest(
       method: method,
       url: endpoint,
-      queries: queries,
-      headers: headers
+      headerFields: headers
     )
 
     let (data, _) = try await httpClient.execute(for: request, from: nil)
