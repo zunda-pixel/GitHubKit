@@ -5,6 +5,7 @@
 import Foundation
 import HTTPClient
 import HTTPTypes
+import HTTPTypesFoundation
 
 public struct GitHubAPI<HTTPClient: HTTPClientProtocol>: Sendable, Hashable
 where HTTPClient.Data == Foundation.Data, HTTPClient.Body == Foundation.Data, HTTPClient: Hashable {

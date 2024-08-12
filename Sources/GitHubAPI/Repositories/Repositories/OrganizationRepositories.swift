@@ -30,18 +30,16 @@ extension GitHubAPI {
     let path = "/orgs/\(organizationID)/repos"
     let method: HTTPRequest.Method = .get
 
-    let queries: [URLQueryItem] = [
-      .init(name: "type", value: type.rawValue),
-      .init(name: "sort", value: sort.rawValue),
-      .init(name: "order", value: direction.rawValue),
-      .init(name: "per_page", value: String(perPage)),
-      .init(name: "page", value: String(page)),
-    ]
-
     let endpoint =
       baseURL
       .appending(path: path)
-      .appending(queryItems: queries)
+      .appending(queryItems: [
+        .init(name: "type", value: type.rawValue),
+        .init(name: "sort", value: sort.rawValue),
+        .init(name: "order", value: direction.rawValue),
+        .init(name: "per_page", value: String(perPage)),
+        .init(name: "page", value: String(page)),
+      ])
 
     let request = HTTPRequest(
       method: method,

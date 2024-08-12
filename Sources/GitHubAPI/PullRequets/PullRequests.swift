@@ -44,7 +44,6 @@ extension GitHubAPI {
     page: Int = 1
   ) async throws -> [PullRequest] {
     let path = "/repos/\(ownerID)/\(repositoryName)/pulls"
-    let endpoint = baseURL.appending(path: path)
     let method: HTTPRequest.Method = .get
 
     var queries: [URLQueryItem] = [
@@ -58,6 +57,10 @@ extension GitHubAPI {
     head.map { queries.append(.init(name: "head", value: $0)) }
     branchName.map { queries.append(.init(name: "base", value: $0)) }
 
+    let endpoint = baseURL
+      .appending(path: path)
+      .appending(queryItems: queries)
+    
     let request = HTTPRequest(
       method: method,
       url: endpoint,

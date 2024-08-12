@@ -12,8 +12,8 @@ extension GitHubAPI {
   /// - Returns: Bool
   public func isFollowing(userID: String) async throws -> Bool {
     let path = "/user/following/\(userID)"
-    let endpoint = baseURL.appending(path: path)
     let method: HTTPRequest.Method = .get
+    let endpoint = baseURL.appending(path: path)
 
     let request = HTTPRequest(
       method: method,
@@ -42,8 +42,8 @@ extension GitHubAPI {
   /// - Returns: Bool
   public func isFollowing(from fromUserID: String, to toUserID: String) async throws -> Bool {
     let path = "/users/\(fromUserID)/following/\(toUserID)"
-    let endpoint = baseURL.appending(path: path)
     let method: HTTPRequest.Method = .get
+    let endpoint = baseURL.appending(path: path)
 
     let request = HTTPRequest(
       method: method,

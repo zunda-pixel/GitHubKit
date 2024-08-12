@@ -18,7 +18,8 @@ extension GitHubAPI {
     subjectID: String? = nil
   ) async throws -> [Hovercard] {
     let path = "/users/\(userID)/hovercard"
-    var queries: [URLQueryItem] = [
+    let method: HTTPRequest.Method = .get
+    let queries: [URLQueryItem] = [
       .init(name: "subject_type", value: subjectType?.rawValue),
       .init(name: "subject_id", value: subjectID),
     ].filter { $0.value != nil }
@@ -27,7 +28,6 @@ extension GitHubAPI {
       baseURL
       .appending(path: path)
       .appending(queryItems: queries)
-    let method: HTTPRequest.Method = .get
 
     let request = HTTPRequest(
       method: method,

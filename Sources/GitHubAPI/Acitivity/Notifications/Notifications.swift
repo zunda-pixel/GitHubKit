@@ -25,7 +25,7 @@ extension GitHubAPI {
     page: Int = 1
   ) async throws -> [GitHubData.Notification] {
     let path = "/notifications"
-
+    let method: HTTPRequest.Method = .get
     var queries: [URLQueryItem] = [
       .init(name: "all", value: all.description),
       .init(name: "participating", value: participating.description),
@@ -44,7 +44,6 @@ extension GitHubAPI {
       baseURL
       .appending(path: path)
       .appending(queryItems: queries)
-    let method: HTTPRequest.Method = .get
 
     let request = HTTPRequest(
       method: method,

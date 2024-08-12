@@ -17,6 +17,7 @@ extension GitHubAPI {
     page: Int = 1
   ) async throws -> [Event] {
     let path = "/events"
+    let method: HTTPRequest.Method = .get
     let endpoint =
       baseURL
       .appending(path: path)
@@ -24,7 +25,6 @@ extension GitHubAPI {
         .init(name: "per_page", value: String(perPage)),
         .init(name: "page", value: String(page)),
       ])
-    let method: HTTPRequest.Method = .get
     let request = HTTPRequest(
       method: method,
       url: endpoint,

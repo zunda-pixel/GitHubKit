@@ -17,8 +17,8 @@ extension GitHubAPI {
     repositoryName: String
   ) async throws -> [ProtectionTag] {
     let path = "/repos/\(ownerID)/\(repositoryName)/tags/protection"
-    let endpoint = baseURL.appending(path: path)
     let method: HTTPRequest.Method = .get
+    let endpoint = baseURL.appending(path: path)
 
     let request = HTTPRequest(
       method: method,

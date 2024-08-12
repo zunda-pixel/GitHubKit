@@ -19,8 +19,8 @@ extension GitHubAPI {
     releaseID: Int
   ) async throws -> Release {
     let path = "/repos/\(ownerID)/\(repositoryName)/releases/\(releaseID)"
-    let endpoint = baseURL.appending(path: path)
     let method: HTTPRequest.Method = .get
+    let endpoint = baseURL.appending(path: path)
 
     let request = HTTPRequest(
       method: method,
@@ -48,8 +48,8 @@ extension GitHubAPI {
     tag: String
   ) async throws -> Release {
     let path = "/repos/\(ownerID)/\(repositoryName)/releases/tags/\(tag)"
-    let endpoint = baseURL.appending(path: path)
     let method: HTTPRequest.Method = .get
+    let endpoint = baseURL.appending(path: path)
 
     let request = HTTPRequest(
       method: method,

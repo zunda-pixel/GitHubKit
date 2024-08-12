@@ -17,8 +17,8 @@ extension GitHubAPI {
     repositoryName: String
   ) async throws -> [String: Int] {
     let path = "/repos/\(ownerID)/\(repositoryName)/languages"
-    let endpoint = baseURL.appending(path: path)
     let method: HTTPRequest.Method = .get
+    let endpoint = baseURL.appending(path: path)
 
     let request = HTTPRequest(
       method: method,

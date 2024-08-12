@@ -23,8 +23,8 @@ extension GitHubAPI {
     defaultBranchOnly: Bool
   ) async throws -> Repository {
     let path = "/repos/\(ownerID)/\(repositoryName)/forks"
-    let endpoint = baseURL.appending(path: path)
     let method: HTTPRequest.Method = .post
+    let endpoint = baseURL.appending(path: path)
 
     var body: [String: String] = [
       "name": name,

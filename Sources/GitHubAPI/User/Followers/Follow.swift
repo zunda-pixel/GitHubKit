@@ -11,8 +11,8 @@ extension GitHubAPI {
   /// - Parameter userID: The handle for the GitHub user account.
   public func follow(userID: String) async throws {
     let path = "/user/following/\(userID)"
-    let endpoint = baseURL.appending(path: path)
     let method: HTTPRequest.Method = .put
+    let endpoint = baseURL.appending(path: path)
 
     let request = HTTPRequest(
       method: method,
@@ -38,8 +38,8 @@ extension GitHubAPI {
   /// - Parameter userID: The handle for the GitHub user account.
   public func unFollow(userID: String) async throws {
     let path = "/user/following/\(userID)"
-    let endpoint = baseURL.appending(path: path)
     let method: HTTPRequest.Method = .delete
+    let endpoint = baseURL.appending(path: path)
 
     let request = HTTPRequest(
       method: method,
