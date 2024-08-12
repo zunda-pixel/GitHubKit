@@ -3,8 +3,8 @@
 //
 
 import Foundation
-import HTTPTypes
 import HTTPClient
+import HTTPTypes
 
 /// OAuth
 /// https://docs.github.com/en/apps/oauth-apps/building-oauth-apps/authorizing-oauth-apps#2-users-are-redirected-back-to-your-site-by-github
@@ -59,7 +59,9 @@ public struct OAuth: Sendable {
     )
   }
 
-  public func authorize<HTTPClient: HTTPClientProtocol>(httpClient: HTTPClient) async throws -> OAuthResponse where HTTPClient.Data == Foundation.Data {
+  public func authorize<HTTPClient: HTTPClientProtocol>(httpClient: HTTPClient) async throws
+    -> OAuthResponse where HTTPClient.Data == Foundation.Data
+  {
     let request = request(responseType: .json)
     let data: Data
     let response: HTTPResponse

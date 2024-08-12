@@ -37,8 +37,9 @@ extension GitHubAPI {
       .init(name: "per_page", value: String(perPage)),
       .init(name: "page", value: String(page)),
     ]
-    
-    let endpoint = baseURL
+
+    let endpoint =
+      baseURL
       .appending(path: path)
       .appending(queryItems: queries)
 

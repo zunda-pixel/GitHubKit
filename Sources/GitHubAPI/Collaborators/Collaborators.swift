@@ -42,8 +42,9 @@ extension GitHubAPI {
     permission.map {
       queries.append(.init(name: "permission", value: $0.rawValue))
     }
-    
-    let endpoint = baseURL
+
+    let endpoint =
+      baseURL
       .appending(path: path)
       .appending(queryItems: queries)
 

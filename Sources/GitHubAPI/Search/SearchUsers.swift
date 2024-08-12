@@ -33,10 +33,11 @@ extension GitHubAPI {
 
     sort.map { queries.append(.init(name: "sort", value: $0.rawValue)) }
 
-    let endpoint = baseURL
+    let endpoint =
+      baseURL
       .appending(path: path)
       .appending(queryItems: queries)
-    
+
     let request = HTTPRequest(
       method: method,
       url: endpoint,

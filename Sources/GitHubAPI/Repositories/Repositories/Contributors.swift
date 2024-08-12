@@ -21,10 +21,11 @@ extension GitHubAPI {
     page: Int = 1
   ) async throws -> [Contributor] {
     let path = "/repos/\(ownerID)/\(repositoryName)/contributors"
-    let endpoint = baseURL
+    let endpoint =
+      baseURL
       .appending(path: path)
       .appending(queryItems: [
-        .init(name: "anon", value: false.description), // Set False to not get anonymous contributors. anonymous contributors has invalid data model
+        .init(name: "anon", value: false.description),  // Set False to not get anonymous contributors. anonymous contributors has invalid data model
         .init(name: "per_page", value: String(perPage)),
         .init(name: "page", value: String(page)),
       ])

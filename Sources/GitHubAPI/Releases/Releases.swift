@@ -21,11 +21,12 @@ extension GitHubAPI {
     page: Int = 1
   ) async throws -> [Release] {
     let path = "/repos/\(ownerID)/\(repositoryName)/releases"
-    let endpoint = baseURL
+    let endpoint =
+      baseURL
       .appending(path: path)
       .appending(queryItems: [
         .init(name: "per_page", value: String(perPage)),
-        .init(name: "page", value: String(page))
+        .init(name: "page", value: String(page)),
       ])
     let method: HTTPRequest.Method = .get
 

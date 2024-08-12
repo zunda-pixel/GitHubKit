@@ -20,7 +20,8 @@ extension GitHubAPI {
     page: Int = 1
   ) async throws -> [Event] {
     let path = "/users/\(userID)/received_events"
-    let endpoint = baseURL
+    let endpoint =
+      baseURL
       .appending(path: path)
       .appending(queryItems: [
         .init(name: "per_page", value: String(perPage)),
@@ -53,7 +54,8 @@ extension GitHubAPI {
     page: Int = 1
   ) async throws -> [Event] {
     let path = "/users/\(userID)/received_events/public"
-    let endpoint = baseURL
+    let endpoint =
+      baseURL
       .appending(path: path)
       .appending(queryItems: [
         .init(name: "per_page", value: String(perPage)),

@@ -25,12 +25,12 @@ extension GitHubAPI {
     page: Int = 1
   ) async throws -> [GitHubData.Notification] {
     let path = "/notifications"
-    
+
     var queries: [URLQueryItem] = [
       .init(name: "all", value: all.description),
       .init(name: "participating", value: participating.description),
-      .init(name: "per_page", value:  String(perPage)),
-      .init(name: "page", value:  String(page)),
+      .init(name: "per_page", value: String(perPage)),
+      .init(name: "page", value: String(page)),
     ]
     let formatter = ISO8601DateFormatter()
     since.map {
@@ -39,8 +39,9 @@ extension GitHubAPI {
     before.map {
       queries.append(.init(name: "before", value: formatter.string(from: $0)))
     }
-    
-    let endpoint = baseURL
+
+    let endpoint =
+      baseURL
       .appending(path: path)
       .appending(queryItems: queries)
     let method: HTTPRequest.Method = .get

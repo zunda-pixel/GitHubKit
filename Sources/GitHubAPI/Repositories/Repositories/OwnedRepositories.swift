@@ -53,17 +53,20 @@ extension GitHubAPI {
     ]
 
     visibility.map { queries.append(.init(name: "visibility", value: $0.rawValue)) }
-    affiliation.map { queries.append(.init(name:"affiliation", value: $0.map(\.rawValue).joined(separator: ","))) }
+    affiliation.map {
+      queries.append(.init(name: "affiliation", value: $0.map(\.rawValue).joined(separator: ",")))
+    }
     type.map { queries.append(.init(name: "type", value: $0.rawValue)) }
 
     let formatter = ISO8601DateFormatter()
     since.map { queries.append(.init(name: "since", value: formatter.string(from: $0))) }
     before.map { queries.append(.init(name: "before", value: formatter.string(from: $0))) }
 
-    let endpoint = baseURL
+    let endpoint =
+      baseURL
       .appending(path: path)
       .appending(queryItems: queries)
-    
+
     let request = HTTPRequest(
       method: method,
       url: endpoint,

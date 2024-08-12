@@ -22,7 +22,8 @@ extension GitHubAPI {
     page: Int = 1
   ) async throws -> [Event] {
     let path = "/users/\(userID)/events/orgs/\(organizationID)"
-    let endpoint = baseURL
+    let endpoint =
+      baseURL
       .appending(path: path)
       .appending(queryItems: [
         .init(name: "per_page", value: String(perPage)),

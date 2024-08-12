@@ -50,16 +50,19 @@ extension GitHubAPI {
     ]
 
     milestone.map { queries.append(.init(name: "milestone", value: String($0))) }
-    assignee.map { queries.append(.init(name: "assignee", value:  String($0))) }
-    creator.map { queries.append(.init(name: "creator", value:  String($0))) }
-    mentioned.map { queries.append(.init(name: "mentioned", value:  String($0))) }
-    if !labels.isEmpty { queries.append(.init(name: "labels", value:  labels.joined(separator: ","))) }
+    assignee.map { queries.append(.init(name: "assignee", value: String($0))) }
+    creator.map { queries.append(.init(name: "creator", value: String($0))) }
+    mentioned.map { queries.append(.init(name: "mentioned", value: String($0))) }
+    if !labels.isEmpty {
+      queries.append(.init(name: "labels", value: labels.joined(separator: ",")))
+    }
     since.map {
       let formatter = ISO8601DateFormatter()
-      queries.append(.init(name: "since", value:  formatter.string(from: $0)))
+      queries.append(.init(name: "since", value: formatter.string(from: $0)))
     }
 
-    let endpoint = baseURL
+    let endpoint =
+      baseURL
       .appending(path: path)
       .appending(queryItems: queries)
 

@@ -20,11 +20,12 @@ extension GitHubAPI {
     page: Int = 1
   ) async throws -> [Event] {
     let path = "/users/\(userName)/events"
-    let endpoint = baseURL
+    let endpoint =
+      baseURL
       .appending(path: path)
       .appending(queryItems: [
         .init(name: "per_page", value: String(perPage)),
-        .init(name: "page", value: String(page))
+        .init(name: "page", value: String(page)),
       ])
     let method: HTTPRequest.Method = .get
 
@@ -54,7 +55,8 @@ extension GitHubAPI {
     page: Int = 1
   ) async throws -> [Event] {
     let path = "/users/\(userID)/events/public"
-    let endpoint = baseURL
+    let endpoint =
+      baseURL
       .appending(path: path)
       .appending(queryItems: [
         .init(name: "per_page", value: String(perPage)),
@@ -88,7 +90,8 @@ extension GitHubAPI {
     page: Int = 1
   ) async throws -> [Event] {
     let path = "/orgs/\(organizationID)/events"
-    let endpoint = baseURL
+    let endpoint =
+      baseURL
       .appending(path: path)
       .appending(queryItems: [
         .init(name: "per_page", value: String(perPage)),

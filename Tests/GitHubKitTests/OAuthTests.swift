@@ -4,7 +4,7 @@ import Testing
 
 let clientID = ProcessInfo.processInfo.environment["CLIENT_ID"]!
 let clientSecret = ProcessInfo.processInfo.environment["CLIENT_SECRET"]!
-var enableManualTest: Bool { ProcessInfo.processInfo.environment["MANUAL_TEST"] != nil}
+var enableManualTest: Bool { ProcessInfo.processInfo.environment["MANUAL_TEST"] != nil }
 
 @Test
 func authorizingURL() {

@@ -22,12 +22,12 @@ extension GitHubAPI {
       .init(name: "subject_type", value: subjectType?.rawValue),
       .init(name: "subject_id", value: subjectID),
     ].filter { $0.value != nil }
-    
-    let endpoint = baseURL
+
+    let endpoint =
+      baseURL
       .appending(path: path)
       .appending(queryItems: queries)
     let method: HTTPRequest.Method = .get
-
 
     let request = HTTPRequest(
       method: method,

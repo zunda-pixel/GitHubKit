@@ -25,7 +25,8 @@ func discussion(ownerID: String, repositoryName: String, discussionNumer: Int) a
 }
 
 @Test(arguments: [("nodejs", "node", 37857)])
-func discussionComments(ownerID: String, repositoryName: String, discussionNumer: Int) async throws {
+func discussionComments(ownerID: String, repositoryName: String, discussionNumer: Int) async throws
+{
   _ = try await api.discussionComments(
     ownerID: ownerID,
     repositoryName: repositoryName,

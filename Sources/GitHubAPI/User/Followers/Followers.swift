@@ -17,7 +17,8 @@ extension GitHubAPI {
     page: Int = 1
   ) async throws -> [User] {
     let path = "/user/followers"
-    let endpoint = baseURL
+    let endpoint =
+      baseURL
       .appending(path: path)
       .appending(queryItems: [
         .init(name: "per_page", value: String(perPage)),
@@ -50,7 +51,8 @@ extension GitHubAPI {
     page: Int = 1
   ) async throws -> [User] {
     let path = "/users/\(userID)/followers"
-    let endpoint = baseURL
+    let endpoint =
+      baseURL
       .appending(path: path)
       .appending(queryItems: [
         .init(name: "per_page", value: String(perPage)),

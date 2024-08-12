@@ -18,7 +18,8 @@ extension GitHubAPI {
   ) async throws -> [SocialAccount] {
     let path = "/user/social_accounts"
     let method: HTTPRequest.Method = .get
-    let endpoint = baseURL
+    let endpoint =
+      baseURL
       .appending(path: path)
       .appending(queryItems: [
         .init(name: "per_page", value: String(perPage)),
@@ -52,7 +53,8 @@ extension GitHubAPI {
   ) async throws -> [SocialAccount] {
     let path = "/users/\(userID)/social_accounts"
     let method: HTTPRequest.Method = .get
-    let endpoint = baseURL
+    let endpoint =
+      baseURL
       .appending(path: path)
       .appending(queryItems: [
         .init(name: "per_page", value: String(perPage)),

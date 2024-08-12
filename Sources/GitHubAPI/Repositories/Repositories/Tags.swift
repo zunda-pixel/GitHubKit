@@ -21,7 +21,8 @@ extension GitHubAPI {
     page: Int = 1
   ) async throws -> [Tag] {
     let path = "/repos/\(ownerID)/\(repositoryName)/tags"
-    let endpoint = baseURL
+    let endpoint =
+      baseURL
       .appending(path: path)
       .appending(queryItems: [
         .init(name: "per_page", value: String(perPage)),
