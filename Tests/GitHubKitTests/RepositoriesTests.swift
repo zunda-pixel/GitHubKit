@@ -128,11 +128,11 @@ func updateRepositoryEncodable() throws {
 @Test
 func updateRepository() async throws {
   let repositoryName: String = "TestRepository\(UUID())"
-  _ = try await createRepository(
-    repositoryName: repositoryName,
+  _ = try await api.createRepository(repository: .init(
+    name: repositoryName,
     homepage: UUID().uuidString,
     isPrivate: true
-  )
+  ))
 
   let updateRepository = UpdateRepository(
     name: "TestRepository\(UUID())",
