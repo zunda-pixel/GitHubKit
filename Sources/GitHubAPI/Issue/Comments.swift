@@ -25,7 +25,6 @@ extension GitHubAPI {
     page: Int = 1
   ) async throws -> [Issue.Comment] {
     let path = "/repos/\(ownerID)/\(repositoryName)/issues/\(issueNumber)/comments"
-    let endpoint = baseURL.appending(path: path)
     let method: HTTPRequest.Method = .get
 
     var queries: [URLQueryItem] = [
@@ -37,6 +36,11 @@ extension GitHubAPI {
       let formatter = ISO8601DateFormatter()
       queries.append(.init(name: "since", value: formatter.string(from: $0)))
     }
+
+    let endpoint =
+      baseURL
+      .appending(path: path)
+      .appending(queryItems: queries)
 
     let request = HTTPRequest(
       method: method,
