@@ -34,15 +34,15 @@ func createRepositoryWithTemplate() async throws {
 }
 
 @Test(arguments: [
-  ("TestRepository\(Int.random(in: Int.min..<Int.max))", "homepage", true)
+  ("TestRepository", "homepage", true)
 ])
 func createRepository(
-  repositoryName: String,
+  repositoryPrefixName: String,
   homepage: String,
   isPrivate: Bool
 ) async throws {
   let newRepository = NewRepository(
-    name: repositoryName,
+    name: "\(repositoryPrefixName)-\(UUID())",
     description: "Description",
     homepage: homepage,
     isPrivate: isPrivate,
@@ -127,15 +127,15 @@ func updateRepositoryEncodable() throws {
 
 @Test
 func updateRepository() async throws {
-  let repositoryName: String = "TestRepository\(Int.random(in: Int.min..<Int.max))"
-  _ = try await createRepository(
-    repositoryName: repositoryName,
+  let repositoryName: String = "TestRepository\(UUID())"
+  _ = try await api.createRepository(repository: .init(
+    name: repositoryName,
     homepage: UUID().uuidString,
     isPrivate: true
-  )
+  ))
 
   let updateRepository = UpdateRepository(
-    name: "TestRepository\(Int.random(in: Int.min..<Int.max))",
+    name: "TestRepository\(UUID())",
     homepage: UUID().uuidString,
     isPrivate: false,
     visibility: .public,
@@ -173,13 +173,15 @@ func updateRepository() async throws {
   )
 }
 
-@Test(arguments: ["TestRepository-\(UUID())"])
-func deleteRepository(repositoryName: String) async throws {
-  try await createRepository(
-    repositoryName: repositoryName,
+@Test(arguments: ["TestRepository"])
+func deleteRepository(repositoryPrefixName: String) async throws {
+  let repositoryName = "\(repositoryPrefixName)-\(UUID())"
+  
+  _ = try await api.createRepository(repository: .init(
+    name: repositoryName,
     homepage: "homepage",
-    isPrivate: true
-  )
+    isPrivate: false
+  ))
 
   try await api.deleteRepository(
     ownerID: "zunda-pixel",
