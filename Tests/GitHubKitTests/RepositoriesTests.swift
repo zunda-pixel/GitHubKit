@@ -34,7 +34,7 @@ func createRepositoryWithTemplate() async throws {
 }
 
 @Test(arguments: [
-  ("TestRepository\(UUID())", "homepage", true)
+  ("TestRepository", "homepage", true)
 ])
 func createRepository(
   repositoryName: String,
@@ -173,7 +173,7 @@ func updateRepository() async throws {
   )
 }
 
-@Test(arguments: ["TestRepository-\(UUID())"])
+@Test(arguments: ["TestRepository"])
 func deleteRepository(repositoryName: String) async throws {
   try await createRepository(
     repositoryName: repositoryName,
