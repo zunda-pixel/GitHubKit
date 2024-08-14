@@ -37,12 +37,12 @@ func createRepositoryWithTemplate() async throws {
   ("TestRepository", "homepage", true)
 ])
 func createRepository(
-  repositoryName: String,
+  repositoryPrefixName: String,
   homepage: String,
   isPrivate: Bool
 ) async throws {
   let newRepository = NewRepository(
-    name: repositoryName,
+    name: "\(repositoryPrefixName)-\(UUID())",
     description: "Description",
     homepage: homepage,
     isPrivate: isPrivate,
@@ -174,12 +174,14 @@ func updateRepository() async throws {
 }
 
 @Test(arguments: ["TestRepository"])
-func deleteRepository(repositoryName: String) async throws {
-  try await createRepository(
-    repositoryName: repositoryName,
+func deleteRepository(repositoryPrefixName: String) async throws {
+  let repositoryName = "\(repositoryPrefixName)-\(UUID())"
+  
+  _ = try await api.createRepository(repository: .init(
+    name: repositoryName,
     homepage: "homepage",
-    isPrivate: true
-  )
+    isPrivate: false
+  ))
 
   try await api.deleteRepository(
     ownerID: "zunda-pixel",
