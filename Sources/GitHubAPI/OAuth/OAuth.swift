@@ -37,8 +37,6 @@ public struct OAuth: Sendable {
   }
 
   public func request(responseType: ResponseType = .default) -> HTTPRequest {
-    let endpoint = baseURL.appending(path: path)
-
     var queries: [URLQueryItem] = [
       .init(name: "client_id", value: clientID),
       .init(name: "client_secret", value: clientSecret),
@@ -46,6 +44,11 @@ public struct OAuth: Sendable {
     ]
 
     redirectURL.map { queries.append(.init(name: "redirect_uri", value: $0.absoluteString)) }
+
+    let endpoint =
+      baseURL
+      .appending(path: path)
+      .appending(queryItems: queries)
 
     var headers: HTTPFields = [:]
     if responseType != .default {

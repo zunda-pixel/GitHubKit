@@ -33,23 +33,23 @@ public struct OAuthRequest: Sendable {
   }
 
   public func authorizingURL() -> URL {
-    let endpoint = baseURL.appending(path: path)
-    var queries: [String: String] = [
-      "client_id": clientID,
-      "allow_signup": allowSignUp.description,
+    var queries: [URLQueryItem] = [
+      .init(name: "client_id", value: clientID),
+      .init(name: "allow_signup", value: allowSignUp.description),
     ]
 
-    redirectURL.map { queries["redirect_uri"] = $0.absoluteString }
-    userID.map { queries["login"] = $0 }
-    state.map { queries["state"] = $0 }
+    redirectURL.map { queries.append(.init(name: "redirect_uri", value: $0.absoluteString)) }
+    userID.map { queries.append(.init(name: "login", value: $0)) }
+    state.map { queries.append(.init(name: "state", value: $0)) }
 
     if !scopes.isEmpty {
-      queries["scope"] = scopes.map(\.rawValue).joined(separator: " ")
+      queries.append(.init(name: "scope", value: scopes.map(\.rawValue).joined(separator: " ")))
     }
 
-    var urlComponents = URLComponents(url: endpoint, resolvingAgainstBaseURL: false)!
-    urlComponents.queryItems = queries.map { .init(name: $0.key, value: $0.value) }
+    let endpoint = baseURL
+      .appending(path: path)
+      .appending(queryItems: queries)
 
-    return urlComponents.url!
+    return endpoint
   }
 }
