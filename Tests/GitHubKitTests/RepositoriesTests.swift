@@ -34,7 +34,7 @@ func createRepositoryWithTemplate() async throws {
 }
 
 @Test(arguments: [
-  ("TestRepository\(Int.random(in: Int.min..<Int.max))", "homepage", true)
+  ("TestRepository\(UUID())", "homepage", true)
 ])
 func createRepository(
   repositoryName: String,
@@ -127,7 +127,7 @@ func updateRepositoryEncodable() throws {
 
 @Test
 func updateRepository() async throws {
-  let repositoryName: String = "TestRepository\(Int.random(in: Int.min..<Int.max))"
+  let repositoryName: String = "TestRepository\(UUID())"
   _ = try await createRepository(
     repositoryName: repositoryName,
     homepage: UUID().uuidString,
@@ -135,7 +135,7 @@ func updateRepository() async throws {
   )
 
   let updateRepository = UpdateRepository(
-    name: "TestRepository\(Int.random(in: Int.min..<Int.max))",
+    name: "TestRepository\(UUID())",
     homepage: UUID().uuidString,
     isPrivate: false,
     visibility: .public,
