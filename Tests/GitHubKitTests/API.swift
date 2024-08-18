@@ -4,7 +4,7 @@
 
 import Foundation
 import GitHubAPI
-import HTTPClientFoundation
+import HTTPClient
 
 let token = ProcessInfo.processInfo.environment["GITHUB_TOKEN"]!
 let api = GitHubAPI(
