@@ -62,9 +62,9 @@ public struct OAuth: Sendable {
     )
   }
 
-  public func authorize<HTTPClient: HTTPClientProtocol>(httpClient: HTTPClient) async throws
-    -> OAuthResponse where HTTPClient.Data == Foundation.Data
-  {
+  public func authorize<HTTPClient: HTTPClientProtocol>(
+    httpClient: HTTPClient
+  ) async throws -> OAuthResponse{
     let request = request(responseType: .json)
     let data: Data
     let response: HTTPResponse

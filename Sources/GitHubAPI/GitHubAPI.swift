@@ -7,8 +7,7 @@ import HTTPClient
 import HTTPTypes
 import HTTPTypesFoundation
 
-public struct GitHubAPI<HTTPClient: HTTPClientProtocol>: Sendable, Hashable
-where HTTPClient.Data == Foundation.Data, HTTPClient: Hashable & Sendable {
+public struct GitHubAPI<HTTPClient: HTTPClientProtocol>: Sendable, Hashable where HTTPClient: Hashable & Sendable {
   public var baseURL = URL(string: "https://api.github.com")!
   public var authorizationType: AuthorizationType
   public var httpClient: HTTPClient
