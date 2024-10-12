@@ -5,7 +5,7 @@ on: pull_request
 jobs:
   test:
     runs-on: ubuntu-latest
-    container: swiftlang/swift:nightly-6.0-jammy
+    container: swift:latest
     steps:
     - uses: actions/checkout@v4
     - run: swift build --build-tests
@@ -16,7 +16,7 @@ jobs:
         CLIENT_SECRET: ${{ secrets.CLIENT_SECRET }}
   lint:
     runs-on: ubuntu-latest
-    container: swiftlang/swift:nightly-6.0-jammy
+    container: swift:latest
     steps:
       - uses: actions/checkout@v4
       - run: swift format lint -r -p -s .
