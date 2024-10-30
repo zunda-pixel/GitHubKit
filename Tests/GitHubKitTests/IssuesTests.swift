@@ -8,7 +8,7 @@ import Testing
 
 @Test(arguments: [
   ("zunda-pixel", "GitHubKit"),
-  ("zunda-pixel", "GitBoard")
+  ("zunda-pixel", "GitBoard"),
 ])
 func issue(ownerID: String, repositoryName: String) async throws {
   _ = try await api.issue(
@@ -20,7 +20,7 @@ func issue(ownerID: String, repositoryName: String) async throws {
 
 @Test(arguments: [
   ("swiftlang", "swift"),
-  ("zunda-pixel", "GitHubKit")
+  ("zunda-pixel", "GitHubKit"),
 ])
 func issues(ownerID: String, repositoryName: String) async throws {
   _ = try await api.issues(
@@ -42,7 +42,7 @@ func issues(ownerID: String, repositoryName: String) async throws {
 
 @Test(arguments: [
   ("swiftlang", "swift", 67351),
-  ("zunda-pixel", "GitHubKit", 1)
+  ("zunda-pixel", "GitHubKit", 1),
 ])
 func issueComments(ownerID: String, repositoryName: String, issueNumber: Int) async throws {
   _ = try await api.comments(
@@ -56,7 +56,7 @@ func issueComments(ownerID: String, repositoryName: String, issueNumber: Int) as
 
 @Test(arguments: [
   ("swiftlang", "swift", 69144),
-  ("zunda-pixel", "GitHubKit", 1)
+  ("zunda-pixel", "GitHubKit", 1),
 ])
 func pullComments(ownerID: String, repositoryName: String, pullNumber: Int) async throws {
   _ = try await api.comments(

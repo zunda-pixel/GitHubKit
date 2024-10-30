@@ -8,7 +8,7 @@ import Testing
 
 @Test(arguments: [
   ("zunda-pixel", "GitHubKit"),
-  ("swiftlang", "swift")
+  ("swiftlang", "swift"),
 ])
 func repositoryLicenses(ownerID: String, repositoryName: String) async throws {
   let license = try await api.license(

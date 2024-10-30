@@ -57,10 +57,11 @@ extension GitHubAPI {
     head.map { queries.append(.init(name: "head", value: $0)) }
     branchName.map { queries.append(.init(name: "base", value: $0)) }
 
-    let endpoint = baseURL
+    let endpoint =
+      baseURL
       .appending(path: path)
       .appending(queryItems: queries)
-    
+
     let request = HTTPRequest(
       method: method,
       url: endpoint,

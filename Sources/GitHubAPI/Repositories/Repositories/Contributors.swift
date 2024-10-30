@@ -26,7 +26,8 @@ extension GitHubAPI {
       baseURL
       .appending(path: path)
       .appending(queryItems: [
-        .init(name: "anon", value: false.description),  // Set False to not get anonymous contributors. anonymous contributors has invalid data model
+        // Set False to not get anonymous contributors. anonymous contributors has invalid data model
+        .init(name: "anon", value: false.description),
         .init(name: "per_page", value: String(perPage)),
         .init(name: "page", value: String(page)),
       ])

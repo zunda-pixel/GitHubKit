@@ -30,7 +30,7 @@ func release(ownerID: String, repositoryName: String, releaseID: Int) async thro
 
 @Test(arguments: [
   ("swiftlang", "swift"),
-  ("swiftlang", "swift-format")
+  ("swiftlang", "swift-format"),
 ])
 func releases(ownerID: String, repositoryName: String) async throws {
   _ = try await api.releases(

@@ -8,7 +8,7 @@ import Testing
 
 @Test(arguments: [
   ("zunda-pixel", "GitHubKit"),
-  ("zunda-pixel", "GitBoard")
+  ("zunda-pixel", "GitBoard"),
 ])
 func collaborators(ownerID: String, repositoryName: String) async throws {
   _ = try await api.collaborators(
