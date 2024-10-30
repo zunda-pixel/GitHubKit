@@ -107,7 +107,7 @@ func isFollowing(userID: String) async throws {
 
 @Test(arguments: [
   ("zunda-pixel", "swiftlang"),
-  ("zunda-pixel", "apple")
+  ("zunda-pixel", "apple"),
 ])
 func isFollowingFromTo(fromUserID: String, toUserID: String) async throws {
   _ = try await api.isFollowing(from: fromUserID, to: toUserID)

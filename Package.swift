@@ -37,7 +37,7 @@ let package = Package(
     .testTarget(
       name: "GitHubKitTests",
       dependencies: [
-        .target(name: "GitHubAPI"),
+        .target(name: "GitHubAPI")
       ]
     ),
   ]

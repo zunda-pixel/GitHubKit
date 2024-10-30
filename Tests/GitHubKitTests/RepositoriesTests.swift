@@ -84,7 +84,7 @@ func setTopics(ownerID: String, repositoryName: String, topics: [String]) async 
 
 @Test(arguments: [
   ("swiftlang", "swift"),
-  ("zunda-pixel", "GitHubKit")
+  ("zunda-pixel", "GitHubKit"),
 ])
 func topics(ownerID: String, repositoryName: String) async throws {
   _ = try await api.topics(
@@ -97,7 +97,7 @@ func topics(ownerID: String, repositoryName: String) async throws {
 
 @Test(arguments: [
   ("swiftlang", "swift"),
-  ("zunda-pixel", "GitHubKit")
+  ("zunda-pixel", "GitHubKit"),
 ])
 func repositoryTeams(ownerID: String, repositoryName: String) async throws {
   _ = try await api.teams(
@@ -110,7 +110,7 @@ func repositoryTeams(ownerID: String, repositoryName: String) async throws {
 
 @Test(arguments: [
   ("swiftlang", "swift"),
-  ("zunda-pixel", "GitHubKit")
+  ("zunda-pixel", "GitHubKit"),
 ])
 func repositoryLanguages(ownerID: String, repositoryName: String) async throws {
   _ = try await api.languages(
@@ -128,11 +128,12 @@ func updateRepositoryEncodable() throws {
 @Test
 func updateRepository() async throws {
   let repositoryName: String = "TestRepository\(UUID())"
-  _ = try await api.createRepository(repository: .init(
-    name: repositoryName,
-    homepage: UUID().uuidString,
-    isPrivate: true
-  ))
+  _ = try await api.createRepository(
+    repository: .init(
+      name: repositoryName,
+      homepage: UUID().uuidString,
+      isPrivate: true
+    ))
 
   let updateRepository = UpdateRepository(
     name: "TestRepository\(UUID())",
@@ -176,12 +177,13 @@ func updateRepository() async throws {
 @Test(arguments: ["TestRepository"])
 func deleteRepository(repositoryPrefixName: String) async throws {
   let repositoryName = "\(repositoryPrefixName)-\(UUID())"
-  
-  _ = try await api.createRepository(repository: .init(
-    name: repositoryName,
-    homepage: "homepage",
-    isPrivate: false
-  ))
+
+  _ = try await api.createRepository(
+    repository: .init(
+      name: repositoryName,
+      homepage: "homepage",
+      isPrivate: false
+    ))
 
   try await api.deleteRepository(
     ownerID: "zunda-pixel",
@@ -192,7 +194,7 @@ func deleteRepository(repositoryPrefixName: String) async throws {
 @Test(arguments: [
   ("github", "explore"),
   ("swiftlang", "swift"),
-  ("zunda-pixel", "GitHubKit")
+  ("zunda-pixel", "GitHubKit"),
 ])
 func repository(ownerID: String, repositoryName: String) async throws {
   _ = try await api.repository(

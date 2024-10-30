@@ -43,7 +43,7 @@ func publicEvents() async throws {
 
 @Test(arguments: [
   ("zunda-pixel", "GitHubKit"),
-  ("swiftlang", "swift")
+  ("swiftlang", "swift"),
 ])
 func networkEvents(owner: String, repositoryName: String) async throws {
   _ = try await api.networkEvents(

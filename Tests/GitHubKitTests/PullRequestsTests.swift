@@ -8,7 +8,7 @@ import Testing
 
 @Test(arguments: [
   ("swiftlang", "swift", 1),
-  ("zunda-pixel", "GitHubKit", 1)
+  ("zunda-pixel", "GitHubKit", 1),
 ])
 func pullRequest(ownerID: String, repositoryName: String, pullNumber: Int) async throws {
   _ = try await api.pullRequest(
@@ -21,7 +21,7 @@ func pullRequest(ownerID: String, repositoryName: String, pullNumber: Int) async
 @Test(arguments: [
   ("github", "explore"),
   ("swiftlang", "swift"),
-  ("zunda-pixel", "GitHubKit")
+  ("zunda-pixel", "GitHubKit"),
 ])
 func pullRequests(ownerID: String, repositoryName: String) async throws {
   _ = try await api.pullRequests(

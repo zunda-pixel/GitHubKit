@@ -46,7 +46,8 @@ public struct OAuthRequest: Sendable {
       queries.append(.init(name: "scope", value: scopes.map(\.rawValue).joined(separator: " ")))
     }
 
-    let endpoint = baseURL
+    let endpoint =
+      baseURL
       .appending(path: path)
       .appending(queryItems: queries)
 
