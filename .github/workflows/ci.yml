@@ -1,17 +1,33 @@
 name: CI
 
-on: pull_request
+on: [pull_request, workflow_dispatch]
+
+permissions:
+  contents: read
 
 jobs:
   test:
+    if: github.event_name == 'pull_request'
     runs-on: ubuntu-latest
     container: swift:latest
     steps:
     - uses: actions/checkout@v7.0.1
-    - run: swift build --build-tests
-    - run: swift test --skip-build --enable-swift-testing --parallel
+    - run: swift test --only-use-versions-from-resolved-file --enable-swift-testing --parallel --filter OfflineTests
+  integration:
+    if: github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    container: swift:latest
+    steps:
+    - uses: actions/checkout@v7.0.1
+    - name: Run integration tests
+      run: |
+        if [ -z "$GITHUB_TOKEN" ]; then
+          echo "::error::Set the GITHUB_TEST_TOKEN Actions secret to run the GitHub API integration tests."
+          exit 1
+        fi
+        swift test --only-use-versions-from-resolved-file --enable-swift-testing --parallel --skip OfflineTests
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TEST_TOKEN }}
         CLIENT_ID: ${{ secrets.CLIENT_ID }}
         CLIENT_SECRET: ${{ secrets.CLIENT_SECRET }}
   lint:

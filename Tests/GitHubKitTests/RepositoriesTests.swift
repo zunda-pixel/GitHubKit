@@ -120,12 +120,6 @@ func repositoryLanguages(ownerID: String, repositoryName: String) async throws {
 }
 
 @Test
-func updateRepositoryEncodable() throws {
-  let updateRepository = UpdateRepository(name: "Hello")
-  _ = try JSONEncoder.github.encode(updateRepository)
-}
-
-@Test
 func updateRepository() async throws {
   let repositoryName: String = "TestRepository\(UUID())"
   _ = try await api.createRepository(
@@ -277,25 +271,6 @@ func createFork(ownerID: String, repositoryName: String) async throws {
     ownerID: "zunda-pixel",
     repositoryName: repositoryName
   )
-}
-
-@Test
-func securityAnalyticsCodable() throws {
-  let securityAnalytics = SecurityAnalytics(
-    advancedSecurity: true,
-    dependabotSecurityUpdates: true,
-    secretScanning: true,
-    secretScanningPushProtection: true
-  )
-  let encoder = JSONEncoder.github
-
-  let data = try encoder.encode(securityAnalytics)
-
-  let decoder = JSONDecoder.github
-
-  let decodedSecurityAnalytics = try decoder.decode(SecurityAnalytics.self, from: data)
-
-  #expect(securityAnalytics == decodedSecurityAnalytics)
 }
 
 @Test(arguments: [
